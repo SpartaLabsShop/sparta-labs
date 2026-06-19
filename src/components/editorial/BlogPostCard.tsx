@@ -9,6 +9,7 @@ export function BlogPostCard({
   excerpt,
   imageSrc,
   readTime,
+  date,
 }: {
   slug: string
   title: string
@@ -16,30 +17,38 @@ export function BlogPostCard({
   excerpt: string
   imageSrc: string
   readTime: string
+  date?: string
 }) {
   return (
-    <Link href={`/journal/${slug}`} className="group flex flex-col bg-white rounded-[2rem] p-4 h-full shadow-sm hover:shadow-md transition-shadow duration-300">
-      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl mb-6">
-        <Image 
-          src={imageSrc} 
-          alt={title} 
-          fill 
-          className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-105" 
+    <Link href={`/journal/${slug}`} className="group flex flex-col h-full">
+      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl mb-5">
+        <Image
+          src={imageSrc}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
       </div>
-      <div className="flex flex-col flex-grow px-2 pb-2">
-        <div className="flex justify-between items-center mb-4">
-          <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-bold uppercase tracking-wider">
-            {category}
-          </span>
-          <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">{readTime}</span>
+
+      <div className="flex flex-col flex-grow">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-[#8B6E4E]" />
+          <span className="text-xs text-[#8B6E4E] font-medium">{category}</span>
         </div>
-        <h3 className="text-xl font-bold text-ink mb-3 group-hover:text-blue-600 transition-colors duration-300 leading-tight">
+
+        <h3 className="text-lg font-semibold text-ink leading-snug mb-2 group-hover:text-ink-muted transition-colors duration-300">
           {title}
         </h3>
-        <p className="text-sm text-gray-500 line-clamp-2 mt-auto leading-relaxed">
+
+        <p className="text-sm text-ink-subtle line-clamp-3 leading-relaxed mb-4">
           {excerpt}
         </p>
+
+        <div className="flex items-center gap-2 mt-auto text-xs text-ink-subtle">
+          <span>{date ?? 'Aug 10'}</span>
+          <span className="text-ink-subtle/50">·</span>
+          <span>{readTime}</span>
+        </div>
       </div>
     </Link>
   )

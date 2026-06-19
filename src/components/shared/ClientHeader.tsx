@@ -81,7 +81,7 @@ export function ClientHeader({ cartItemCount = 0, wishlistItemCount = 0, isLogge
   }, [])
 
   const pathname = usePathname()
-  const isHome = pathname === '/' || pathname === '/en' || pathname === '/shop'
+  const isHome = pathname === '/' || pathname === '/en' || pathname === '/shop' || pathname === '/journal'
 
   useEffect(() => {
     const isClosed = sessionStorage.getItem('announcement_closed') === 'true'
