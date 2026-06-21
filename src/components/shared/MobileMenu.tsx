@@ -176,7 +176,7 @@ export function MobileMenu({ isOpen, onClose, isLoggedIn = false, onSearchClick 
                     <span className="text-[9px] font-bold uppercase tracking-widest">Account</span>
                   </Link>
                 ) : (
-                  <Link href="/login" onClick={onClose} className="flex flex-col items-center justify-center gap-1.5 text-ink/60 hover:text-ink hover:bg-black/5 transition-colors">
+                  <Link href="/login" onClick={onClose} className="flex flex-col items-center justify-center gap-1.5 text-ink/60 hover:text-ink hover:bg-black/5 transition-colors h-full w-full">
                     <LogIn size={18} strokeWidth={1.5} />
                     <span className="text-[9px] font-bold uppercase tracking-widest">Login</span>
                   </Link>

@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react"
+import { motion } from "framer-motion"
 
-const faqs = [
+const defaultFaqs = [
   {
     question: "Are your products intended for human consumption?",
     answer:
@@ -24,14 +24,23 @@ const faqs = [
     answer:
       "All orders are packed securely in climate-controlled packaging to maintain optimal conditions during transit. We process and ship orders promptly to ensure your research is not delayed.",
   },
-];
+]
 
-const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState(null);
+interface FaqItem {
+  question: string
+  answer: string
+}
 
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+interface FAQProps {
+  faqs?: FaqItem[]
+}
+
+const FAQ = ({ faqs = defaultFaqs }: FAQProps) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -39,12 +48,12 @@ const FAQ = () => {
       opacity: 1,
       transition: { staggerChildren: 0.1, delayChildren: 0.1 },
     },
-  };
+  }
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-  };
+  }
 
   return (
     <motion.section
@@ -66,7 +75,7 @@ const FAQ = () => {
 
         <div className="flex w-full flex-col gap-4">
           {faqs.map((faq, index) => {
-            const isOpen = openIndex === index;
+            const isOpen = openIndex === index
             return (
               <motion.div
                 key={index}
@@ -112,12 +121,12 @@ const FAQ = () => {
                   </p>
                 </div>
               </motion.div>
-            );
+            )
           })}
         </div>
       </div>
     </motion.section>
-  );
-};
+  )
+}
 
-export default FAQ;
+export default FAQ

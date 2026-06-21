@@ -6,7 +6,8 @@ import { Container } from '@/components/ui/container'
 import { FilterSidebar } from '@/components/shop/FilterSidebar'
 import { PrimaryProductCard, Product } from '@/components/shop/PrimaryProductCard'
 import { motion, useInView } from 'framer-motion'
-import { X, Filter, Search } from 'lucide-react'
+import { FadeUp } from '@/components/motion/FadeUp'
+import { X, Filter, Search, Globe, ArrowDown } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Spinner } from '@/components/ui/spinner'
 import { EmptyState } from '@/components/shared/EmptyState'
@@ -147,61 +148,82 @@ function ShopClientInner({ initialProducts, totalPages, categories }: ShopClient
 
   return (
     <div className="w-full bg-[#f3f4f6] min-h-screen">
-      {/* Video Hero Section */}
-      <motion.section
-        className="relative h-[75vh] flex items-end overflow-hidden bg-black"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={{
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.2, delayChildren: 0.1 },
-          },
-        }}
-      >
-        {/* Background Video */}
-        <video
-          ref={heroVideoRef}
-          autoPlay
-          muted
-          playsInline
-          onEnded={handleVideoEnded}
-          className="absolute inset-0 w-full h-full object-cover"
-          src="https://res.cloudinary.com/dgrrovta3/video/upload/v1781823079/Firefly_Create_a_premium_pharmaceutical_product_reveal_animation._Start_with_a_clean_deep-red_textur_uyroig.webm"
-        />
-
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent" />
-
-        {/* Hero Content — aligned with navbar padding */}
-        <div className="relative z-10 w-full px-4 md:px-8 lg:px-10 pb-12 sm:pb-16 lg:pb-20">
-          <motion.h1
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
-            }}
-            className="mb-6 text-[2.5rem] leading-[1.05] font-normal tracking-[-1.5px] text-white min-[480px]:text-[3rem] md:text-[4.5rem] uppercase"
-          >
-            The Complete
-            <br />
-            Collection
-          </motion.h1>
-
-          <motion.p
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
-            }}
-            className="text-[1rem] leading-[1.6] font-light text-white/85 md:text-[1.1rem] max-w-[480px]"
-          >
-            Explore our complete catalog of research-grade peptides and compounds.
-            Filter by category, purity, and availability to find exactly what your
-            guideline requires.
-          </motion.p>
+      {/* 1. Redesigned Hero Section */}
+      <section className="relative h-screen min-h-[800px] w-full overflow-hidden bg-ink flex flex-col justify-between pt-32 pb-16 px-4 md:px-8 lg:px-10">
+        
+        {/* Background Video & Overlays */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.div className="absolute inset-0 w-full h-[120%]" style={{ y: typeof window !== 'undefined' ? (window.scrollY * 0.5) : 0 }}>
+             <video
+              ref={heroVideoRef}
+              autoPlay
+              muted
+              playsInline
+              onEnded={handleVideoEnded}
+              className="absolute inset-0 w-full h-full object-cover opacity-70"
+              src="https://res.cloudinary.com/dgrrovta3/video/upload/v1781823079/Firefly_Create_a_premium_pharmaceutical_product_reveal_animation._Start_with_a_clean_deep-red_textur_uyroig.webm"
+            />
+          </motion.div>
+          {/* Gradient Overlays for readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/90 via-ink/20 to-ink/95" />
         </div>
-      </motion.section>
+
+        {/* Top Content Row */}
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start w-full gap-10">
+          
+          {/* Top Left: Stats */}
+          <FadeUp delay={0.2} className="flex items-center gap-6 md:gap-10 text-white">
+            <div className="flex flex-col">
+              <span className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">100+</span>
+              <span className="text-xs md:text-sm font-light mt-2 text-white/70 uppercase tracking-wider">Compounds</span>
+            </div>
+            <div className="w-px h-16 bg-white/20" />
+            <div className="flex flex-col">
+              <span className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">99%</span>
+              <span className="text-xs md:text-sm font-light mt-2 text-white/70 uppercase tracking-wider">Purity</span>
+            </div>
+          </FadeUp>
+
+          {/* Top Right: Paragraph */}
+          <FadeUp delay={0.4} className="md:max-w-xs lg:max-w-sm">
+            <p className="text-white/80 text-sm md:text-base md:text-right leading-relaxed font-light">
+              Explore our complete catalog of research-grade peptides and compounds. Filter by category, purity, and availability to find exactly what your guideline requires.
+            </p>
+          </FadeUp>
+
+        </div>
+
+        {/* Bottom Content Row */}
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-end w-full gap-10 mt-auto">
+          
+          {/* Bottom Left: Large Heading */}
+          <FadeUp delay={0.6} className="max-w-3xl lg:max-w-5xl">
+            <h1 className="text-[32px] sm:text-[48px] md:text-[64px] lg:text-[72px] xl:text-[84px] leading-[1.05] text-white font-medium tracking-tight uppercase">
+              The Complete Collection.
+            </h1>
+          </FadeUp>
+
+          {/* Bottom Right: Button & Footer */}
+          <FadeUp delay={0.8} className="flex flex-col items-start md:items-end w-full md:w-auto relative">
+            <div className="mb-6 lg:mb-8 w-full md:w-auto">
+              <button onClick={() => { document.getElementById('products-grid')?.scrollIntoView({ behavior: 'smooth' }) }} className="block w-full">
+                <Button className="w-full bg-white text-ink hover:bg-white/90 rounded-none px-8 py-7 text-base lg:text-lg font-medium flex items-center justify-center gap-4 transition-all duration-300">
+                  Browse Catalog <ArrowDown className="w-5 h-5" />
+                </Button>
+              </button>
+            </div>
+            
+            <div className="flex items-center gap-4 w-full md:w-auto md:min-w-[300px] lg:min-w-[400px] border-t border-white/20 pt-4">
+              <Globe className="w-4 h-4 text-white/60" />
+              <span className="text-white/60 text-xs sm:text-sm font-light tracking-wide">
+                Established 2024
+              </span>
+            </div>
+          </FadeUp>
+
+        </div>
+
+      </section>
 
       <Container size="page" className="pt-12 pb-12" id="products-grid">
         {/* Top Toolbar */}

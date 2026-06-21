@@ -2,6 +2,12 @@ import { withPayload } from '@payloadcms/next/withPayload'
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: [
+    'googleapis',
+    'sharp',
+    'stripe',
+    'jsonwebtoken',
+  ],
   images: {
     localPatterns: [
       { pathname: '/api/media/file/**' },
