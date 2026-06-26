@@ -6,9 +6,11 @@ import Stripe from 'stripe'
 import { verifyCoupon, getUserMaxxPoints } from '../actions'
 import { cookies } from 'next/headers'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2024-04-10' as any,
-})
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+    apiVersion: '2024-04-10' as any,
+  })
+}
 
 export async function getShippingMethods() {
   const payload = await getPayload({ config: configPromise })
@@ -146,6 +148,7 @@ export async function createPaymentIntent(
   const clickCookie = cookieStore.get('affiliate_click_id')?.value
 
   try {
+    const stripe = getStripe()
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
       currency: 'usd',
@@ -320,7 +323,7 @@ export async function createPayloadOrder(
 
     // Update Stripe PaymentIntent with the Order ID (unless it's a free order)
     if (paymentIntentId && paymentIntentId !== 'free_order') {
-       await stripe.paymentIntents.update(paymentIntentId, {
+       await getStripe().paymentIntents.update(paymentIntentId, {
           metadata: {
              orderId: String(order.id)
           }
@@ -353,7 +356,7 @@ export async function createPayloadOrder(
 
 export async function syncPaymentStatus(paymentIntentId: string, orderId: string) {
   try {
-    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
+    const paymentIntent = await getStripe().paymentIntents.retrieve(paymentIntentId)
     
     if (paymentIntent.status === 'succeeded') {
       const { finalizeOrder } = await import('@/lib/orders/finalizeOrder')
