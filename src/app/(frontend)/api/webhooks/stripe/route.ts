@@ -3,14 +3,17 @@ import Stripe from 'stripe'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2024-04-10' as any,
-})
-
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+    apiVersion: '2024-04-10' as any,
+  })
+}
 
 export async function POST(req: Request) {
   try {
+    const stripe = getStripe()
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
+
     const body = await req.text()
     const headersList = await headers()
     const signature = headersList.get('stripe-signature') as string
