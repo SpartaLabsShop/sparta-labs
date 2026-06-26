@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef, useCallback, Suspense } from 'react'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
-import { Container } from '@/components/ui/container'
 import { FilterSidebar } from '@/components/shop/FilterSidebar'
 import { PrimaryProductCard, Product } from '@/components/shop/PrimaryProductCard'
 import { motion, useInView } from 'framer-motion'
@@ -147,7 +146,7 @@ function ShopClientInner({ initialProducts, totalPages, categories }: ShopClient
   const activeChips = getActiveChips()
 
   return (
-    <div className="w-full bg-[#f3f4f6] min-h-screen">
+    <div className="w-full bg-white min-h-screen">
       {/* 1. Redesigned Hero Section */}
       <section className="relative h-screen min-h-[800px] w-full overflow-hidden bg-ink flex flex-col justify-between pt-32 pb-16 px-4 md:px-8 lg:px-10">
         
@@ -225,7 +224,7 @@ function ShopClientInner({ initialProducts, totalPages, categories }: ShopClient
 
       </section>
 
-      <Container size="page" className="pt-12 pb-12" id="products-grid">
+      <div className="mx-auto max-w-[1700px] px-8 max-[768px]:px-4 max-[480px]:px-3 pt-12 pb-12" id="products-grid">
         {/* Top Toolbar */}
         <div className={`flex flex-col gap-3 sm:gap-4 mb-6 sm:mb-8 bg-white/95 backdrop-blur-xl border border-ink/10 p-3 sm:p-4 rounded-2xl shadow-sm sticky z-30 transition-all duration-300 ${isScrollingDown ? 'top-4 sm:top-6' : 'top-[110px] sm:top-[120px]'}`}>
           {/* Top Row: Buttons */}
@@ -301,10 +300,10 @@ function ShopClientInner({ initialProducts, totalPages, categories }: ShopClient
         {products.length > 0 ? (
           <>
             {/* Product Grid - Full Width */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-3 gap-6 max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1 max-[480px]:grid-cols-1">
               {products.map((product, index) => (
-                <motion.div 
-                  key={product.slug} 
+                <motion.div
+                  key={product.slug}
                   className="flex h-full w-full"
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -345,7 +344,7 @@ function ShopClientInner({ initialProducts, totalPages, categories }: ShopClient
             }
           />
         )}
-      </Container>
+      </div>
     </div>
   )
 }

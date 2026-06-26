@@ -25,9 +25,9 @@ import { StaggerChildren, staggerItemVariants } from '@/components/motion/Stagge
 import { CompactProductCard } from '@/components/shop/CompactProductCard'
 import { PrimaryProductCard } from '@/components/shop/PrimaryProductCard'
 import { FadeUp } from '@/components/motion/FadeUp'
-import { Space_Grotesk } from 'next/font/google'
+import { Inter } from 'next/font/google'
 
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['300', '400', '500', '700'] })
+const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] })
 
 interface ProductData {
   id: string
@@ -98,7 +98,7 @@ function SlideToCartButton({ onAdd, disabled, isAdded }: { onAdd: () => void, di
   return (
     <div 
       ref={containerRef} 
-      className={`relative flex-1 h-16 bg-white border border-ink/10 rounded-full flex items-center overflow-hidden z-10 transition-colors hover:border-ink/30 ${disabled ? 'opacity-50 pointer-events-none' : ''}`}
+      className={`relative flex-1 h-16 bg-white border border-ink/10 rounded-xl flex items-center overflow-hidden z-10 transition-colors hover:border-ink/30 ${disabled ? 'opacity-50 pointer-events-none' : ''}`}
     >
       <div className="absolute inset-0 flex items-center justify-center pl-10 text-[13px] font-bold text-ink uppercase tracking-widest pointer-events-none select-none">
         {isAdded ? 'Added to Cart' : <>Slide to Add <ChevronRight size={16} className="inline ml-1 opacity-50" /></>}
@@ -112,7 +112,7 @@ function SlideToCartButton({ onAdd, disabled, isAdded }: { onAdd: () => void, di
         dragSnapToOrigin={true}
         onDragEnd={handleDragEnd}
         whileTap={disabled || isAdded ? {} : { scale: 0.95 }}
-        className={`absolute left-2 w-12 h-12 rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing z-20 shadow-sm transition-colors duration-300 ${
+        className={`absolute left-2 w-12 h-12 rounded-lg flex items-center justify-center cursor-grab active:cursor-grabbing z-20 shadow-sm transition-colors duration-300 ${
           isAdded ? 'bg-green-600 text-white' : 'bg-ink text-white'
         }`}
       >
@@ -304,7 +304,7 @@ export function ProductClient({ product }: ProductClientProps) {
   }
 
   return (
-    <div className="flex flex-col w-full bg-[#f3f4f6] min-h-screen">
+    <div className={`flex flex-col w-full bg-[#f3f4f6] min-h-screen ${inter.className}`}>
       
       {/* 1. Hero Section */}
       <section className="w-full relative z-10 pt-8 pb-32">
@@ -333,17 +333,17 @@ export function ProductClient({ product }: ProductClientProps) {
             <div className="flex items-center gap-3 mb-6">
               {product.categories ? (
                 product.categories.map(cat => (
-                  <span key={cat} className="text-[10px] uppercase tracking-widest text-ink/50 font-bold bg-white/50 px-3 py-1 rounded-full border border-ink/5">{cat}</span>
+                  <span key={cat} className="text-[10px] uppercase tracking-widest text-ink/50 font-bold bg-white/50 px-3 py-1 rounded-xl border border-ink/5">{cat}</span>
                 ))
               ) : (
-                <span className="text-[10px] uppercase tracking-widest text-ink/50 font-bold bg-white/50 px-3 py-1 rounded-full border border-ink/5">{product.category}</span>
+                <span className="text-[10px] uppercase tracking-widest text-ink/50 font-bold bg-white/50 px-3 py-1 rounded-xl border border-ink/5">{product.category}</span>
               )}
               {product.badges?.map(badge => (
-                <Badge key={badge} variant="new" className="bg-ink text-white border-none px-3 py-1 shadow-sm text-[10px] tracking-wider uppercase rounded-full">{badge}</Badge>
+                <Badge key={badge} variant="new" className="bg-ink text-white border-none px-3 py-1 shadow-sm text-[10px] tracking-wider uppercase rounded-xl">{badge}</Badge>
               ))}
             </div>
 
-            <h1 className={`text-4xl md:text-5xl lg:text-[52px] leading-[1.05] font-semibold text-ink mb-6 tracking-tight ${spaceGrotesk.className}`}>
+            <h1 className={`text-4xl md:text-5xl lg:text-[52px] leading-[1.05] font-semibold text-ink mb-6 tracking-tight ${inter.className}`}>
               {product.name}
             </h1>
             
@@ -392,7 +392,7 @@ export function ProductClient({ product }: ProductClientProps) {
                         if (discount > maxDiscount) maxDiscount = discount
                       })
                       return maxDiscount > 0 ? (
-                        <span className="text-xs font-bold text-green-600 bg-green-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Save up to {maxDiscount}%</span>
+                        <span className="text-xs font-bold text-green-600 bg-green-50 px-2.5 py-1 rounded-lg uppercase tracking-wider">Save up to {maxDiscount}%</span>
                       ) : null
                     })()}
                   </div>
@@ -449,7 +449,7 @@ export function ProductClient({ product }: ProductClientProps) {
                           toast.success('Added bundle to cart', { action: { label: 'VIEW', onClick: cartStore.openCart } })
                           setTimeout(() => setJustAdded(false), 1500)
                         }}
-                        className="relative w-full flex items-center justify-between p-4 sm:p-5 rounded-2xl border border-ink/10 hover:border-ink/30 hover:shadow-lg hover:shadow-ink/5 transition-all duration-300 group bg-white text-left overflow-hidden"
+                        className="relative w-full flex items-center justify-between p-4 sm:p-5 rounded-xl border border-ink/10 hover:border-ink/30 hover:shadow-lg hover:shadow-ink/5 transition-all duration-300 group bg-white text-left overflow-hidden"
                       >
                         {/* Hover Gradient Effect */}
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-ink/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -translate-x-full group-hover:translate-x-full ease-out" />
@@ -476,7 +476,7 @@ export function ProductClient({ product }: ProductClientProps) {
                                 <span className="font-bold text-ink text-lg leading-none">${salePriceNum.toFixed(2)}</span>
                               </div>
                               {discount > 0 && (
-                                <span className="text-[10px] font-bold text-white bg-ink px-2 py-0.5 rounded-full uppercase tracking-widest shadow-sm">Save {discount}%</span>
+                                <span className="text-[10px] font-bold text-white bg-ink px-2 py-0.5 rounded-lg uppercase tracking-widest shadow-sm">Save {discount}%</span>
                               )}
                             </div>
                           ) : (
@@ -496,12 +496,12 @@ export function ProductClient({ product }: ProductClientProps) {
               {/* Row 1: Quantity & Wishlist */}
               <div className="flex items-center gap-4">
                 <div className="flex-1">
-                  <QuantityStepper value={quantity} onChange={setQuantity} className="w-full h-16 rounded-[1.25rem] px-2 shadow-none" />
+                  <QuantityStepper value={quantity} onChange={setQuantity} className="w-full h-16 rounded-xl px-2 shadow-none" />
                 </div>
                 <motion.button 
                   whileHover={isWishlistPending ? {} : { scale: 1.05 }}
                   whileTap={isWishlistPending ? {} : { scale: 0.95 }}
-                  className={`relative w-16 h-16 p-0 flex-shrink-0 rounded-[1.25rem] font-bold border transition-colors duration-300 flex items-center justify-center group outline-none disabled:opacity-70 ${
+                  className={`relative w-16 h-16 p-0 flex-shrink-0 rounded-xl font-bold border transition-colors duration-300 flex items-center justify-center group outline-none disabled:opacity-70 ${
                     inWishlist 
                       ? 'border-red-500 bg-red-50 text-red-500 shadow-sm' 
                       : 'border-ink/10 bg-white hover:border-ink/30 hover:bg-gray-50 text-ink/60 hover:text-ink'
@@ -561,7 +561,7 @@ export function ProductClient({ product }: ProductClientProps) {
                 </div>
                 <Button 
                   variant="dark" 
-                  className="flex-1 h-16 rounded-full font-bold text-white bg-gradient-to-r from-ink to-gray-800 hover:from-black hover:to-ink transition-all duration-500 text-sm uppercase tracking-widest border-none shadow-[0_8px_20px_rgb(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.25)] hover:-translate-y-0.5"
+                  className="flex-1 h-16 rounded-xl font-bold text-white bg-gradient-to-r from-ink to-gray-800 hover:from-black hover:to-ink transition-all duration-500 text-sm uppercase tracking-widest border-none shadow-[0_8px_20px_rgb(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.25)] hover:-translate-y-0.5"
                   onClick={() => {
                     handleAddToCart()
                     setTimeout(() => window.location.href = '/checkout', 300)
@@ -576,7 +576,7 @@ export function ProductClient({ product }: ProductClientProps) {
             {/* Trust Badges Inline Flow */}
             <div className="flex flex-wrap gap-x-8 gap-y-6 mb-12 pt-6 border-t border-ink/10">
               <div className="flex items-center gap-3 group">
-                <div className="w-10 h-10 rounded-full border border-ink/10 text-ink flex items-center justify-center font-bold text-lg group-hover:scale-110 group-hover:border-ink/30 transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl border border-ink/10 text-ink flex items-center justify-center font-bold text-lg group-hover:scale-110 group-hover:border-ink/30 transition-all duration-300">
                   <ShieldCheck size={18} strokeWidth={1.5} />
                 </div>
                 <div className="flex flex-col">
@@ -585,7 +585,7 @@ export function ProductClient({ product }: ProductClientProps) {
                 </div>
               </div>
               <div className="flex items-center gap-3 group">
-                <div className="w-10 h-10 rounded-full border border-ink/10 text-ink flex items-center justify-center font-bold text-lg group-hover:scale-110 group-hover:border-ink/30 transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl border border-ink/10 text-ink flex items-center justify-center font-bold text-lg group-hover:scale-110 group-hover:border-ink/30 transition-all duration-300">
                   <FlaskConical size={18} strokeWidth={1.5} />
                 </div>
                 <div className="flex flex-col">
@@ -594,7 +594,7 @@ export function ProductClient({ product }: ProductClientProps) {
                 </div>
               </div>
               <div className="flex items-center gap-3 group">
-                <div className="w-10 h-10 rounded-full border border-ink/10 text-ink flex items-center justify-center font-bold text-lg group-hover:scale-110 group-hover:border-ink/30 transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl border border-ink/10 text-ink flex items-center justify-center font-bold text-lg group-hover:scale-110 group-hover:border-ink/30 transition-all duration-300">
                   <MapPin size={18} strokeWidth={1.5} />
                 </div>
                 <div className="flex flex-col">
@@ -604,7 +604,7 @@ export function ProductClient({ product }: ProductClientProps) {
               </div>
               {product.coaFile && (
                 <a href={product.coaFile} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group hover:opacity-80 transition-opacity">
-                  <div className="w-10 h-10 rounded-full bg-ink text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                  <div className="w-10 h-10 rounded-xl bg-ink text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-sm">
                     <Download size={16} strokeWidth={1.5} />
                   </div>
                   <div className="flex flex-col">
@@ -668,7 +668,7 @@ export function ProductClient({ product }: ProductClientProps) {
                     >
                       <div className="flex flex-col gap-6">
                         <div className="flex items-center gap-4 group">
-                          <div className="w-10 h-10 rounded-full border border-ink/10 text-ink flex items-center justify-center font-bold text-lg shrink-0 group-hover:scale-110 group-hover:border-ink/30 transition-all duration-300">
+                          <div className="w-10 h-10 rounded-xl border border-ink/10 text-ink flex items-center justify-center font-bold text-lg shrink-0 group-hover:scale-110 group-hover:border-ink/30 transition-all duration-300">
                             <Truck size={18} strokeWidth={1.5} />
                           </div>
                           <div className="flex flex-col">
@@ -677,7 +677,7 @@ export function ProductClient({ product }: ProductClientProps) {
                           </div>
                         </div>
                         <div className="flex items-center gap-4 group">
-                          <div className="w-10 h-10 rounded-full border border-ink/10 text-ink flex items-center justify-center font-bold text-lg shrink-0 group-hover:scale-110 group-hover:border-ink/30 transition-all duration-300">
+                          <div className="w-10 h-10 rounded-xl border border-ink/10 text-ink flex items-center justify-center font-bold text-lg shrink-0 group-hover:scale-110 group-hover:border-ink/30 transition-all duration-300">
                             <Sparkles size={18} strokeWidth={1.5} />
                           </div>
                           <div className="flex flex-col">
@@ -710,7 +710,7 @@ export function ProductClient({ product }: ProductClientProps) {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
               <span className="text-[#5984c4] text-label-sm uppercase tracking-[0.2em] font-bold mb-4 block">Continue Exploring</span>
-              <h2 className={`text-[44px] sm:text-[56px] lg:text-[64px] leading-none font-bold tracking-tighter text-ink ${spaceGrotesk.className}`}>
+              <h2 className={`text-[44px] sm:text-[56px] lg:text-[64px] leading-none font-bold tracking-tighter text-ink ${inter.className}`}>
                 Also Considered.
               </h2>
             </div>
@@ -719,14 +719,14 @@ export function ProductClient({ product }: ProductClientProps) {
             <div className="flex gap-3">
               <button 
                 onClick={() => relatedEmblaApi?.scrollPrev()}
-                className="w-12 h-12 rounded-full border border-blue-200 flex items-center justify-center text-ink hover:bg-ink hover:text-white transition-all shadow-sm bg-white"
+                className="w-12 h-12 rounded-xl border border-blue-200 flex items-center justify-center text-ink hover:bg-ink hover:text-white transition-all shadow-sm bg-white"
                 aria-label="Previous Products"
               >
                 <ChevronLeft size={20} />
               </button>
               <button 
                 onClick={() => relatedEmblaApi?.scrollNext()}
-                className="w-12 h-12 rounded-full border border-blue-200 flex items-center justify-center text-ink hover:bg-ink hover:text-white transition-all shadow-sm bg-white"
+                className="w-12 h-12 rounded-xl border border-blue-200 flex items-center justify-center text-ink hover:bg-ink hover:text-white transition-all shadow-sm bg-white"
                 aria-label="Next Products"
               >
                 <ChevronRight size={20} />
@@ -777,7 +777,7 @@ export function ProductClient({ product }: ProductClientProps) {
             <motion.button 
               whileHover={isWishlistPending ? {} : { scale: 1.05 }}
               whileTap={isWishlistPending ? {} : { scale: 0.9 }}
-              className={`relative w-11 h-11 p-0 flex-shrink-0 rounded-full font-bold border transition-colors duration-300 flex items-center justify-center group outline-none disabled:opacity-70 ${
+              className={`relative w-11 h-11 p-0 flex-shrink-0 rounded-xl font-bold border transition-colors duration-300 flex items-center justify-center group outline-none disabled:opacity-70 ${
                 inWishlist ? 'border-red-500 bg-red-50 text-red-500 shadow-sm' : 'border-ink/10 bg-white text-ink/60 hover:text-ink hover:bg-gray-50'
               }`}
               aria-label="Toggle Wishlist"
@@ -821,7 +821,7 @@ export function ProductClient({ product }: ProductClientProps) {
 
             <Button 
               variant="outline" 
-              className="w-11 h-11 p-0 flex-shrink-0 rounded-full font-bold text-ink border border-ink bg-white hover:bg-ink hover:text-white transition-all duration-300 flex items-center justify-center group"
+              className="w-11 h-11 p-0 flex-shrink-0 rounded-xl font-bold text-ink border border-ink bg-white hover:bg-ink hover:text-white transition-all duration-300 flex items-center justify-center group"
               aria-label="Add to Cart"
               onClick={handleAddToCart}
               disabled={!selectedVariant?.inStock || justAdded}
@@ -841,7 +841,7 @@ export function ProductClient({ product }: ProductClientProps) {
 
             <Button 
               variant="dark" 
-              className="flex-1 h-11 rounded-full font-bold text-white bg-gradient-to-r from-ink to-gray-800 hover:from-black hover:to-ink transition-all duration-300 text-[11px] uppercase tracking-widest border-none shadow-[0_4px_14px_rgba(0,0,0,0.1)] hover:-translate-y-0.5"
+              className="flex-1 h-11 rounded-xl font-bold text-white bg-gradient-to-r from-ink to-gray-800 hover:from-black hover:to-ink transition-all duration-300 text-[11px] uppercase tracking-widest border-none shadow-[0_4px_14px_rgba(0,0,0,0.1)] hover:-translate-y-0.5"
               onClick={() => {
                 handleAddToCart()
                 setTimeout(() => window.location.href = '/checkout', 300)
@@ -866,7 +866,7 @@ export function ProductClient({ product }: ProductClientProps) {
             }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-            className="fixed top-0 left-0 h-[72px] bg-white/90 backdrop-blur-md text-ink rounded-full flex items-center justify-center pointer-events-none z-[100] text-[10px] font-bold tracking-[0.2em] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-ink/10 hidden md:flex overflow-hidden"
+            className="fixed top-0 left-0 h-[72px] bg-white/90 backdrop-blur-md text-ink rounded-xl flex items-center justify-center pointer-events-none z-[100] text-[10px] font-bold tracking-[0.2em] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-ink/10 hidden md:flex overflow-hidden"
             style={{
               x: cursorXSpring,
               y: cursorYSpring,
