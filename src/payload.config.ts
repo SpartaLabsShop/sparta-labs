@@ -135,23 +135,21 @@ export default buildConfig({
           media: {
             disableLocalStorage: true,
             disablePayloadAccessControl: true,
-            prefix: 'Product Images',
+            prefix: 'media',
             generateFileURL: ({ filename, prefix }) => {
               const publicUrl = process.env.R2_PUBLIC_URL || ''
               const base = publicUrl.replace(/\/$/, '')
-              const path = prefix ? `${prefix}/${filename}` : filename
-              return `${base}/${path.replace(/ /g, '%20')}`
+              return prefix ? `${base}/${prefix}/${filename}` : `${base}/${filename}`
             },
           },
           documents: {
             disableLocalStorage: true,
             disablePayloadAccessControl: true,
-            prefix: 'COA',
+            prefix: 'documents',
             generateFileURL: ({ filename, prefix }) => {
               const publicUrl = process.env.R2_PUBLIC_URL || ''
               const base = publicUrl.replace(/\/$/, '')
-              const path = prefix ? `${prefix}/${filename}` : filename
-              return `${base}/${path.replace(/ /g, '%20')}`
+              return prefix ? `${base}/${prefix}/${filename}` : `${base}/${filename}`
             },
           },
         },
