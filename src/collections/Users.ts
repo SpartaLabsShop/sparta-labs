@@ -9,6 +9,10 @@ export const Users: CollectionConfig = {
   },
   auth: {
     tokenExpiration: 7200,
+    cookies: {
+      sameSite: 'Lax',
+      secure: process.env.NODE_ENV === 'production',
+    },
   },
   access: accessUsers,
   fields: [
