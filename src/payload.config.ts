@@ -139,9 +139,8 @@ export default buildConfig({
             generateFileURL: ({ filename, prefix }) => {
               const publicUrl = process.env.R2_PUBLIC_URL || ''
               const base = publicUrl.replace(/\/$/, '')
-              const encodedPrefix = prefix ? encodeURIComponent(prefix) : ''
-              const encodedFilename = encodeURIComponent(filename)
-              return encodedPrefix ? `${base}/${encodedPrefix}/${encodedFilename}` : `${base}/${encodedFilename}`
+              const path = prefix ? `${prefix}/${filename}` : filename
+              return `${base}/${path.replace(/ /g, '%20')}`
             },
           },
           documents: {
@@ -151,9 +150,8 @@ export default buildConfig({
             generateFileURL: ({ filename, prefix }) => {
               const publicUrl = process.env.R2_PUBLIC_URL || ''
               const base = publicUrl.replace(/\/$/, '')
-              const encodedPrefix = prefix ? encodeURIComponent(prefix) : ''
-              const encodedFilename = encodeURIComponent(filename)
-              return encodedPrefix ? `${base}/${encodedPrefix}/${encodedFilename}` : `${base}/${encodedFilename}`
+              const path = prefix ? `${prefix}/${filename}` : filename
+              return `${base}/${path.replace(/ /g, '%20')}`
             },
           },
         },
