@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Dna, Activity, Brain, FlaskConical, TrendingUp, Scale, Target, BatteryCharging } from "lucide-react";
+import Link from "next/link";
 
 const categories = [
   { id: 1, title: "Bioregulators", description: "Short-chain peptide bioregulators. Research-grade purity, lot-specific COA.", image: "/categories/light_bioregulators.png", icon: <Dna size={20} /> },
@@ -103,9 +104,9 @@ const Categories = () => {
                   >
                     <h3 className="mb-2 text-[1.5rem] font-semibold text-[#111111] font-['Neue_Haas_Grotesk_Display',sans-serif]">{category.title}</h3>
                     <p className="mb-6 max-w-[90%] text-[0.95rem] leading-[1.5] text-[#444444]">{category.description}</p>
-                    <button className="inline-flex w-fit items-center gap-3 rounded bg-[#111111] px-6 py-3 text-[0.85rem] font-medium text-white transition-colors duration-200 hover:bg-black">
+                    <Link href={`/shop?category=${encodeURIComponent(category.title)}`} className="inline-flex w-fit items-center gap-3 rounded bg-[#111111] px-6 py-3 text-[0.85rem] font-medium text-white transition-colors duration-200 hover:bg-black">
                       <span className="flex items-center justify-center">{category.icon}</span> Explore category
-                    </button>
+                    </Link>
                   </motion.div>
 
                   {/* Bottom Icon (always visible, but positioned differently depending on state) */}

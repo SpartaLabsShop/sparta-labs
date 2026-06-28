@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const slideImages = [
   {
@@ -81,6 +82,9 @@ const AboutUs = () => {
               <span className="text-[#999999]">Welcome to</span> Sparta — your trusted source <br />
               for premium-quality, <span className="text-[#999999]">lab-tested research compounds.</span>
             </h2>
+            <Link href="/about" className="mt-6 inline-flex items-center rounded bg-[#111111] px-6 py-3 text-[0.85rem] font-medium text-white transition-colors duration-200 hover:bg-black">
+              Learn More About Us
+            </Link>
           </div>
           <div className="hidden flex-shrink-0 pt-4 md:block">
             <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -187,14 +191,14 @@ const AboutUs = () => {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <button className="flex w-full items-center justify-between rounded-lg border border-white/30 bg-transparent px-4 py-3 text-[0.85rem] font-medium text-white transition-all duration-300 hover:border-white/50 hover:bg-white/10">
-                    <span>Recovery & Repair Peptides</span>
+                  <Link href="/journal" className="flex w-full items-center justify-between rounded-lg border border-white/30 bg-transparent px-4 py-3 text-[0.85rem] font-medium text-white transition-all duration-300 hover:border-white/50 hover:bg-white/10">
+                    <span>Read Research Peptides</span>
                     <span className="text-base font-normal">↗</span>
-                  </button>
-                  <button className="flex w-full items-center justify-between rounded-lg border border-white bg-white px-4 py-3 text-[0.85rem] font-medium text-[#111111] transition-all duration-300 hover:border-[#f0f0f0] hover:bg-[#f0f0f0]">
+                  </Link>
+                  <Link href="/shop" className="flex w-full items-center justify-between rounded-lg border border-white bg-white px-4 py-3 text-[0.85rem] font-medium text-[#111111] transition-all duration-300 hover:border-[#f0f0f0] hover:bg-[#f0f0f0]">
                     <span>Fat Loss Peptides</span>
                     <span className="text-base font-normal">↗</span>
-                  </button>
+                  </Link>
                 </div>
               </div>
             </motion.div>

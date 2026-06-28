@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 const defaultFaqs = [
   {
@@ -74,7 +75,7 @@ const FAQ = ({ faqs = defaultFaqs }: FAQProps) => {
         </motion.div>
 
         <div className="flex w-full flex-col gap-4">
-          {faqs.map((faq, index) => {
+          {faqs.map((faq, index: number) => {
             const isOpen = openIndex === index
             return (
               <motion.div
@@ -124,6 +125,12 @@ const FAQ = ({ faqs = defaultFaqs }: FAQProps) => {
             )
           })}
         </div>
+
+        <motion.div className="mt-8" variants={itemVariants}>
+          <Link href="/faq" className="inline-flex items-center rounded bg-[#111111] px-8 py-3.5 text-[0.85rem] font-medium text-white transition-colors duration-200 hover:bg-black">
+            View All FAQs
+          </Link>
+        </motion.div>
       </div>
     </motion.section>
   )

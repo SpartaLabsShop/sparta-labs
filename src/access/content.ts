@@ -1,8 +1,8 @@
 export const accessContent: any = {
   create: ({ req }: any) => req.user?.role === 'admin',
-  read: ({ req, data }: any) => {
+  read: ({ req }: any) => {
     if (req.user?.role === 'admin') return true
-    return data?.status === 'published'
+    return { status: { equals: 'published' } }
   },
   update: ({ req }: any) => req.user?.role === 'admin',
   delete: ({ req }: any) => req.user?.role === 'admin',

