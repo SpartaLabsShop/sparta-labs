@@ -136,7 +136,7 @@ export function PrimaryProductCard({ product, id }: PrimaryProductCardProps) {
     <Link
       href={`/products/${product.slug}`}
       id={id}
-      className="group relative flex flex-col overflow-hidden rounded-xl bg-[#f6f6f6] pt-8 px-6 pb-6 h-full w-full"
+      className="group relative flex flex-col overflow-hidden rounded-xl bg-[#f6f6f6] pt-6 sm:pt-8 px-3 sm:px-6 pb-4 sm:pb-6 h-full w-full"
     >
       {/* Third-Party Tested Badge */}
       <div className="absolute top-0 left-1/2 z-10 flex h-7 w-[180px] -translate-x-1/2 items-center justify-center bg-white [clip-path:polygon(0_0,100%_0,88%_100%,12%_100%)]">
@@ -212,7 +212,7 @@ export function PrimaryProductCard({ product, id }: PrimaryProductCardProps) {
       )}
 
       {/* Product Image */}
-      <div className="mt-2.5 mb-4 flex h-[220px] w-full items-center justify-center max-[768px]:h-[200px]">
+      <div className="mt-2.5 mb-3 sm:mb-4 flex h-[150px] sm:h-[220px] w-full items-center justify-center">
         <div className="relative h-full w-full max-w-[90%]">
           <Image
             src={product.image}
@@ -225,17 +225,17 @@ export function PrimaryProductCard({ product, id }: PrimaryProductCardProps) {
 
       {/* Info Area */}
       <div className="flex flex-1 flex-col text-center">
-        <p className="mb-1.5 text-[0.7rem] tracking-[0.5px] text-[#999999] uppercase">{product.category}</p>
-        <h3 className="mb-3 text-[1.2rem] font-normal text-ink">{product.name}</h3>
+        <p className="mb-1 sm:mb-1.5 text-[0.6rem] sm:text-[0.7rem] tracking-[0.5px] text-[#999999] uppercase">{product.category}</p>
+        <h3 className="mb-2 sm:mb-3 text-[0.9rem] sm:text-[1.2rem] font-normal text-ink leading-tight">{product.name}</h3>
 
         {/* Price Row */}
-        <div className="mb-5 flex items-center justify-center gap-2">
+        <div className="mb-3 sm:mb-5 flex items-center justify-center gap-1.5 sm:gap-2">
           {product.originalPrice && (
             <span className="text-xs sm:text-sm font-medium text-ink/40 line-through">
               {product.originalPrice}
             </span>
           )}
-          <span className="text-base font-semibold text-[#111111]">{product.priceRange}</span>
+          <span className="text-sm sm:text-base font-semibold text-[#111111]">{product.priceRange}</span>
           {product.discountPercentage && (
             <span className="rounded-xl bg-red-100 px-1.5 py-0.5 text-[0.65rem] font-bold text-red-600">
               -{product.discountPercentage}%
@@ -255,7 +255,7 @@ export function PrimaryProductCard({ product, id }: PrimaryProductCardProps) {
         {/* Add to Cart + Qty */}
         <div className="mt-auto flex gap-2" onClick={(e) => e.preventDefault()}>
           {isAdded ? (
-            <div className="flex flex-1 items-center justify-center rounded bg-[#333333] p-3 text-[0.85rem] font-medium text-white">
+            <div className="flex flex-1 items-center justify-center rounded bg-[#333333] p-2.5 sm:p-3 text-[0.75rem] sm:text-[0.85rem] font-medium text-white">
               In Cart <Check size={14} className="ml-1" />
             </div>
           ) : (
@@ -264,11 +264,11 @@ export function PrimaryProductCard({ product, id }: PrimaryProductCardProps) {
                 role="button"
                 tabIndex={0}
                 onClick={handleAddToCart}
-                className="flex flex-1 items-center justify-center rounded bg-[#111111] p-3 text-[0.85rem] font-medium text-white transition-colors duration-200 hover:bg-black cursor-pointer select-none"
+                className="flex flex-1 items-center justify-center rounded bg-[#111111] p-2.5 sm:p-3 text-[0.75rem] sm:text-[0.85rem] font-medium text-white transition-colors duration-200 hover:bg-black cursor-pointer select-none"
               >
                 Add to cart
               </div>
-              <div className="flex h-auto w-[90px] items-center rounded border border-[#cccccc] bg-transparent">
+              <div className="hidden sm:flex h-auto w-[90px] items-center rounded border border-[#cccccc] bg-transparent">
                 <div
                   role="button"
                   tabIndex={0}

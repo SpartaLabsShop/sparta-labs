@@ -43,13 +43,21 @@ export function MobileMenu({ isOpen, onClose, isLoggedIn = false, onSearchClick 
 
   useEffect(() => {
     if (isOpen) {
+      const scrollY = window.scrollY
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.width = '100%'
       document.body.style.overflow = 'hidden'
       const handleEsc = (e: KeyboardEvent) => {
         if (e.key === 'Escape') onClose()
       }
       window.addEventListener('keydown', handleEsc)
       return () => {
+        document.body.style.position = ''
+        document.body.style.top = ''
+        document.body.style.width = ''
         document.body.style.overflow = ''
+        window.scrollTo(0, scrollY)
         window.removeEventListener('keydown', handleEsc)
       }
     }
@@ -71,7 +79,7 @@ export function MobileMenu({ isOpen, onClose, isLoggedIn = false, onSearchClick 
 
           {/* Side Panel */}
           <motion.div
-            className="fixed top-0 right-0 z-[2001] flex h-screen w-full max-w-[450px] flex-col border-l border-white/50 bg-white/85 shadow-[-10px_0_30px_rgba(0,0,0,0.1)] backdrop-blur-[20px] max-[768px]:max-w-[80%]"
+            className="fixed inset-y-0 right-0 z-[2001] flex w-full max-w-[450px] flex-col border-l border-white/50 bg-white/85 shadow-[-10px_0_30px_rgba(0,0,0,0.1)] backdrop-blur-[20px] max-[768px]:max-w-[80%]"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -88,7 +96,7 @@ export function MobileMenu({ isOpen, onClose, isLoggedIn = false, onSearchClick 
             </div>
 
             {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto px-10 pt-8 pb-28">
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-10 pt-8 pb-28 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden" style={{ WebkitOverflowScrolling: 'touch' }}>
               {/* Main Nav Links */}
               <ul className="flex flex-col gap-[30px] list-none mb-12">
                 {DISCOVER_LINKS.map((link, i) => (

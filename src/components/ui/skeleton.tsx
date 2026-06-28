@@ -12,25 +12,33 @@ function Skeleton({ className, ...props }: React.ComponentProps<'div'>) {
   )
 }
 
-// 1. ProductCard Skeleton
+// 1. ProductCard Skeleton — matches PrimaryProductCard layout
 export function ProductCardSkeleton() {
   return (
-    <div className="block relative w-full h-[460px] sm:h-[500px] rounded-[32px] bg-white p-2 sm:p-3 shadow-sm border border-border-subtle">
-      <div className="relative w-full h-full rounded-[24px] overflow-hidden bg-cream">
-        {/* Image Area Skeleton */}
-        <div className="absolute inset-0 bg-ink/5 animate-pulse" />
-        
-        {/* Bottom Content Area Skeleton */}
-        <div className="absolute bottom-0 left-0 right-0 z-30 p-4 sm:p-5 bg-white rounded-b-[24px]">
-          <Skeleton className="h-5 w-3/4 mb-1" />
-          <div className="h-[36px] flex flex-col justify-center gap-1.5 mt-1">
-            <Skeleton className="h-3 w-full" />
-            <Skeleton className="h-3 w-5/6" />
-          </div>
-          <div className="flex items-center justify-between mt-2">
-            <Skeleton className="h-6 w-16" />
-            <Skeleton className="h-9 w-20 rounded-full" />
-          </div>
+    <div className="flex flex-col overflow-hidden rounded-xl bg-white border border-[#eaeaea] pt-6 sm:pt-8 px-3 sm:px-6 pb-4 sm:pb-6 h-full w-full">
+      {/* Third-Party Tested Badge */}
+      <div className="flex justify-center mb-3 sm:mb-4">
+        <Skeleton className="h-5 w-[120px] sm:w-[140px]" />
+      </div>
+
+      {/* Image Area */}
+      <div className="mt-2.5 mb-3 sm:mb-4 flex h-[150px] sm:h-[220px] w-full items-center justify-center">
+        <Skeleton className="h-full w-[70%] rounded-lg" />
+      </div>
+
+      {/* Category */}
+      <div className="flex flex-col items-center text-center flex-1">
+        <Skeleton className="h-3 w-16 sm:w-20 mb-1 sm:mb-2" />
+        {/* Product Name */}
+        <Skeleton className="h-5 sm:h-6 w-3/4 mb-2 sm:mb-3" />
+        {/* Price */}
+        <Skeleton className="h-4 sm:h-5 w-16 mb-3 sm:mb-4" />
+        {/* COA Badge */}
+        <Skeleton className="h-4 w-20 sm:w-24 mb-3 sm:mb-4" />
+        {/* Add to Cart + Qty */}
+        <div className="mt-auto flex gap-2 w-full">
+          <Skeleton className="h-10 sm:h-12 flex-1 rounded" />
+          <Skeleton className="hidden sm:block h-12 w-[90px] rounded" />
         </div>
       </div>
     </div>

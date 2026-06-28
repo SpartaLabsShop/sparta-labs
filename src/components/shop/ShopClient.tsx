@@ -300,7 +300,7 @@ function ShopClientInner({ initialProducts, totalPages, categories }: ShopClient
         {products.length > 0 ? (
           <>
             {/* Product Grid - Full Width */}
-            <div className="grid grid-cols-3 gap-6 max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1 max-[480px]:grid-cols-1">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
               {products.map((product, index) => (
                 <motion.div
                   key={product.slug}

@@ -155,7 +155,7 @@ export async function GET(request: Request) {
 
     response.cookies.set('payload-token', loginResult.token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
       expires: new Date(Date.now() + tokenExpiration * 1000),

@@ -6,7 +6,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative border-t border-line bg-[#FAFAFB] pt-20 text-[#333333] [clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]">
+    <footer className="relative border-t border-[#2a1f1f] bg-[#1B1212] pt-20 text-[#cccccc] [clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]">
       <div className="mx-auto flex max-w-[1700px] flex-col gap-16 px-8 max-[768px]:px-4 max-[480px]:px-3">
         {/* Top Footer */}
         <div className="flex flex-wrap justify-between gap-10">

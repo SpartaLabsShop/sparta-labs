@@ -44,7 +44,7 @@ const Categories = () => {
     >
       <div className="mx-auto flex max-w-[1700px] flex-col items-center px-8">
         <motion.div className="mb-16 max-w-[600px] text-center" variants={itemVariants}>
-          <h2 className="mb-4 text-[2.5rem] font-semibold tracking-[-0.02em] text-[#111111] font-['Neue_Haas_Grotesk_Display',sans-serif]">
+          <h2 className="mb-4 text-[2.5rem] font-semibold tracking-[-0.02em] text-[#111111] uppercase font-[var(--font-inter)]">
             <span className="font-normal text-[#888888] line-through">Discover</span> a few more categories.
           </h2>
           <p className="text-base leading-[1.6] text-[#666666]">
