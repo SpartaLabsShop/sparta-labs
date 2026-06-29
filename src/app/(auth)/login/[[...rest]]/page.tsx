@@ -100,7 +100,10 @@ export default function LoginPage() {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-gray-800">Password</label>
+              <div className="flex items-center justify-between">
+                <label className="text-[10px] font-bold uppercase tracking-[0.1em] text-gray-800">Password</label>
+                <Link href="/forgot-password" className="text-[10px] text-gray-500 uppercase tracking-widest hover:text-black transition-colors">Forgot?</Link>
+              </div>
               <input
                 type="password" value={password} onChange={e => setPassword(e.target.value)}
                 required autoComplete="current-password" placeholder="••••••••"

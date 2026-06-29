@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
+import Image from 'next/image'
 import { ShoppingBag, Menu, Search, X, User, Heart } from 'lucide-react'
 import { MobileMenu } from './MobileMenu'
 import { useCartStore } from '@/lib/cart/store'
@@ -16,7 +17,7 @@ const CartDrawer = dynamic(() => import('@/components/cart/CartDrawer').then(mod
 
 const SALE_END_DATE = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
 
-export function ClientHeader({ cartItemCount = 0, wishlistItemCount = 0, isLoggedIn = false, categories: initialCategories = [], initialWishlistItems = [], initialCartItems = [] }: any) {
+export function ClientHeader({ cartItemCount = 0, wishlistItemCount = 0, isLoggedIn = false, userEmail = '', avatarUrl = '', categories: initialCategories = [], initialWishlistItems = [], initialCartItems = [] }: any) {
   const cartStore = useCartStore()
   const setCartItems = useCartStore((state) => state.setItems)
   const setWishlistItems = useWishlistStore((state) => state.setItems)
@@ -284,9 +285,34 @@ export function ClientHeader({ cartItemCount = 0, wishlistItemCount = 0, isLogge
             <div className="flex items-center md:min-w-[34px] justify-center">
               {mounted ? (
                 isLoggedIn ? (
-                  <Link href="/account" className={`p-1 transition-colors flex items-center justify-center ${textColor} ${textHoverColor}`}>
-                    <User size={18} strokeWidth={1.5} />
-                  </Link>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button className={`p-1 transition-colors flex items-center justify-center ${textColor} ${textHoverColor} focus:outline-none`}>
+                        {avatarUrl ? (
+                          <Image src={avatarUrl} alt="Profile" width={24} height={24} className="rounded-full object-cover" referrerPolicy="no-referrer" />
+                        ) : (
+                          <User size={18} strokeWidth={1.5} />
+                        )}
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-56 bg-white rounded-xl shadow-lg border border-gray-100 p-2 mt-2">
+                      <div className="px-3 py-2 border-b border-gray-100 mb-1">
+                        <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400">Signed in as</p>
+                        <p className="text-sm font-semibold text-black truncate">{userEmail}</p>
+                      </div>
+                      <DropdownMenuItem asChild className="cursor-pointer focus:bg-gray-50 focus:text-black rounded-lg">
+                        <Link href="/account" className="flex w-full items-center py-2 px-3 text-sm font-medium">
+                          Account & orders
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer focus:bg-gray-50 focus:text-black rounded-lg" onSelect={async () => {
+                        await fetch('/api/users/logout', { method: 'POST', credentials: 'include' })
+                        window.location.href = '/'
+                      }}>
+                        <span className="flex w-full items-center py-2 px-3 text-sm font-medium text-red-600">Sign out</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 ) : (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

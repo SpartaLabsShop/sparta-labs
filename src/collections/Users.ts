@@ -13,6 +13,28 @@ export const Users: CollectionConfig = {
       sameSite: 'Lax',
       secure: process.env.NODE_ENV === 'production',
     },
+    forgotPassword: {
+      generateEmailHTML: ({ token }: { token: string }) => {
+        const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+        return `
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 40px 20px;">
+            <div style="text-align: center; margin-bottom: 32px;">
+              <h1 style="font-size: 20px; font-weight: 700; color: #111; margin: 0;">SPARTA LABS</h1>
+            </div>
+            <h2 style="font-size: 24px; font-weight: 700; color: #111; margin-bottom: 16px;">Reset your password</h2>
+            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 24px;">
+              We received a request to reset your password. Click the button below to choose a new one. This link will expire in 1 hour.
+            </p>
+            <a href="${serverUrl}/reset-password?token=${token}" style="display: inline-block; background: #111; color: #fff; padding: 14px 32px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none;">
+              Reset Password
+            </a>
+            <p style="font-size: 12px; color: #999; margin-top: 32px; line-height: 1.6;">
+              If you didn't request this, you can safely ignore this email. Your password will not change.
+            </p>
+          </div>
+        `
+      },
+    },
   },
   access: accessUsers,
   fields: [
@@ -108,6 +130,11 @@ export const Users: CollectionConfig = {
         readOnly: true,
         condition: ({ user }) => !!user?.role && ['admin', 'staff'].includes(user.role),
       },
+    },
+    {
+      name: 'avatarUrl',
+      type: 'text',
+      admin: { readOnly: true },
     },
     {
       name: 'authProvider',

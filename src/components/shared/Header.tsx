@@ -67,6 +67,8 @@ export async function Header() {
         cartItemCount={cartItemCount}
         wishlistItemCount={wishlistItemCount}
         isLoggedIn={!!user}
+        userEmail={(user as any)?.email || ''}
+        avatarUrl={(user as any)?.avatarUrl || ''}
         categories={[]}
         initialWishlistItems={initialWishlistItems}
         initialCartItems={initialCartItems}

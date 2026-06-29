@@ -71,7 +71,7 @@ export async function GET(request: Request) {
     }
 
     const googleUser = await userInfoRes.json()
-    const { id: googleId, email, given_name: firstName, family_name: lastName } = googleUser
+    const { id: googleId, email, given_name: firstName, family_name: lastName, picture: avatarUrl } = googleUser
 
     if (!email) {
       return NextResponse.redirect(new URL('/login?error=google_no_email', origin), { status: 302 })
@@ -92,7 +92,7 @@ export async function GET(request: Request) {
       user = await payload.update({
         collection: 'users',
         id: byGoogleId.docs[0].id,
-        data: { password: tempPassword },
+        data: { password: tempPassword, ...(avatarUrl ? { avatarUrl } : {}) },
         overrideAccess: true,
       })
     } else {
@@ -113,6 +113,7 @@ export async function GET(request: Request) {
             emailVerified: true,
             ...(firstName && !byEmail.docs[0].firstName ? { firstName } : {}),
             ...(lastName && !byEmail.docs[0].lastName ? { lastName } : {}),
+            ...(avatarUrl ? { avatarUrl } : {}),
           },
           overrideAccess: true,
         })
@@ -128,6 +129,7 @@ export async function GET(request: Request) {
             authProvider: 'google',
             emailVerified: true,
             role: 'customer',
+            ...(avatarUrl ? { avatarUrl } : {}),
           },
           overrideAccess: true,
         })
@@ -147,7 +149,7 @@ export async function GET(request: Request) {
       return NextResponse.redirect(new URL('/login?error=google_login_failed', origin), { status: 302 })
     }
 
-    const redirectUrl = new URL(redirectTo, origin)
+    const redirectUrl = new URL(`/auth-redirect?to=${encodeURIComponent(redirectTo)}`, origin)
     const response = NextResponse.redirect(redirectUrl, { status: 302 })
 
     const collectionConfig = payload.collections['users'].config
