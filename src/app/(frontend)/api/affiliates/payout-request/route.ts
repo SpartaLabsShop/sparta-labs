@@ -72,7 +72,7 @@ export async function POST(request: Request) {
         </div>
       `
       await payload.sendEmail({
-        to: 'support@thelooksmaxxinglab.com',
+        to: 'support@spartalabs.com',
         subject: `[Payout Request] $${amount.toFixed(2)} from ${affiliate.displayName || affiliate.referralSlug}`,
         html: emailHtml,
       })

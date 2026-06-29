@@ -6,11 +6,8 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ShoppingBag, Heart } from 'lucide-react'
 import { EmptyState } from '@/components/shared/EmptyState'
-import { Space_Grotesk } from 'next/font/google'
 import { useWishlistStore } from '@/lib/wishlist/store'
 import { useEffect, useState } from 'react'
-
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['300', '400', '500', '700'] })
 
 export interface WishlistItem {
   id: string;
@@ -40,20 +37,19 @@ export function WishlistClient({ items: serverItems }: AccountWishlistProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-col w-full"
+      className="flex flex-col w-full gap-8"
     >
-
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 border-b border-slate-200 pb-6">
-        <div className="flex flex-col gap-2">
-          <h1 className={`text-3xl md:text-4xl text-ink font-bold tracking-tighter ${spaceGrotesk.className}`}>
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+        <div className="flex flex-col gap-1">
+          <h1 className="text-3xl font-bold text-slate-900">
             My Wishlist
           </h1>
-          <p className="text-sm text-[#8A8A8A]">You have {displayItems.length} items saved for later.</p>
+          <p className="text-sm text-slate-500">You have {displayItems.length} items saved for later.</p>
         </div>
 
-        <button className="flex items-center justify-center gap-2 bg-ink hover:bg-[#5984c4] text-white rounded-xl px-6 py-3.5 text-[10px] font-bold uppercase tracking-[0.15em] transition-all w-full sm:w-auto shadow-sm">
-          <ShoppingBag size={14} />
+        <button className="flex items-center justify-center gap-2 bg-[#CC292B] hover:bg-[#b02224] text-white rounded-xl px-6 py-3.5 text-sm font-bold transition-colors w-full sm:w-auto shadow-sm">
+          <ShoppingBag size={18} />
           Move All to Cart
         </button>
       </div>
@@ -65,7 +61,7 @@ export function WishlistClient({ items: serverItems }: AccountWishlistProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {displayItems.map((product, i) => (
               <motion.div
@@ -73,11 +69,10 @@ export function WishlistClient({ items: serverItems }: AccountWishlistProps) {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
-                className="group flex flex-col w-full bg-white rounded-3xl border border-slate-200 overflow-hidden hover:border-[#5984c4] hover:shadow-lg hover:shadow-[#5984c4]/10 transition-all duration-500"
+                className="group flex flex-col w-full bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm hover:border-slate-300 transition-all duration-300"
               >
-
                 {/* Image Area */}
-                <div className="relative w-full aspect-[4/5] overflow-hidden bg-[#F5F5F7]">
+                <div className="relative w-full aspect-[4/5] overflow-hidden bg-slate-50">
                   <Link href={`/products/${product.slug}`}>
                     <motion.div
                       whileHover={{ scale: 1.04 }}
@@ -99,35 +94,34 @@ export function WishlistClient({ items: serverItems }: AccountWishlistProps) {
                       e.preventDefault()
                       removeItem(product.id)
                     }}
-                    className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md text-[#8A8A8A] hover:text-red-500 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 shadow-sm"
+                    className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md text-slate-500 hover:text-[#CC292B] flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 shadow-sm"
                   >
-                    <X size={14} />
+                    <X size={18} />
                   </button>
                 </div>
 
                 {/* Info Area */}
-                <div className="flex flex-col flex-1 p-5">
+                <div className="flex flex-col flex-1 p-6">
                   <Link href={`/products/${product.slug}`}>
-                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#5984c4] mb-1.5 block">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#CC292B] mb-2 block">
                       {/* @ts-ignore */}
                       {product.descriptor || 'Product'}
                     </span>
-                    <h3 className={`text-lg font-bold text-ink mb-1 tracking-tight group-hover:text-[#5984c4] transition-colors ${spaceGrotesk.className}`}>
+                    <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#CC292B] transition-colors leading-tight">
                       {product.name}
                     </h3>
                   </Link>
 
                   <div className="mt-4 flex items-center justify-between gap-3 pt-4 border-t border-slate-100">
-                    <span className={`text-lg font-bold text-ink tracking-tighter ${spaceGrotesk.className}`}>
+                    <span className="text-xl font-bold text-slate-900 tracking-tight">
                       {/* @ts-ignore */}
                       {product.price || product.priceRange || ''}
                     </span>
-                    <button className="bg-slate-100 hover:bg-[#5984c4] text-ink hover:text-white rounded-xl px-5 py-2.5 text-[9px] font-bold uppercase tracking-[0.1em] transition-all shrink-0">
+                    <button className="bg-slate-50 hover:bg-[#FFF5F5] text-slate-700 hover:text-[#CC292B] border border-slate-200 hover:border-[#CC292B] rounded-xl px-5 py-2.5 text-xs font-bold transition-all shrink-0">
                       Add to Cart
                     </button>
                   </div>
                 </div>
-
               </motion.div>
             ))}
           </motion.div>
@@ -137,22 +131,23 @@ export function WishlistClient({ items: serverItems }: AccountWishlistProps) {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
-            className="w-full bg-white rounded-3xl border border-dashed border-slate-300 p-12"
+            className="w-full bg-white rounded-3xl border border-slate-100 shadow-sm p-12"
           >
-            <EmptyState
-              icon={Heart}
-              title="Your wishlist is empty"
-              description="Save items you want to buy later by clicking the heart icon on any product page."
-              action={
-                <Link href="/shop" className="inline-flex items-center justify-center bg-ink hover:bg-[#5984c4] text-white rounded-xl px-8 py-4 text-[10px] font-bold uppercase tracking-[0.15em] transition-colors shadow-sm shadow-[#5984c4]/10">
-                  Start Browsing
-                </Link>
-              }
-            />
+            <div className="flex flex-col items-center text-center gap-4 py-8">
+              <div className="w-20 h-20 rounded-full bg-[#FFF5F5] flex items-center justify-center">
+                <Heart size={36} className="text-[#CC292B]" />
+              </div>
+              <div>
+                <h4 className="text-xl font-bold text-slate-900 mb-2">Your wishlist is empty</h4>
+                <p className="text-slate-500">Save items you want to buy later by clicking the heart icon on any product page.</p>
+              </div>
+              <Link href="/shop" className="bg-[#CC292B] text-white px-8 py-3.5 rounded-xl text-sm font-bold hover:bg-[#b02224] transition-colors mt-4">
+                Start Browsing
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-
     </motion.div>
   )
 }

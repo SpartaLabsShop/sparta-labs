@@ -4,7 +4,7 @@ import config from '@payload-config'
 import { AffiliatesLandingClient, UserAffiliateStatus } from './AffiliatesLandingClient'
 
 export const metadata = {
-  title: 'Affiliate Program | The Looksmaxxing Lab',
+  title: 'Affiliate Program | Sparta Labs',
   description: 'Join our affiliate program and earn 15% commission on all referrals.',
 }
 

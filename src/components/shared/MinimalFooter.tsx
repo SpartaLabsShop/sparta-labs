@@ -7,7 +7,7 @@ export function MinimalFooter() {
     <footer className="w-full border-t border-border-subtle bg-cream py-8">
       <Container size="wide" className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
         <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-body-sm text-ink-muted">
-          <div>© {new Date().getFullYear()} The Looksmaxxing Lab. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} Sparta Labs. All rights reserved.</div>
           <span className="hidden md:block opacity-30">|</span>
           <div>Designed & Developed by <a href="https://www.belkdigital.com/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors font-bold">Belk Digital</a></div>
         </div>

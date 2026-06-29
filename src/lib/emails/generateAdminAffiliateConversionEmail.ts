@@ -1,5 +1,5 @@
 export function generateAdminAffiliateConversionEmail(order: any, affiliate: any, commissionAmount: number): string {
-  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://thelooksmaxxinglab.com';
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://spartalabs.com';
   
   const affiliateName = affiliate.displayName || 'Partner';
   const orderNumber = order.orderNumber || order.id || 'N/A';

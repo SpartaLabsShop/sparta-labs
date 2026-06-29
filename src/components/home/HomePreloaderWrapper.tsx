@@ -30,7 +30,7 @@ export function HomePreloaderWrapper({ children }: { children: React.ReactNode }
 
   useGSAP(() => {
     // Check if the preloader has already been shown in this browser session
-    const hasPlayed = sessionStorage.getItem('looksmaxxingPreloaderPlayed')
+    const hasPlayed = sessionStorage.getItem('spartaPreloaderPlayed')
     
     if (hasPlayed === 'true') {
       // Immediately hide preloader and set ready without animation
@@ -40,7 +40,7 @@ export function HomePreloaderWrapper({ children }: { children: React.ReactNode }
     }
 
     // Mark as played for future navigations
-    sessionStorage.setItem('looksmaxxingPreloaderPlayed', 'true')
+    sessionStorage.setItem('spartaPreloaderPlayed', 'true')
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -143,7 +143,7 @@ export function HomePreloaderWrapper({ children }: { children: React.ReactNode }
               <circle cx="58" cy="4" r="1.5" fill="currentColor" />
            </svg>
            <span className="text-[10px] md:text-label-sm uppercase tracking-[0.3em] font-bold text-center">
-             The Looksmaxxing Lab
+             Sparta Labs
            </span>
          </div>
 

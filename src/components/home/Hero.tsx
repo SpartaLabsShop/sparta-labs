@@ -92,7 +92,7 @@ export function Hero() {
           >
             <Image
               src={backgroundImages[currentImageIndex]}
-              alt="Dark blue laboratory environment with premium glass peptide vials — The Looksmaxxing Lab research peptides"
+              alt="Dark blue laboratory environment with premium glass peptide vials — Sparta Labs research peptides"
               fill
               className="object-cover object-center"
               priority={currentImageIndex === 0}

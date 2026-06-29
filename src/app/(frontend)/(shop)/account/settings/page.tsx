@@ -4,7 +4,7 @@ import { getPayloadUser } from '@/lib/auth/getPayloadUser'
 import { redirect } from 'next/navigation'
 
 export const metadata = {
-  title: 'Account Settings | The Looksmaxxing Lab',
+  title: 'Account Settings | Sparta Labs',
 }
 
 export default async function SettingsPage() {

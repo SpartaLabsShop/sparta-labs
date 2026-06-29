@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { FadeUp } from '@/components/motion/FadeUp'
+import { HeroBreadcrumb } from '@/components/shared/HeroBreadcrumb'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Globe } from 'lucide-react'
 import { PillarsSection } from '@/components/about/PillarsSection'
@@ -12,11 +13,11 @@ import FAQ from '@/components/FAQ'
 import { WhyChooseUs } from '@/components/about/WhyChooseUs'
 import { SwipeCarousel } from '@/components/shared/SwipeCarousel'
 import { getFeaturedProducts } from '@/app/(frontend)/actions/getFeaturedProducts'
-
+import { CTASection } from '@/components/shared/CTASection'
 const ABOUT_FAQS = [
   {
     question: "Are your products intended for human consumption?",
-    answer: "No. All products sold by The Looks Maxxing Lab are strictly for laboratory research purposes only. They are not intended for human consumption, diagnostic, or therapeutic use. Buyers must be qualified researchers."
+    answer: "No. All products sold by Sparta Labs are strictly for laboratory research purposes only. They are not intended for human consumption, diagnostic, or therapeutic use. Buyers must be qualified researchers."
   },
   {
     question: "Do you provide Certificates of Analysis (COA)?",
@@ -77,79 +78,73 @@ export default function AboutPage() {
   return (
     <main className="bg-white min-h-screen">
       
-      {/* 1. Redesigned Hero Section */}
-      <section className="relative h-screen min-h-[800px] w-full overflow-hidden bg-ink flex flex-col justify-between pt-32 pb-16 px-4 md:px-8 lg:px-10">
-        
-        {/* Background Image & Overlays */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.div className="absolute inset-0 w-full h-[120%]" style={{ y: heroImageY }}>
-            <Image 
-              src="https://res.cloudinary.com/denskvdyt/image/upload/v1782002303/ChatGPT_Image_Jun_21_2026_06_07_18_AM_k3gx1h.png" 
-              alt="Laboratory environment" 
-              fill 
-              className="object-cover object-center opacity-60"
-              priority
-            />
-          </motion.div>
-          {/* Gradient Overlays for readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/90 via-ink/20 to-ink/95" />
+      {/* Redesigned Hero Banner */}
+      <section className="px-4 md:px-8 container mx-auto mt-24 mb-8 lg:mb-12">
+        <div className="relative w-full h-[250px] md:h-[350px] rounded-lg overflow-hidden bg-ink">
+          {/* Background Image & Overlays */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <motion.div className="absolute inset-0 w-full h-[120%]" style={{ y: heroImageY }}>
+              <Image 
+                src="https://res.cloudinary.com/denskvdyt/image/upload/v1782002303/ChatGPT_Image_Jun_21_2026_06_07_18_AM_k3gx1h.png" 
+                alt="Laboratory environment" 
+                fill 
+                className="object-cover object-center opacity-60"
+                priority
+              />
+            </motion.div>
+            <div className="absolute inset-0 bg-gradient-to-b from-ink/90 via-ink/20 to-ink/95" />
+          </div>
+
+          <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12 lg:p-16 z-10">
+            <FadeUp>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold text-white tracking-tight">About</h1>
+            </FadeUp>
+            <HeroBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
+          </div>
         </div>
 
-        {/* Top Content Row */}
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start w-full gap-10">
-          
-          {/* Top Left: Stats */}
-          <FadeUp delay={0.2} className="flex items-center gap-6 md:gap-10 text-white">
-            <div className="flex flex-col">
-              <span className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">99%</span>
-              <span className="text-xs md:text-sm font-light mt-2 text-white/70 uppercase tracking-wider">Verified Purity</span>
-            </div>
-            <div className="w-px h-16 bg-white/20" />
-            <div className="flex flex-col">
-              <span className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">USA</span>
-              <span className="text-xs md:text-sm font-light mt-2 text-white/70 uppercase tracking-wider">3rd Party Tested</span>
+        {/* Content Relocated from old Hero */}
+        <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+          <FadeUp delay={0.2} className="flex flex-col gap-8">
+            <h2 className="text-[32px] sm:text-[40px] md:text-[48px] leading-[1.05] text-ink font-medium tracking-tight uppercase">
+              Uncompromising Quality for Global Research.
+            </h2>
+            <div className="flex items-center gap-6 md:gap-10 text-ink">
+              <div className="flex flex-col">
+                <span className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">99%</span>
+                <span className="text-xs md:text-sm font-light mt-2 text-ink/70 uppercase tracking-wider">Verified Purity</span>
+              </div>
+              <div className="w-px h-16 bg-ink/20" />
+              <div className="flex flex-col">
+                <span className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">USA</span>
+                <span className="text-xs md:text-sm font-light mt-2 text-ink/70 uppercase tracking-wider">3rd Party Tested</span>
+              </div>
             </div>
           </FadeUp>
 
-          {/* Top Right: Paragraph */}
-          <FadeUp delay={0.4} className="md:max-w-xs lg:max-w-sm">
-            <p className="text-white/80 text-sm md:text-base md:text-right leading-relaxed font-light">
+          <FadeUp delay={0.4} className="flex flex-col items-start md:items-end justify-between h-full gap-8">
+            <p className="text-ink/80 text-sm md:text-base md:text-right leading-relaxed font-light max-w-md">
               A premier, US-based supplier dedicated to rigorous third-party testing and absolute transparency in peptide synthesis.
             </p>
-          </FadeUp>
-
-        </div>
-
-        {/* Bottom Content Row */}
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-end w-full gap-10 mt-auto">
-          
-          {/* Bottom Left: Large Heading */}
-          <FadeUp delay={0.6} className="max-w-3xl lg:max-w-5xl">
-            <h1 className="text-[32px] sm:text-[48px] md:text-[64px] lg:text-[72px] xl:text-[84px] leading-[1.05] text-white font-medium tracking-tight uppercase">
-              Uncompromising Quality for Global Research.
-            </h1>
-          </FadeUp>
-
-          {/* Bottom Right: Button & Footer */}
-          <FadeUp delay={0.8} className="flex flex-col items-start md:items-end w-full md:w-auto relative">
-            <div className="mb-6 lg:mb-8 w-full md:w-auto">
-              <Link href="/shop" className="block w-full">
-                <Button className="w-full bg-white text-ink hover:bg-white/90 rounded-none px-8 py-7 text-base lg:text-lg font-medium flex items-center justify-center gap-4 transition-all duration-300">
-                  Explore Our Catalog <ArrowRight className="w-5 h-5" />
-                </Button>
-              </Link>
-            </div>
             
-            <div className="flex items-center gap-4 w-full md:w-auto md:min-w-[300px] lg:min-w-[400px] border-t border-white/20 pt-4">
-              <Globe className="w-4 h-4 text-white/60" />
-              <span className="text-white/60 text-xs sm:text-sm font-light tracking-wide">
-                Established 2024
-              </span>
+            <div className="flex flex-col items-start md:items-end w-full md:w-auto relative gap-6">
+              <div className="w-full md:w-auto">
+                <Link href="/shop" className="block w-full">
+                  <Button className="w-full md:w-auto bg-ink text-white hover:bg-ink/90 rounded-full px-8 py-7 text-base lg:text-lg font-medium flex items-center justify-center gap-4 transition-all duration-300">
+                    Explore Our Catalog <ArrowRight className="w-5 h-5" />
+                  </Button>
+                </Link>
+              </div>
+              
+              <div className="flex items-center justify-start md:justify-end gap-4 w-full md:w-auto border-t border-ink/20 pt-4">
+                <Globe className="w-4 h-4 text-ink/60" />
+                <span className="text-ink/60 text-xs sm:text-sm font-light tracking-wide">
+                  Established 2024
+                </span>
+              </div>
             </div>
           </FadeUp>
-
         </div>
-
       </section>
 
       {/* 2. Mission, Philosophy, Journey */}
@@ -166,7 +161,7 @@ export default function AboutPage() {
       />
 
       {/* 4. Our Services Section */}
-      <section className="bg-white text-ink py-20 lg:py-32 px-4 md:px-8 lg:px-10">
+      <section className="bg-white text-ink py-16 lg:py-20 px-4 md:px-8 lg:px-10">
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
           {/* Left — Heading + Service List */}
@@ -300,93 +295,15 @@ export default function AboutPage() {
       {/* 5. FAQs Section */}
       <FAQ faqs={ABOUT_FAQS} />
       {/* 6. CTA section - Redesigned for Premium Aesthetic */}
-      <section className="py-24 px-6 lg:px-12 bg-white relative overflow-hidden">
-        <FadeUp>
-          <div className="relative w-full max-w-[1400px] mx-auto bg-gradient-to-b from-[#f4f7fb] to-white border border-[#eef3fb] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl shadow-[#5984c4]/10 px-6 py-24 lg:py-40 flex flex-col items-center justify-center text-center">
-            
-            {/* Ambient Glows (Optimized: Using radial gradients instead of expensive CSS blurs) */}
-            <div 
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] md:w-[800px] h-[400px] pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(89,132,196,0.15) 0%, rgba(89,132,196,0) 70%)' }}
-            />
-            <div 
-              className="absolute bottom-0 right-0 w-[400px] h-[400px] pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(186,230,253,0.2) 0%, rgba(186,230,253,0) 70%)' }}
-            />
-            
-            {/* Background Vials & Tech Elements */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
-              
-              {/* Subtle Dot Grid */}
-              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(#5984c4 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-              
-              {/* Floating Transparent Vial 1 */}
-              <motion.div
-                animate={{ y: [-15, 15, -15], rotate: [10, 15, 10] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -left-[5%] md:left-[5%] top-[10%] w-[300px] md:w-[400px] h-[400px] md:h-[500px] opacity-[0.15] pointer-events-none"
-                style={{ willChange: 'transform' }}
-              >
-                <Image src="/Featured%20Images/vial-no-bg.webp" alt="Vial Watermark" fill className="object-contain" />
-              </motion.div>
-
-              {/* Floating Transparent Vial 2 */}
-              <motion.div
-                animate={{ y: [15, -15, 15], rotate: [-15, -20, -15] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -right-[10%] md:-right-[5%] bottom-[5%] w-[400px] md:w-[500px] h-[500px] md:h-[600px] opacity-[0.1] pointer-events-none"
-                style={{ willChange: 'transform' }}
-              >
-                <Image src="/Featured%20Images/vial-no-bg.webp" alt="Vial Watermark" fill className="object-contain" />
-              </motion.div>
-
-              {/* Scientific Rings */}
-              <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 200, repeat: Infinity, ease: "linear" }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] border-[1px] border-[#5984c4]/10 rounded-full"
-                style={{ willChange: 'transform' }}
-              />
-              <motion.div 
-                animate={{ rotate: -360 }}
-                transition={{ duration: 250, repeat: Infinity, ease: "linear" }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] md:w-[1000px] md:h-[1000px] border-[1px] border-[#5984c4]/10 rounded-full border-dashed"
-                style={{ willChange: 'transform' }}
-              />
-            </div>
-
-            <div className="relative z-10 w-full max-w-4xl flex flex-col items-center gap-8">
-              <span className="text-[#5984c4] font-mono tracking-[0.2em] text-xs lg:text-sm uppercase font-bold bg-[#5984c4]/10 px-6 py-2 rounded-full">
-                Initiate Your Guideline
-              </span>
-              
-              <h2 className="text-5xl md:text-6xl lg:text-8xl font-serif text-ink leading-[1.1] tracking-tight">
-                Advance your <br/>
-                <span className="italic font-light text-[#5984c4]">research.</span>
-              </h2>
-              
-              <p className="text-lg lg:text-2xl text-ink/60 font-light max-w-2xl mx-auto mt-2 lg:mt-4">
-                Explore our catalog of highly purified, third-party verified compounds engineered for rigorous laboratory standards.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mt-8 lg:mt-12 w-full sm:w-auto">
-                <Link href="/shop" className="w-full sm:w-auto group">
-                  <Button className="w-full rounded-full px-12 py-8 bg-ink text-white hover:bg-[#5984c4] transition-colors duration-500 shadow-xl font-medium text-lg flex items-center justify-center gap-3">
-                    Shop Collection
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-                <Link href="/certificates" className="w-full sm:w-auto group">
-                  <Button variant="outline" className="w-full rounded-full px-12 py-8 border-slate-200 text-ink hover:border-[#5984c4] hover:bg-slate-50 transition-colors duration-500 text-lg bg-white shadow-sm flex items-center justify-center gap-3">
-                    View COAs
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        </FadeUp>
-      </section>
+      <CTASection
+        subtitle="INITIATE YOUR GUIDELINE"
+        title="Advance your research."
+        description="Explore our catalog of highly purified, third-party verified compounds engineered for rigorous laboratory standards."
+        primaryButtonText="Shop Collection"
+        primaryButtonLink="/shop"
+        secondaryButtonText="View COAs"
+        secondaryButtonLink="/certificates"
+      />
     </main>
   )
 }

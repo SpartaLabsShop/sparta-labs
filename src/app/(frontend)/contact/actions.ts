@@ -31,7 +31,7 @@ export async function submitContactForm(formData: FormData) {
     `
 
     await payload.sendEmail({
-      to: 'support@thelooksmaxxinglab.com',
+      to: 'support@spartalabs.com',
       replyTo: email,
       subject: `[Contact Form] ${subject}`,
       html: html,

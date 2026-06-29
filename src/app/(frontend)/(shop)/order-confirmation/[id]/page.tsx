@@ -5,7 +5,7 @@ import { OrderConfirmationClient } from './OrderConfirmationClient'
 import { notFound } from 'next/navigation'
 
 export const metadata = {
-  title: 'Order Confirmed | The Looksmaxxing Lab',
+  title: 'Order Confirmed | Sparta Labs',
 }
 
 export default async function OrderConfirmationPage({ params }: { params: Promise<{ id: string }> }) {
@@ -110,7 +110,7 @@ export default async function OrderConfirmationPage({ params }: { params: Promis
     discountTotal: order.discountTotal || 0,
     redeemedPoints: order.redeemedPoints || 0,
     couponCode: order.couponCode || '',
-    paymentMethod: 'Credit Card' 
+    paymentMethod: order.paymentStatus === 'unpaid' ? 'zelle_pending' : 'Credit Card'
   }
 
   return (

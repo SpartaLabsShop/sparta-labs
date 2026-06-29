@@ -1,16 +1,16 @@
 
-THE LOOKSMAXXING LAB
+SPARTA LABS
 Peptide Calculator — SEO Content Strategy
 
 
 Complete Copy, Metadata & Optimization Deliverables
-https://the-looksmaxxing-lab.vercel.app/peptide-calculator
+https://spartalabs.com/peptide-calculator
  	
 Page URL	/peptide-calculator — Free Online Tool Page
 Page Type	Free Utility Tool + Informational Resource — Top-of-Funnel
 Tool Function	Peptide Reconstitution Calculator: Syringe (IU) + BAC Water + Dose
 Focus Keyphrase	peptide reconstitution calculator
-Primary Audience	Men 16–35 — looksmaxxing, biohacking, fitness, research peptides
+Primary Audience	Men 16–35 — biohacking, fitness, research peptides
 Compliance	Theoretical research calibration only — not medical advice — FDA disclaimer required
 Page Sections	Hero+Calculator, 4-Step Guide, Math Science, Quick Reference, Storage, Unit Conversions, Footer
 Prepared	June 2026
@@ -30,10 +30,10 @@ PART A — SEO Metadata & Technical Signals
 
 1. Meta Title
 Current Meta Title (REPLACE)
-Looksmaxxing Lab
+Sparta Labs
 
 Recommended Meta Title (57 chars — Yoast GREEN)
-Peptide Reconstitution Calculator — Free Tool | Looksmaxxing Lab
+Peptide Reconstitution Calculator — Free Tool | Sparta Labs
 
 Current title is only the brand name — scores red in Yoast. Recommended version leads with the exact-match primary keyword 'peptide reconstitution calculator' (57 chars, within limit). 'Free Tool' modifier captures high-CTR informational intent. Brand name anchors the tail.
 2. Meta Description
@@ -51,7 +51,7 @@ peptide reconstitution calculator
 Exact-match primary keyword for the page’s core function. Must appear in: H1, meta title, meta description, first 100 words of body copy, at least one H2, and the hero/tool description paragraph. Secondary keyphrase for Yoast: 'how to reconstitute peptides'.
 4. SEO Title (Yoast Format)
 Yoast SEO Title Tag
-Peptide Reconstitution Calculator — Free Tool | Looksmaxxing Lab | %%page%%
+Peptide Reconstitution Calculator — Free Tool | Sparta Labs | %%page%%
 
 5. URL Slug Recommendation
 Slug (current — keep as-is)
@@ -303,7 +303,7 @@ Volume table	[Volume & Syringe Units]	Syringe Volume Reference: ml to IU on U-10
 
 ■  LEGAL DISCLAIMER (KEEP AND IMPROVE)
 Current (keep structure, improve copy)
-All products referenced on this page and throughout The LooksMaxxing Lab are intended exclusively for in-vitro laboratory research purposes only. They are not intended for human consumption, diagnostic, therapeutic, or any other clinical use. This calculator is provided strictly as a theoretical research tool to assist researchers in calculating reconstitution volumes and concentrations for their laboratory guidelines. It does not constitute medical advice, and no information provided should be interpreted as guidance for human administration. By using this tool, you confirm that you are a qualified researcher and that all products will be used in strict compliance with applicable federal, state, and local regulations. The LooksMaxxing Lab assumes no liability for misuse of this tool or any products listed on our platform.
+All products referenced on this page and throughout Sparta Labs are intended exclusively for in-vitro laboratory research purposes only. They are not intended for human consumption, diagnostic, therapeutic, or any other clinical use. This calculator is provided strictly as a theoretical research tool to assist researchers in calculating reconstitution volumes and concentrations for their laboratory guidelines. It does not constitute medical advice, and no information provided should be interpreted as guidance for human administration. By using this tool, you confirm that you are a qualified researcher and that all products will be used in strict compliance with applicable federal, state, and local regulations. Sparta Labs assumes no liability for misuse of this tool or any products listed on our platform.
 
 
 SECTION 7 — FAQ SECTION (NEW — INSERT BEFORE SHOP CTA)
@@ -419,7 +419,7 @@ Paste this JSON-LD in the <head> or before </body> on /peptide-calculator. Enabl
 WebApplication  —  Priority: CRITICAL
 Marks the calculator as a structured web-based tool. LLMs index WebApplication schema to understand what a tool does, who it’s for, and what category it falls in. This is the single most important schema for LLM discoverability of the calculator.
 JSON-LD snippet:
-{"@type":"WebApplication","name":"Peptide Reconstitution Calculator","url":"https://the-looksmaxxing-lab.vercel.app/peptide-calculator","description":"Free online peptide reconstitution calculator. Enter vial size, BAC water volume, and target dose to get exact IU syringe units, concentration, and total doses.","applicationCategory":"HealthApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"creator":{"@type":"Organization","name":"The Looksmaxxing Lab"}}
+{"@type":"WebApplication","name":"Peptide Reconstitution Calculator","url":"https://spartalabs.com/peptide-calculator","description":"Free online peptide reconstitution calculator. Enter vial size, BAC water volume, and target dose to get exact IU syringe units, concentration, and total doses.","applicationCategory":"HealthApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"creator":{"@type":"Organization","name":"Sparta Labs"}}
 HowTo  —  Priority: CRITICAL
 Marks the 4-step calculator guide as a structured how-to process. Makes the step sequence eligible for Google AI Overview ‘How to’ extractions and Featured Snippet numbered-list format.
 JSON-LD snippet:
@@ -427,7 +427,7 @@ JSON-LD snippet:
 BreadcrumbList  —  Priority: HIGH
 Marks up the page navigation trail for Google SERP breadcrumb display.
 JSON-LD snippet:
-{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://the-looksmaxxing-lab.vercel.app"},{"@type":"ListItem","position":2,"name":"Peptide Calculator","item":"https://the-looksmaxxing-lab.vercel.app/peptide-calculator"}]}
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://spartalabs.com"},{"@type":"ListItem","position":2,"name":"Peptide Calculator","item":"https://spartalabs.com/peptide-calculator"}]}
 SoftwareApplication (alternative to WebApplication)  —  Priority: MEDIUM
 Alternative schema if WebApplication is already used. Signals to Google that the URL hosts a functional application, not just a content article.
 JSON-LD snippet:
@@ -439,7 +439,7 @@ PART E — ALT Text Recommendations
 13. ALT Text Recommendations
 Image / Visual Element	Current ALT	Recommended ALT	Target KW
 Hero background (dark lab/syringe aesthetic)	(missing/empty)	Insulin syringe and lyophilized peptide vial for research reconstitution	peptide reconstitution, insulin syringe
-Calculator widget screenshot / OG image	(missing)	Free peptide reconstitution calculator — Looksmaxxing Lab online tool	peptide reconstitution calculator
+Calculator widget screenshot / OG image	(missing)	Free peptide reconstitution calculator — Sparta Labs online tool	peptide reconstitution calculator
 Syringe capacity diagram / illustration (Step 01)	(missing)	Three U-100 insulin syringe sizes for research peptide dosing: 0.3ml, 0.5ml, 1.0ml	U-100 insulin syringe, syringe capacity
 Lyophilized peptide vial illustration (Step 02)	(missing)	Lyophilized research peptide vial showing 5mg label for reconstitution calculation	lyophilized peptide vial, 5mg peptide
 Bacteriostatic water diagram (Step 03)	(missing)	Bacteriostatic water being added to research peptide vial for reconstitution	bacteriostatic water peptide reconstitution
@@ -490,13 +490,13 @@ PART G — GEO Optimization Notes
 15. GEO Optimization Notes
 
 US-Based Brand Signal in Calculator Context
-The calculator itself is a universal tool — the mathematics are the same globally. GEO value comes from positioning The Looksmaxxing Lab as a US-based research supplier whose free tool is available to US researchers. Key phrase to integrate: 'US-synthesized compounds available in our shop' in the new Shop CTA section. This geo-anchors the tool-to-shop conversion path.
+The calculator itself is a universal tool — the mathematics are the same globally. GEO value comes from positioning Sparta Labs as a US-based research supplier whose free tool is available to US researchers. Key phrase to integrate: 'US-synthesized compounds available in our shop' in the new Shop CTA section. This geo-anchors the tool-to-shop conversion path.
 
 Meta Description Geo Signal
 The recommended meta description does not include a geo modifier (to maximize global tool traffic). Add a geo-targeted variant for Google Search Console targeting if US-specific ranking is a priority: 'Free peptide reconstitution calculator for US researchers. Enter vial size, BAC water, and target dose to get exact IU results. No signup — instant results.'
 
 hreflang and Locale Routing
-The site uses /en/ locale routing. Ensure canonical tag on /en/peptide-calculator points to https://the-looksmaxxing-lab.vercel.app/peptide-calculator. Add <link rel='alternate' hreflang='en-US' href='https://the-looksmaxxing-lab.vercel.app/en/peptide-calculator' />. This prevents Google from treating the /en/ version and root as duplicate pages with competing signals.
+The site uses /en/ locale routing. Ensure canonical tag on /en/peptide-calculator points to https://spartalabs.com/peptide-calculator. Add <link rel='alternate' hreflang='en-US' href='https://spartalabs.com/en/peptide-calculator' />. This prevents Google from treating the /en/ version and root as duplicate pages with competing signals.
 
 WebApplication Schema: countryOfOrigin
 In the WebApplication schema (see Part D), add a 'creator' field with Organization schema including the US address or at minimum the US sameAs links. This geo-anchors the tool’s creator entity to the United States without requiring geo-specific copy on the page itself.
@@ -550,7 +550,7 @@ Compound-Specific Reconstitution Guides (Support Network)
 Each Journal article on compound-specific reconstitution (BPC-157, TB-500, GHK-Cu, Semaglutide) that links to this calculator creates a citation network. LLMs that encounter multiple sources all linking to the same tool begin to associate that tool with authoritative answers on the topic. Publish 3–4 compound-specific guides in the Journal as a priority action.
 
 Consistent Tool Naming Across All Pages
-The tool must be named consistently across all pages as 'Peptide Reconstitution Calculator by The Looksmaxxing Lab' or 'The Looksmaxxing Lab Peptide Calculator'. LLMs associate entity names with URLs through consistent co-occurrence. Inconsistent naming (sometimes 'Calculator', sometimes 'Peptide Calculator', sometimes 'reconstitution tool') fragments the entity signal and reduces citation probability.
+The tool must be named consistently across all pages as 'Peptide Reconstitution Calculator by Sparta Labs' or 'Sparta Labs Peptide Calculator'. LLMs associate entity names with URLs through consistent co-occurrence. Inconsistent naming (sometimes 'Calculator', sometimes 'Peptide Calculator', sometimes 'reconstitution tool') fragments the entity signal and reduces citation probability.
 
 Reddit Seeding as LLM Training Source
 Reddit is among the top 5 training sources for major LLMs including GPT-4 and Gemini. A genuine, helpful post in r/Peptides linking to this calculator as a free resource will: (a) drive immediate referral traffic, (b) earn a natural backlink, and (c) seed the calculator URL in LLM training data. This is the highest-ROI single action for LLM citation improvement on the calculator page.
@@ -563,13 +563,13 @@ PART J — Yoast SEO Green Score Checklist
 
 
 Yoast Check	Status After Update	Notes
-Focus keyphrase in SEO title	PASS	'Peptide Reconstitution Calculator' in 'Peptide Reconstitution Calculator — Free Tool | Looksmaxxing Lab'
+Focus keyphrase in SEO title	PASS	'Peptide Reconstitution Calculator' in 'Peptide Reconstitution Calculator — Free Tool | Sparta Labs'
 Focus keyphrase in meta description	PASS	'Free peptide reconstitution calculator' opens the meta description
 Focus keyphrase in H1	PASS	New H1: 'Peptide Reconstitution Calculator'
 Keyphrase in first 100 words	PASS	Sub-headline: 'Free online peptide reconstitution calculator — enter...' is the first crawlable paragraph
 Keyphrase density (0.5–3%)	PASS	'Peptide reconstitution calculator' appears ~6–8x across updated body copy (within 0.5–3% range)
 Keyphrase in URL slug	ℹ️ N/A	Current /peptide-calculator is acceptable; 'reconstitution' absent but slug change not recommended
-Keyphrase in image ALT text	PASS	OG/hero image ALT: 'Free peptide reconstitution calculator — Looksmaxxing Lab online tool'
+Keyphrase in image ALT text	PASS	OG/hero image ALT: 'Free peptide reconstitution calculator — Sparta Labs online tool'
 Text length (≥300 words for tool page)	PASS	Full updated body copy exceeds 800 words of indexable text
 Internal links present	PASS	16 outbound internal links + 8 inbound sources defined in Part F
 Outbound/external links	ADD	Add 1 external link to a PubMed study on BPC-157 or bacteriostatic water in the math or storage section for E-E-A-T
@@ -585,7 +585,7 @@ Subheadings (H2/H3) present	PASS	Full H2/H3 architecture: 7 H2s + 14 H3s defined
 
 
 CALCULATOR PAGE CONTENT STRATEGY — DELIVERY COMPLETE
-The Looksmaxxing Lab  ·  /peptide-calculator  ·  June 2026
+Sparta Labs  ·  /peptide-calculator  ·  June 2026
 
 
 Part	Deliverable	Status

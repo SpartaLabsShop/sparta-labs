@@ -121,7 +121,7 @@ export const useCartStore = create<CartState>()(
       closeCart: () => set({ isOpen: false }),
     }),
     {
-      name: 'looksmaxxing-cart-storage',
+      name: 'sparta-cart-storage',
     },
   ),
 )

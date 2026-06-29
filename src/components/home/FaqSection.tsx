@@ -4,7 +4,7 @@ import { FaqCarousel, FaqItem } from '@/components/shared/FaqCarousel'
 const FAQS: FaqItem[] = [
   {
     question: "What is the purity standard for your research peptides?",
-    answer: "Every research peptide sold by The Looksmaxxing Lab must meet or exceed a strictly enforced ≥99% purity threshold. We verify this standard through independent, third-party High-Performance Liquid Chromatography (HPLC) and Liquid Chromatography–Mass Spectrometry (LC-MS) testing for every production batch — not random samples. Any batch that tests below this threshold is immediately discarded."
+    answer: "Every research peptide sold by Sparta Labs must meet or exceed a strictly enforced ≥99% purity threshold. We verify this standard through independent, third-party High-Performance Liquid Chromatography (HPLC) and Liquid Chromatography–Mass Spectrometry (LC-MS) testing for every production batch — not random samples. Any batch that tests below this threshold is immediately discarded."
   },
   {
     question: "How can I access the Certificate of Analysis (COA) for my order?",
@@ -12,15 +12,15 @@ const FAQS: FaqItem[] = [
   },
   {
     question: "Are these products intended for human consumption?",
-    answer: "No. All products sold by The Looksmaxxing Lab are strictly for laboratory and research use only. They are not intended to diagnose, treat, cure, or prevent any disease, and are not for human or animal consumption. These statements have not been evaluated by the FDA."
+    answer: "No. All products sold by Sparta Labs are strictly for laboratory and research use only. They are not intended to diagnose, treat, cure, or prevent any disease, and are not for human or animal consumption. These statements have not been evaluated by the FDA."
   },
   {
     question: "What are your shipping and fulfillment times?",
     answer: "All orders are fulfilled from our US-based facilities. We offer standard shipping (3–5 business days) and expedited 2-day shipping on orders over $300. Orders placed before 2 PM EST typically ship same day. All peptides are dispatched using validated cold-chain packaging to maintain molecular integrity in transit."
   },
   {
-    question: "What is looksmaxxing — and how do peptides relate to it?",
-    answer: "Looksmaxxing is the practice of systematically optimizing one's physical appearance through controllable factors such as skincare, fitness, grooming, and diet. Research peptides are studied in the context of skin collagen, tissue recovery, body composition, and hair density — areas directly relevant to appearance optimization. Our compounds are for research use only and are not offered as cosmetic or medical products."
+    question: "What are research peptides — and how are they used?",
+    answer: "Research peptides are synthetic compounds used in laboratory settings to study biological processes such as tissue recovery, skin collagen synthesis, body composition, and hair density. They are manufactured under strict quality controls and verified through third-party HPLC and LC-MS testing. Our compounds are for research use only and are not offered as cosmetic or medical products."
   },
   {
     question: "How are your research peptides synthesized?",
@@ -32,7 +32,7 @@ const FAQS: FaqItem[] = [
   },
   {
     question: "How do I verify that a peptide vendor is legitimate and properly tested?",
-    answer: "The three non-negotiable markers of a legitimate research peptide supplier are: (1) independent third-party HPLC and LC-MS testing — not in-house testing — for every batch; (2) a publicly accessible COA library with lot-traceable documentation; and (3) US-based synthesis, not merely US-based fulfillment of overseas-sourced raw powders. The Looksmaxxing Lab meets all three criteria on every order."
+    answer: "The three non-negotiable markers of a legitimate research peptide supplier are: (1) independent third-party HPLC and LC-MS testing — not in-house testing — for every batch; (2) a publicly accessible COA library with lot-traceable documentation; and (3) US-based synthesis, not merely US-based fulfillment of overseas-sourced raw powders. Sparta Labs meets all three criteria on every order."
   }
 ]
 

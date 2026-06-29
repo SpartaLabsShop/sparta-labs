@@ -102,7 +102,7 @@ export function SwipeCarousel({ title, description, cards, isLoading = false }: 
   }
 
   return (
-    <section className="py-24 lg:py-32 bg-[#f4f3ef] text-ink overflow-hidden">
+    <section className="py-16 lg:py-20 bg-[#f4f3ef] text-ink overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
         
         {/* Header */}

@@ -109,7 +109,7 @@ const FooterContent = () => {
           <Link href="/disclaimer" className="text-[10px] text-white/70 hover:text-white uppercase tracking-widest transition-colors font-medium">Disclaimer</Link>
           <div className="flex flex-col items-start lg:items-end w-full lg:w-auto mt-4 lg:mt-0 gap-1">
             <p className="text-[10px] text-white/30 uppercase tracking-widest font-medium">
-              © {new Date().getFullYear()} The Looksmaxxing Lab.
+              © {new Date().getFullYear()} Sparta Labs.
             </p>
             <p className="text-[10px] text-white/30 uppercase tracking-widest font-medium">
               Designed and developed by <a href="https://www.belkdigital.com/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">Belk Digital</a>

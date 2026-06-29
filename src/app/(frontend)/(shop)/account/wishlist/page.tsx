@@ -6,7 +6,7 @@ import config from '@payload-config'
 import { redirect } from 'next/navigation'
 
 export const metadata = {
-  title: 'My Wishlist | The Looksmaxxing Lab',
+  title: 'My Wishlist | Sparta Labs',
 }
 
 export default async function WishlistPage() {

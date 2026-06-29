@@ -1,12 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Space_Grotesk } from 'next/font/google'
 import { motion, Variants } from 'framer-motion'
 import { WalletCards, ArrowRight, Loader2, CheckCircle2, Clock } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['300', '400', '500', '700'] })
 
 interface PayoutsClientProps {
   payoutRequests: {
@@ -115,43 +112,43 @@ export function PayoutsClient({ payoutRequests, availableBalance, totalPendingHo
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Available Balance Card */}
-        <motion.div variants={itemVars} className="bg-black p-8 rounded-3xl text-white shadow-xl flex flex-col justify-between min-h-[200px]">
+        <motion.div variants={itemVars} className="bg-[#CC292B] p-8 rounded-3xl text-white shadow-md shadow-[#CC292B]/20 flex flex-col justify-between min-h-[200px]">
           <div>
-            <h1 className={`text-2xl font-bold tracking-tight mb-2 ${spaceGrotesk.className}`}>
+            <h1 className="text-2xl font-bold tracking-tight mb-2">
               Available Balance
             </h1>
-            <p className="text-gray-400 text-sm">Funds cleared and ready to withdraw.</p>
+            <p className="text-white/80 text-sm">Funds cleared and ready to withdraw.</p>
           </div>
           <div className="mt-8">
-            <span className="text-5xl font-black text-[#5984c4] tracking-tight">{formatMoney(availableBalance)}</span>
+            <span className="text-5xl font-black text-white tracking-tight">{formatMoney(availableBalance)}</span>
           </div>
         </motion.div>
 
         {/* Pending Hold Card */}
-        <motion.div variants={itemVars} className="bg-white border border-gray-100 p-8 rounded-3xl shadow-sm flex flex-col justify-between min-h-[200px]">
+        <motion.div variants={itemVars} className="bg-white border border-slate-100 p-8 rounded-3xl shadow-sm flex flex-col justify-between min-h-[200px]">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Clock className="w-5 h-5 text-gray-400" />
-              <h1 className={`text-xl font-bold tracking-tight text-black ${spaceGrotesk.className}`}>
+              <Clock className="w-5 h-5 text-slate-400" />
+              <h1 className="text-xl font-bold tracking-tight text-slate-900">
                 {pendingPeriodDays}-Day Hold
               </h1>
             </div>
-            <p className="text-gray-500 text-sm">Pending commissions from recent orders. They will automatically clear after {pendingPeriodDays} days.</p>
+            <p className="text-slate-500 text-sm">Pending commissions from recent orders. They will automatically clear after {pendingPeriodDays} days.</p>
           </div>
           <div className="mt-8">
-            <span className="text-4xl font-black text-gray-400 tracking-tight">{formatMoney(totalPendingHold)}</span>
+            <span className="text-4xl font-black text-slate-300 tracking-tight">{formatMoney(totalPendingHold)}</span>
           </div>
         </motion.div>
       </div>
 
-      <motion.div variants={itemVars} className="bg-white border border-gray-100 p-8 rounded-3xl shadow-sm">
-        <h2 className={`text-2xl font-bold tracking-tight text-black mb-6 ${spaceGrotesk.className}`}>
+      <motion.div variants={itemVars} className="bg-white border border-slate-100 p-8 rounded-3xl shadow-sm">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-6">
           Request Payout
         </h2>
         
         <form onSubmit={handleRequestPayout} className="flex flex-col md:flex-row gap-6 items-end">
           <div className="flex-1 w-full flex flex-col gap-2">
-            <label className="text-xs uppercase tracking-widest text-gray-400 font-bold">Amount ($)</label>
+            <label className="text-xs uppercase tracking-widest text-slate-500 font-bold">Amount ($)</label>
             <input 
               type="number" 
               step="0.01"
@@ -159,18 +156,18 @@ export function PayoutsClient({ payoutRequests, availableBalance, totalPendingHo
               max={(availableBalance / 100).toString()}
               value={amount}
               onChange={e => setAmount(e.target.value)}
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-black font-medium focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#CC292B] focus:border-transparent transition-all"
               placeholder="0.00"
               required
             />
           </div>
 
           <div className="flex-1 w-full flex flex-col gap-2">
-            <label className="text-xs uppercase tracking-widest text-gray-400 font-bold">Method</label>
+            <label className="text-xs uppercase tracking-widest text-slate-500 font-bold">Method</label>
             <select
               value={method}
               onChange={e => setMethod(e.target.value as any)}
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-black font-medium focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#CC292B] focus:border-transparent transition-all"
             >
               <option value="zelle">Zelle</option>
               <option value="cashapp">CashApp</option>
@@ -179,12 +176,12 @@ export function PayoutsClient({ payoutRequests, availableBalance, totalPendingHo
           </div>
 
           <div className="flex-[1.5] w-full flex flex-col gap-2">
-            <label className="text-xs uppercase tracking-widest text-gray-400 font-bold">Payout Details (Phone/ID)</label>
+            <label className="text-xs uppercase tracking-widest text-slate-500 font-bold">Payout Details (Phone/ID)</label>
             <input 
               type="text" 
               value={details}
               onChange={e => setDetails(e.target.value)}
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-black font-medium focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#CC292B] focus:border-transparent transition-all"
               placeholder="e.g. $cashtag, Apple Pay #..."
               required
             />
@@ -193,7 +190,7 @@ export function PayoutsClient({ payoutRequests, availableBalance, totalPendingHo
           <button 
             type="submit"
             disabled={isRequesting || availableBalance < minimumThreshold}
-            className="w-full md:w-auto bg-black text-white px-8 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full md:w-auto bg-[#CC292B] text-white px-8 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#b02224] transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           >
             {isRequesting ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Request'}
           </button>
@@ -212,14 +209,14 @@ export function PayoutsClient({ payoutRequests, availableBalance, totalPendingHo
       </motion.div>
       
       <div className="flex flex-col gap-4">
-        <h2 className={`text-xl font-bold tracking-tight text-black px-2 ${spaceGrotesk.className}`}>
+        <h2 className="text-xl font-bold tracking-tight text-slate-900 px-2">
           Payout History
         </h2>
         {payoutRequests.length === 0 ? (
-          <motion.div variants={itemVars} className="bg-white p-12 rounded-3xl border border-dashed border-gray-200 flex flex-col items-center justify-center text-center gap-4 text-gray-500">
-            <WalletCards size={48} className="text-gray-200" />
+          <motion.div variants={itemVars} className="bg-white p-12 rounded-3xl border border-dashed border-slate-200 flex flex-col items-center justify-center text-center gap-4 text-slate-500">
+            <WalletCards size={48} className="text-slate-200" />
             <div className="flex flex-col gap-1">
-              <h3 className="text-lg font-bold text-black">No Requests Yet</h3>
+              <h3 className="text-lg font-bold text-slate-900">No Requests Yet</h3>
               <p className="text-sm">Submit your first payout request above.</p>
             </div>
           </motion.div>
@@ -228,33 +225,33 @@ export function PayoutsClient({ payoutRequests, availableBalance, totalPendingHo
             <motion.div 
               key={req.id} 
               variants={itemVars}
-              className="group flex flex-col md:flex-row md:items-center justify-between p-6 bg-white border border-gray-100 rounded-3xl shadow-sm hover:shadow-lg hover:shadow-black/5 hover:border-gray-200 transition-all duration-300 gap-6 relative overflow-hidden"
+              className="group flex flex-col md:flex-row md:items-center justify-between p-6 bg-white border border-slate-100 rounded-3xl shadow-sm hover:shadow-md hover:border-[#CC292B]/30 transition-all duration-300 gap-6 relative overflow-hidden"
             >
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#CC292B] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
               
               <div className="flex flex-col gap-2 pl-2 md:w-1/4">
-                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">Date</span>
-                <span className="text-base font-bold text-black">{req.date}</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Date</span>
+                <span className="text-base font-bold text-slate-900">{req.date}</span>
               </div>
 
               <div className="flex flex-col gap-2 md:w-1/4">
-                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">Method</span>
-                <span className="text-sm font-medium text-gray-600 capitalize">{req.method}</span>
-                <span className="text-xs text-gray-400 truncate max-w-[150px]">{req.details}</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Method</span>
+                <span className="text-sm font-medium text-slate-700 capitalize">{req.method}</span>
+                <span className="text-xs text-slate-500 truncate max-w-[150px]">{req.details}</span>
               </div>
               
               <div className="flex flex-col md:items-end gap-2 md:w-1/2">
-                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400">Amount</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Amount</span>
                 <div className="flex items-center gap-4">
-                  <span className="text-base text-black font-bold">{formatMoney(req.amount)}</span>
-                  <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full">
+                  <span className="text-base text-slate-900 font-bold">{formatMoney(req.amount)}</span>
+                  <div className="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-full">
                     <span className={`w-1.5 h-1.5 rounded-full ${
                       req.status === 'pending' ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]' : 
                       req.status === 'paid' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]' : 
                       req.status === 'rejected' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]' :
-                      'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]'
+                      'bg-[#CC292B] shadow-[0_0_8px_rgba(204,41,43,0.8)]'
                     }`} />
-                    <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-gray-600">{req.status}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-600">{req.status}</span>
                   </div>
                 </div>
               </div>

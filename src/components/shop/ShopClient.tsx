@@ -10,6 +10,7 @@ import { X, Filter, Search, Globe, ArrowDown } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Spinner } from '@/components/ui/spinner'
 import { EmptyState } from '@/components/shared/EmptyState'
+import { HeroBreadcrumb } from '@/components/shared/HeroBreadcrumb'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from '@/components/ui/dropdown-menu'
 
@@ -147,12 +148,11 @@ function ShopClientInner({ initialProducts, totalPages, categories }: ShopClient
 
   return (
     <div className="w-full bg-white min-h-screen">
-      {/* 1. Redesigned Hero Section */}
-      <section className="relative h-screen min-h-[800px] w-full overflow-hidden bg-ink flex flex-col justify-between pt-32 pb-16 px-4 md:px-8 lg:px-10">
-        
-        {/* Background Video & Overlays */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.div className="absolute inset-0 w-full h-[120%]" style={{ y: typeof window !== 'undefined' ? (window.scrollY * 0.5) : 0 }}>
+      {/* Redesigned Hero Banner */}
+      <section className="px-4 md:px-8 container mx-auto mt-24 mb-16 lg:mb-24">
+        <div className="relative w-full h-[250px] md:h-[350px] rounded-lg overflow-hidden bg-ink">
+          {/* Background Video & Overlays */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
              <video
               ref={heroVideoRef}
               autoPlay
@@ -162,66 +162,58 @@ function ShopClientInner({ initialProducts, totalPages, categories }: ShopClient
               className="absolute inset-0 w-full h-full object-cover opacity-70"
               src="https://res.cloudinary.com/dgrrovta3/video/upload/v1781823079/Firefly_Create_a_premium_pharmaceutical_product_reveal_animation._Start_with_a_clean_deep-red_textur_uyroig.webm"
             />
-          </motion.div>
-          {/* Gradient Overlays for readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/90 via-ink/20 to-ink/95" />
+            {/* Gradient Overlays for readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-ink/90 via-ink/20 to-ink/95" />
+          </div>
+
+          <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12 lg:p-16 z-10">
+            <FadeUp>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold text-white tracking-tight">Shop</h1>
+            </FadeUp>
+            <HeroBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Shop' }]} />
+          </div>
         </div>
 
-        {/* Top Content Row */}
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start w-full gap-10">
-          
-          {/* Top Left: Stats */}
-          <FadeUp delay={0.2} className="flex items-center gap-6 md:gap-10 text-white">
-            <div className="flex flex-col">
-              <span className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">100+</span>
-              <span className="text-xs md:text-sm font-light mt-2 text-white/70 uppercase tracking-wider">Compounds</span>
-            </div>
-            <div className="w-px h-16 bg-white/20" />
-            <div className="flex flex-col">
-              <span className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">99%</span>
-              <span className="text-xs md:text-sm font-light mt-2 text-white/70 uppercase tracking-wider">Purity</span>
+        {/* Content Relocated from old Hero */}
+        <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+          <FadeUp delay={0.2} className="flex flex-col gap-8">
+            <h2 className="text-[32px] sm:text-[40px] md:text-[48px] leading-[1.05] text-ink font-medium tracking-tight uppercase">
+              The Complete Collection.
+            </h2>
+            <div className="flex items-center gap-6 md:gap-10 text-ink">
+              <div className="flex flex-col">
+                <span className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">100+</span>
+                <span className="text-xs md:text-sm font-light mt-2 text-ink/70 uppercase tracking-wider">Compounds</span>
+              </div>
+              <div className="w-px h-16 bg-ink/20" />
+              <div className="flex flex-col">
+                <span className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">99%</span>
+                <span className="text-xs md:text-sm font-light mt-2 text-ink/70 uppercase tracking-wider">Purity</span>
+              </div>
             </div>
           </FadeUp>
-
-          {/* Top Right: Paragraph */}
-          <FadeUp delay={0.4} className="md:max-w-xs lg:max-w-sm">
-            <p className="text-white/80 text-sm md:text-base md:text-right leading-relaxed font-light">
+          
+          <FadeUp delay={0.4} className="flex flex-col items-start md:items-end justify-between h-full gap-8">
+            <p className="text-ink/80 text-sm md:text-base md:text-right leading-relaxed font-light max-w-md">
               Explore our complete catalog of research-grade peptides and compounds. Filter by category, purity, and availability to find exactly what your guideline requires.
             </p>
-          </FadeUp>
-
-        </div>
-
-        {/* Bottom Content Row */}
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-end w-full gap-10 mt-auto">
-          
-          {/* Bottom Left: Large Heading */}
-          <FadeUp delay={0.6} className="max-w-3xl lg:max-w-5xl">
-            <h1 className="text-[32px] sm:text-[48px] md:text-[64px] lg:text-[72px] xl:text-[84px] leading-[1.05] text-white font-medium tracking-tight uppercase">
-              The Complete Collection.
-            </h1>
-          </FadeUp>
-
-          {/* Bottom Right: Button & Footer */}
-          <FadeUp delay={0.8} className="flex flex-col items-start md:items-end w-full md:w-auto relative">
-            <div className="mb-6 lg:mb-8 w-full md:w-auto">
-              <button onClick={() => { document.getElementById('products-grid')?.scrollIntoView({ behavior: 'smooth' }) }} className="block w-full">
-                <Button className="w-full bg-white text-ink hover:bg-white/90 rounded-none px-8 py-7 text-base lg:text-lg font-medium flex items-center justify-center gap-4 transition-all duration-300">
+            
+            <div className="flex flex-col items-start md:items-end w-full md:w-auto relative gap-6">
+              <button onClick={() => { document.getElementById('products-grid')?.scrollIntoView({ behavior: 'smooth' }) }} className="block w-full md:w-auto">
+                <Button className="w-full md:w-auto bg-ink text-white hover:bg-ink/90 rounded-full px-8 py-7 text-base lg:text-lg font-medium flex items-center justify-center gap-4 transition-all duration-300">
                   Browse Catalog <ArrowDown className="w-5 h-5" />
                 </Button>
               </button>
-            </div>
-            
-            <div className="flex items-center gap-4 w-full md:w-auto md:min-w-[300px] lg:min-w-[400px] border-t border-white/20 pt-4">
-              <Globe className="w-4 h-4 text-white/60" />
-              <span className="text-white/60 text-xs sm:text-sm font-light tracking-wide">
-                Established 2024
-              </span>
+              
+              <div className="flex items-center justify-start md:justify-end gap-4 w-full md:w-auto border-t border-ink/20 pt-4">
+                <Globe className="w-4 h-4 text-ink/60" />
+                <span className="text-ink/60 text-xs sm:text-sm font-light tracking-wide">
+                  Established 2024
+                </span>
+              </div>
             </div>
           </FadeUp>
-
         </div>
-
       </section>
 
       <div className="mx-auto max-w-[1700px] px-8 max-[768px]:px-4 max-[480px]:px-3 pt-12 pb-12" id="products-grid">

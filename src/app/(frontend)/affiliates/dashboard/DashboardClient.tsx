@@ -3,11 +3,8 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, MousePointerClick, Target, DollarSign, Wallet, Copy, Check, ExternalLink } from 'lucide-react'
-import { Space_Grotesk } from 'next/font/google'
 import { motion, Variants } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['300', '400', '500', '700'] })
 
 export interface DashboardClientProps {
   stats: {
@@ -45,7 +42,7 @@ export function DashboardClient({ stats, recentConversions }: DashboardClientPro
 
   // Formatting helpers
   const formatMoney = (cents: number) => `$${(cents / 100).toFixed(2)}`
-  const [baseUrl, setBaseUrl] = useState('https://thelooksmaxxinglab.com')
+  const [baseUrl, setBaseUrl] = useState('https://spartalabs.com')
   
   React.useEffect(() => {
     setBaseUrl(window.location.origin)
@@ -77,46 +74,46 @@ export function DashboardClient({ stats, recentConversions }: DashboardClientPro
       
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-        <motion.div variants={itemVars} className="group relative bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 transition-all duration-500 overflow-hidden">
-          <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-500 text-blue-500">
-            <MousePointerClick size={64} />
+        <motion.div variants={itemVars} className="group relative bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-[#CC292B]/50 hover:shadow-md transition-all duration-300 overflow-hidden">
+          <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-[#CC292B]">
+            <MousePointerClick size={80} />
           </div>
           <div className="relative z-10 flex flex-col h-full justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">Total Clicks</span>
-            <span className={`text-5xl text-black leading-none font-bold tracking-tighter ${spaceGrotesk.className}`}>{stats.totalClicks}</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-6">Total Clicks</span>
+            <span className="text-5xl text-slate-900 leading-none font-bold tracking-tight">{stats.totalClicks}</span>
           </div>
         </motion.div>
 
-        <motion.div variants={itemVars} className="group relative bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 transition-all duration-500 overflow-hidden">
-          <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-500 text-emerald-500">
-            <Target size={64} />
+        <motion.div variants={itemVars} className="group relative bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-[#CC292B]/50 hover:shadow-md transition-all duration-300 overflow-hidden">
+          <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-emerald-500">
+            <Target size={80} />
           </div>
           <div className="relative z-10 flex flex-col h-full justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">Conversions</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-6">Conversions</span>
             <div className="flex items-end gap-3">
-              <span className={`text-5xl text-black leading-none font-bold tracking-tighter ${spaceGrotesk.className}`}>{stats.totalConversions}</span>
-              <span className="text-sm font-bold text-emerald-500 bg-emerald-50 px-2 py-1 rounded-md mb-1">{stats.conversionRate}</span>
+              <span className="text-5xl text-slate-900 leading-none font-bold tracking-tight">{stats.totalConversions}</span>
+              <span className="text-sm font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg mb-1">{stats.conversionRate}</span>
             </div>
           </div>
         </motion.div>
 
-        <motion.div variants={itemVars} className="group relative bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 transition-all duration-500 overflow-hidden">
-          <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-500 text-amber-500">
-            <DollarSign size={64} />
+        <motion.div variants={itemVars} className="group relative bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-[#CC292B]/50 hover:shadow-md transition-all duration-300 overflow-hidden">
+          <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-amber-500">
+            <DollarSign size={80} />
           </div>
           <div className="relative z-10 flex flex-col h-full justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">Pending Commission</span>
-            <span className={`text-5xl text-black leading-none font-bold tracking-tighter ${spaceGrotesk.className}`}>{formatMoney(stats.totalCommissionPending)}</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-6">Pending Commission</span>
+            <span className="text-5xl text-slate-900 leading-none font-bold tracking-tight">{formatMoney(stats.totalCommissionPending)}</span>
           </div>
         </motion.div>
 
-        <motion.div variants={itemVars} className="group relative bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 transition-all duration-500 overflow-hidden">
-          <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-500 text-purple-500">
-            <Wallet size={64} />
+        <motion.div variants={itemVars} className="group relative bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-[#CC292B]/50 hover:shadow-md transition-all duration-300 overflow-hidden">
+          <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-[#CC292B]">
+            <Wallet size={80} />
           </div>
           <div className="relative z-10 flex flex-col h-full justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">Total Paid Out</span>
-            <span className={`text-5xl text-black leading-none font-bold tracking-tighter ${spaceGrotesk.className}`}>{formatMoney(stats.totalCommissionPaid)}</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-6">Total Paid Out</span>
+            <span className="text-5xl text-slate-900 leading-none font-bold tracking-tight">{formatMoney(stats.totalCommissionPaid)}</span>
           </div>
         </motion.div>
       </div>
@@ -125,19 +122,19 @@ export function DashboardClient({ stats, recentConversions }: DashboardClientPro
         
         {/* Left Column: Recent Conversions */}
         <motion.div variants={itemVars} className="flex flex-col gap-6">
-          <div className="flex items-center justify-between border-b border-gray-200 pb-4">
-            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-black">Recent Conversions</h3>
-            <Link href="/affiliates/dashboard/conversions" className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#5984c4] hover:text-blue-700 transition-colors bg-blue-50 px-3 py-1.5 rounded-full hover:bg-blue-100">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900">Recent Conversions</h3>
+            <Link href="/affiliates/dashboard/conversions" className="text-xs font-bold uppercase tracking-widest text-[#CC292B] hover:text-white transition-colors bg-[#FFF5F5] hover:bg-[#CC292B] px-4 py-2 rounded-xl">
               View All
             </Link>
           </div>
           
           <div className="flex flex-col gap-4">
             {recentConversions.length === 0 ? (
-              <div className="bg-white p-8 rounded-3xl border border-dashed border-gray-200 flex flex-col items-center justify-center text-center gap-4 text-gray-500">
-                <Target size={32} className="text-gray-300" />
+              <div className="bg-white p-12 rounded-3xl border border-dashed border-slate-200 flex flex-col items-center justify-center text-center gap-4 text-slate-500">
+                <Target size={36} className="text-slate-300" />
                 <p className="text-sm">No conversions recorded yet.</p>
-                <p className="text-xs text-gray-400">Share your referral link to start earning!</p>
+                <p className="text-xs text-slate-400">Share your referral link to start earning!</p>
               </div>
             ) : (
               recentConversions.map((conv, i) => (
@@ -146,25 +143,25 @@ export function DashboardClient({ stats, recentConversions }: DashboardClientPro
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 + 0.3 }}
-                  className="group flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-white border border-gray-100 rounded-3xl shadow-sm hover:shadow-lg hover:shadow-black/5 hover:border-gray-200 transition-all duration-300 gap-4 cursor-pointer relative overflow-hidden"
+                  className="group flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md hover:border-[#CC292B]/30 transition-all duration-300 gap-4 cursor-pointer relative overflow-hidden"
                 >
                   {/* Highlight bar on hover */}
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#CC292B] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
                   
                   <div className="flex flex-col gap-2 pl-2">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-black">Order #{conv.id.substring(0, 8)}</span>
-                    <span className="text-xs font-medium text-gray-500">{conv.date}</span>
+                    <span className="text-xs font-bold uppercase tracking-widest text-slate-900">Order #{conv.id.substring(0, 8)}</span>
+                    <span className="text-sm font-medium text-slate-500">{conv.date}</span>
                   </div>
                   
                   <div className="flex flex-col sm:items-end gap-2">
-                    <span className="text-sm text-emerald-600 font-bold">+{formatMoney(conv.amount)}</span>
-                    <div className="flex items-center gap-2 bg-gray-50 px-2.5 py-1 rounded-full">
+                    <span className="text-base text-emerald-600 font-bold">+{formatMoney(conv.amount)}</span>
+                    <div className="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-full">
                       <span className={`w-1.5 h-1.5 rounded-full ${
                         conv.status === 'pending' ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]' : 
-                        conv.status === 'approved' ? 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]' : 
+                        conv.status === 'approved' ? 'bg-[#CC292B] shadow-[0_0_8px_rgba(204,41,43,0.8)]' : 
                         'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]'
                       }`} />
-                      <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-gray-600">{conv.status}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-slate-600">{conv.status}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -175,26 +172,26 @@ export function DashboardClient({ stats, recentConversions }: DashboardClientPro
 
         {/* Right Column: Share Tools */}
         <motion.div variants={itemVars} className="flex flex-col gap-6">
-          <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-black border-b border-gray-200 pb-4">Share Tools</h3>
+          <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900 border-b border-slate-100 pb-4">Share Tools</h3>
           
           {/* Referral Link */}
           <div className="flex flex-col gap-3">
-            <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-500">Your Referral Link</span>
-            <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-3">
-              <div className="bg-gray-50 rounded-xl px-4 py-3 text-sm font-mono text-gray-700 break-all border border-gray-200/50">
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Your Referral Link</span>
+            <div className="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm flex flex-col gap-4">
+              <div className="bg-slate-50 rounded-xl px-4 py-3 text-sm font-mono text-slate-700 break-all border border-slate-200">
                 {referralUrl}
               </div>
               <div className="flex gap-2">
                 <Button 
                   onClick={() => handleCopy(referralUrl, 'link')}
                   variant="outline" 
-                  className="flex-1 rounded-xl h-10 text-xs font-bold uppercase tracking-widest gap-2 bg-white"
+                  className="flex-1 rounded-xl h-12 text-xs font-bold uppercase tracking-widest gap-2 bg-white border-slate-200 hover:bg-[#FFF5F5] hover:text-[#CC292B] hover:border-[#CC292B]"
                 >
-                  {copiedLink ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
+                  {copiedLink ? <Check size={16} className="text-emerald-500" /> : <Copy size={16} />}
                   {copiedLink ? 'Copied!' : 'Copy'}
                 </Button>
-                <a href={referralUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-500 transition-colors">
-                  <ExternalLink size={16} />
+                <a href={referralUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-50 hover:bg-[#FFF5F5] border border-slate-200 hover:border-[#CC292B] hover:text-[#CC292B] text-slate-500 transition-colors">
+                  <ExternalLink size={18} />
                 </a>
               </div>
             </div>
@@ -203,17 +200,17 @@ export function DashboardClient({ stats, recentConversions }: DashboardClientPro
           {/* Coupon Code */}
           {stats.couponCode && (
             <div className="flex flex-col gap-3 mt-4">
-              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-500">Your Coupon Code (15% Off)</span>
-              <div className="bg-gradient-to-br from-[#f8faff] to-[#eef4ff] p-4 rounded-2xl border border-blue-100 shadow-sm flex flex-col gap-3 relative overflow-hidden">
-                <div className="absolute -right-4 -top-4 w-24 h-24 bg-blue-500/5 rounded-full blur-xl" />
-                <div className="bg-white rounded-xl px-4 py-3 text-lg font-mono font-bold text-[#5984c4] text-center border border-blue-100/50 relative z-10">
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Your Coupon Code (15% Off)</span>
+              <div className="bg-[#FFF5F5] p-5 rounded-3xl border border-[#CC292B]/20 shadow-sm flex flex-col gap-4 relative overflow-hidden">
+                <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#CC292B]/10 rounded-full blur-xl" />
+                <div className="bg-white rounded-xl px-4 py-4 text-xl font-mono font-bold text-[#CC292B] text-center border border-[#CC292B]/20 relative z-10">
                   {stats.couponCode}
                 </div>
                 <Button 
                   onClick={() => handleCopy(stats.couponCode, 'code')}
-                  className="w-full rounded-xl h-10 text-xs font-bold uppercase tracking-widest gap-2 bg-[#5984c4] hover:bg-blue-600 text-white border-none shadow-md"
+                  className="w-full rounded-xl h-12 text-xs font-bold uppercase tracking-widest gap-2 bg-[#CC292B] hover:bg-[#b02224] text-white border-none shadow-md"
                 >
-                  {copiedCode ? <Check size={14} /> : <Copy size={14} />}
+                  {copiedCode ? <Check size={16} /> : <Copy size={16} />}
                   {copiedCode ? 'Copied!' : 'Copy Code'}
                 </Button>
               </div>

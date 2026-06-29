@@ -321,8 +321,8 @@ export async function createPayloadOrder(
       }
     })
 
-    // Update Stripe PaymentIntent with the Order ID (unless it's a free order)
-    if (paymentIntentId && paymentIntentId !== 'free_order') {
+    // Update Stripe PaymentIntent with the Order ID (unless it's a free order or zelle)
+    if (paymentIntentId && paymentIntentId !== 'free_order' && paymentIntentId !== 'zelle_pending') {
        await getStripe().paymentIntents.update(paymentIntentId, {
           metadata: {
              orderId: String(order.id)
@@ -398,7 +398,7 @@ export async function notifyAdminFailedPayment(orderId: string, errorMessage: st
     `
 
     await payload.sendEmail({
-      to: 'support@thelooksmaxxinglab.com',
+      to: 'support@spartalabs.com',
       subject: `⚠️ Payment Failed - Order ${orderId}`,
       html: html,
     })

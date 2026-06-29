@@ -188,7 +188,7 @@ export function CoaSection() {
             >
                <Image 
                  src="/Featured%20Images/vial-no-bg.webp"
-                 alt="Single precision research peptide vial with Certificate of Analysis document — The Looksmaxxing Lab"
+                 alt="Single precision research peptide vial with Certificate of Analysis document — Sparta Labs"
                  fill
                  className="object-contain"
                  priority

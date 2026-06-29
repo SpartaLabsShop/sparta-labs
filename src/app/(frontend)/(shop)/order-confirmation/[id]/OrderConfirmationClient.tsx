@@ -72,13 +72,40 @@ export function OrderConfirmationClient({ order }: { order: OrderData }) {
           
           <FadeUp delay={0.1}>
             <h1 className="text-3xl md:text-4xl font-display font-bold text-ink mb-3">
-              Payment Successful
+              {order.paymentMethod === 'zelle_pending' ? 'Order Placed' : 'Payment Successful'}
             </h1>
             <p className="text-ink/60 text-sm md:text-base">
-              Thank you, {order.customerName}. Your order is confirmed.
+              Thank you, {order.customerName}. {order.paymentMethod === 'zelle_pending' ? 'Please complete your Zelle payment below.' : 'Your order is confirmed.'}
             </p>
           </FadeUp>
         </div>
+
+        {/* Zelle Payment Instructions */}
+        {order.paymentMethod === 'zelle_pending' && (
+          <FadeUp delay={0.15} className="w-full max-w-lg mb-8">
+            <div className="bg-purple-50 border-2 border-purple-200 rounded-2xl p-6 md:p-8 flex flex-col items-center gap-4 text-center">
+              <div className="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M13.559 24H6.832c-.91 0-1.376-1.1-.74-1.746L17.133 11.26H8.59a1.19 1.19 0 01-1.19-1.19V7.295c0-.657.533-1.19 1.19-1.19h6.869c.91 0 1.376 1.1.74 1.745L5.157 18.844h8.402c.657 0 1.19.533 1.19 1.19v2.776c0 .657-.533 1.19-1.19 1.19z" fill="#6D1ED4"/></svg>
+              </div>
+              <h3 className="text-lg font-bold text-purple-900">Complete Your Zelle Payment</h3>
+              <p className="text-sm text-purple-800/80">
+                Send <strong>${order.total.toFixed(2)}</strong> via Zelle using the QR code below or send to:
+              </p>
+              {/* Placeholder QR - replace /zelle-qr.png with your actual QR code */}
+              <div className="w-48 h-48 bg-white rounded-xl border border-purple-200 flex items-center justify-center overflow-hidden">
+                <Image src="/zelle-qr.png" alt="Zelle QR Code" width={180} height={180} className="object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+              </div>
+              <div className="bg-white rounded-xl px-6 py-3 border border-purple-200">
+                <p className="text-xs text-purple-600 font-bold uppercase tracking-widest mb-1">Send to</p>
+                <p className="text-base font-bold text-purple-900">kyle@spartalabs.shop</p>
+              </div>
+              <p className="text-xs text-purple-700/60">
+                Include your order number <strong>#{order.id}</strong> in the Zelle memo. Your order will be confirmed once payment is verified.
+              </p>
+            </div>
+          </FadeUp>
+        )}
+
 
         {/* Invoice Card */}
         <FadeUp delay={0.2} className="w-full max-w-5xl print:max-w-none print:w-full">
@@ -86,8 +113,8 @@ export function OrderConfirmationClient({ order }: { order: OrderData }) {
             
             {/* Print Branding Header */}
             <div className="hidden print:flex items-center justify-between py-4 px-0 border-b border-ink/10">
-              <h1 className="text-2xl font-display font-bold tracking-tight text-ink uppercase">The Looksmaxxing Lab</h1>
-              <p className="text-sm font-medium text-ink/60">thelooksmaxxinglab.com</p>
+              <h1 className="text-2xl font-display font-bold tracking-tight text-ink uppercase">Sparta Labs</h1>
+              <p className="text-sm font-medium text-ink/60">spartalabs.com</p>
             </div>
 
             {/* Invoice Header */}
@@ -209,7 +236,7 @@ export function OrderConfirmationClient({ order }: { order: OrderData }) {
               <button onClick={() => window.print()} className="flex items-center gap-2 hover:text-ink transition-colors font-medium">
                 <Printer size={16} /> Print Receipt
               </button>
-              <span className="text-center sm:text-left">Questions? <a href="mailto:support@thelooksmaxxinglab.com" className="text-ink underline hover:no-underline font-medium">Contact Support</a></span>
+              <span className="text-center sm:text-left">Questions? <a href="mailto:support@spartalabs.com" className="text-ink underline hover:no-underline font-medium">Contact Support</a></span>
             </div>
           </div>
         </FadeUp>

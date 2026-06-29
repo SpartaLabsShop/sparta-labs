@@ -63,12 +63,12 @@ export function WhatSetsUsApart() {
             <div className="w-5/12 flex flex-col">
               <FadeUp>
                 <span className="text-label-md uppercase tracking-widest text-[#5984c4] mb-4 block font-bold">
-                  THE LOOKSMAXXING STANDARD
+                  THE SPARTA STANDARD
                 </span>
               </FadeUp>
               <FadeUp delay={0.1}>
                 <h2 className="text-[clamp(2rem,5vh,3.5rem)] font-display text-ink leading-[0.9] tracking-tight mb-4 lg:mb-6">
-                  The Looksmaxxing Standard: Why Purity Matters
+                  The Sparta Standard: Why Purity Matters
                 </h2>
               </FadeUp>
               <FadeUp delay={0.2}>
@@ -189,12 +189,12 @@ export function WhatSetsUsApart() {
           <div className="flex flex-col mb-12">
             <FadeUp>
               <span className="text-label-md uppercase tracking-widest text-[#5984c4] mb-4 block font-bold">
-                THE LOOKSMAXXING STANDARD
+                THE SPARTA STANDARD
               </span>
             </FadeUp>
             <FadeUp delay={0.1}>
               <h2 className="text-[10vw] sm:text-display-sm font-display text-ink leading-[0.9] tracking-tight mb-6">
-                The Looksmaxxing Standard: Why Purity Matters
+                The Sparta Standard: Why Purity Matters
               </h2>
             </FadeUp>
             <FadeUp delay={0.2}>

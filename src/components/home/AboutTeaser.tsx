@@ -37,7 +37,7 @@ export function AboutTeaser() {
         >
           <Image 
             src="/Featured%20Images/scientist-at-microscope.webp"
-            alt="US-based peptide synthesis facility — ISO-certified laboratory where Looksmaxxing Lab compounds are produced"
+            alt="US-based peptide synthesis facility — ISO-certified laboratory where Sparta Labs compounds are produced"
             fill
             className="object-cover opacity-100"
           />

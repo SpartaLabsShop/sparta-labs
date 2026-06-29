@@ -219,6 +219,7 @@ export interface User {
   defaultBillingAddress?: (number | null) | Address;
   lastLoginAt?: string | null;
   googleId?: string | null;
+  avatarUrl?: string | null;
   authProvider?: ('email' | 'google') | null;
   metadata?:
     | {
@@ -283,6 +284,7 @@ export interface Media {
   id: number;
   alt: string;
   caption?: string | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -312,6 +314,7 @@ export interface Media {
 export interface Document {
   id: number;
   title: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -807,6 +810,14 @@ export interface BlogPost {
   title: string;
   slug?: string | null;
   author: number | User;
+  /**
+   * External URL for the featured image (e.g. Unsplash, Cloudinary)
+   */
+  featuredImageUrl?: string | null;
+  /**
+   * Short summary shown on blog cards
+   */
+  excerpt?: string | null;
   content?: {
     root: {
       type: string;
@@ -1373,6 +1384,7 @@ export interface UsersSelect<T extends boolean = true> {
   defaultBillingAddress?: T;
   lastLoginAt?: T;
   googleId?: T;
+  avatarUrl?: T;
   authProvider?: T;
   metadata?: T;
   maxxPoints?: T;
@@ -1400,6 +1412,7 @@ export interface UsersSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1432,6 +1445,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface DocumentsSelect<T extends boolean = true> {
   title?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1774,6 +1788,8 @@ export interface BlogPostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   author?: T;
+  featuredImageUrl?: T;
+  excerpt?: T;
   content?: T;
   publishedAt?: T;
   status?: T;

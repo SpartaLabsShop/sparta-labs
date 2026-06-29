@@ -10,7 +10,7 @@ export function generateAdminAffiliateNotificationEmail(application: any, affili
     socialLinksHtml = application.socialLinks.map((link: any) => `${link.platform}: <a href="${link.url}">${link.url}</a>`).join('<br>');
   }
 
-  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://thelooksmaxxinglab.com';
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://spartalabs.com';
   const adminUrl = `${serverUrl}/admin/collections/affiliates/${affiliate.id}`;
 
   return `

@@ -3,7 +3,6 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Space_Grotesk } from 'next/font/google'
 import { LayoutDashboard, Link as LinkIcon, Target, DollarSign, WalletCards, Settings, LogOut, Medal } from 'lucide-react'
 import { motion } from 'framer-motion'
 
@@ -11,8 +10,6 @@ import { useAuth } from '@/lib/auth/AuthContext'
 import { useRouter } from 'next/navigation'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from '@/components/ui/dialog'
 import { useState } from 'react'
-
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['300', '400', '500', '700'] })
 
 const NAV_ITEMS = [
   { name: 'Overview', href: '/affiliates/dashboard', icon: LayoutDashboard },
@@ -35,33 +32,33 @@ export function AffiliateSidebar({
   const [open, setOpen] = useState(false)
   
   return (
-    <aside className="w-full h-fit flex flex-col gap-8 lg:sticky lg:top-32 z-10">
+    <aside className="w-full h-full flex flex-col pt-8 lg:pt-12 px-6 lg:px-8 pb-12">
       {/* Greeting */}
-      <div className="hidden lg:flex flex-col gap-1">
-        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">Affiliate Dashboard</span>
-        <h2 className={`text-2xl font-bold text-black tracking-tight ${spaceGrotesk.className}`}>
+      <div className="mb-6 lg:mb-10 px-4 flex flex-col gap-1">
+        <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Affiliate Portal</span>
+        <h2 className="text-2xl font-bold text-slate-900 tracking-tight hidden lg:block">
           {userName}
         </h2>
       </div>
 
       {/* Tier Widget */}
-      <div className="flex flex-col gap-3 bg-gradient-to-br from-[#f8faff] to-[#eef4ff] border border-blue-200/60 shadow-sm p-5 rounded-2xl w-full relative overflow-hidden group">
-        <div className="absolute top-0 right-0 -mt-2 -mr-2 p-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-blue-500 pointer-events-none">
+      <div className="flex flex-col gap-3 bg-[#FFF5F5] border border-[#CC292B]/20 shadow-sm p-5 rounded-2xl w-full relative overflow-hidden group mb-6 lg:mb-8">
+        <div className="absolute top-0 right-0 -mt-2 -mr-2 p-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-[#CC292B] pointer-events-none">
           <Medal size={80} />
         </div>
         <div className="flex items-center gap-3 relative z-10">
-          <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 shadow-inner border border-blue-200/50">
+          <div className="w-10 h-10 rounded-full bg-[#CC292B]/10 text-[#CC292B] flex items-center justify-center shrink-0 border border-[#CC292B]/20">
             <Medal size={18} />
           </div>
           <div className="flex flex-col">
-            <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-blue-500">Current Status</span>
-            <span className="text-xl font-bold text-[#5984c4] leading-none mt-1 capitalize">{tier} Tier</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#CC292B]">Current Status</span>
+            <span className="text-lg font-bold text-[#CC292B] leading-none mt-1 capitalize">{tier} Tier</span>
           </div>
         </div>
       </div>
       
       {/* Navigation */}
-      <nav className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-col gap-2 pb-4 lg:pb-0">
+      <nav className="flex flex-col gap-2 flex-1">
         {NAV_ITEMS.map((item) => {
           // Strict exact match for root /dashboard
           const isActive = item.href === '/affiliates/dashboard' 
@@ -75,22 +72,22 @@ export function AffiliateSidebar({
               key={item.href}
               href={item.href}
               className={`
-                relative flex items-center justify-center lg:justify-start gap-3 shrink-0 px-4 py-3.5 rounded-2xl text-[11px] font-bold uppercase tracking-[0.15em] transition-all duration-300
-                ${isActive 
-                  ? 'text-white' 
-                  : 'text-gray-500 hover:text-black hover:bg-black/5 bg-gray-50 lg:bg-transparent'
+                relative flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300
+                ${isActive
+                  ? 'text-[#CC292B]'
+                  : 'text-slate-800 hover:bg-slate-100'
                 }
               `}
             >
               {isActive && (
-                <motion.div 
+                <motion.div
                   layoutId="affiliate-active-pill"
-                  className="absolute inset-0 bg-black rounded-2xl z-0 shadow-md shadow-black/10"
+                  className="absolute inset-0 bg-[#CC292B]/10 rounded-xl z-0"
                   initial={false}
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
-              <Icon size={16} className={`relative z-10 transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-black'}`} />
+              <Icon size={18} className={`relative z-10 ${isActive ? 'text-[#CC292B]' : 'text-slate-600'}`} />
               <span className="relative z-10">{item.name}</span>
             </Link>
           )
@@ -99,33 +96,33 @@ export function AffiliateSidebar({
         {/* Back to Shop Link */}
         <Link
           href="/account"
-          className="relative flex items-center justify-center lg:justify-start gap-3 shrink-0 px-4 py-3.5 rounded-2xl text-[11px] font-bold uppercase tracking-[0.15em] transition-all duration-300 text-gray-500 hover:bg-gray-100 bg-transparent group mt-2"
+          className="relative flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 text-slate-500 hover:bg-slate-100 mt-2"
         >
-          <span className="relative z-10 group-hover:text-black">&larr; Back to Account</span>
+          <span className="relative z-10">&larr; Back to Account</span>
         </Link>
-        
-        <div className="hidden lg:block w-full h-px bg-gray-200 my-4" />
-        
+      </nav>
+      
+      <div className="mt-auto pt-8">
         {/* Sign out */}
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <button className="flex items-center justify-center lg:justify-start gap-3 shrink-0 px-4 py-3.5 rounded-2xl text-[11px] font-bold uppercase tracking-[0.15em] text-red-500 hover:text-white hover:bg-red-500 transition-all duration-300 group bg-red-50 lg:bg-transparent">
-              <LogOut size={16} className="text-red-400 group-hover:text-white transition-colors duration-300" />
-              <span className="relative z-10">Sign out</span>
+            <button className="flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-semibold text-[#CC292B] hover:bg-[#CC292B]/5 transition-all duration-300 w-full">
+              <LogOut size={18} className="text-[#CC292B]" />
+              <span>Sign out</span>
             </button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md bg-white border border-gray-100 p-8 rounded-3xl shadow-2xl">
+          <DialogContent className="sm:max-w-md bg-white border-0 p-8 rounded-2xl shadow-2xl">
             <DialogHeader>
-              <DialogTitle className={`text-2xl font-bold tracking-tight text-black ${spaceGrotesk.className}`}>
+              <DialogTitle className="text-2xl font-bold tracking-tight text-slate-900">
                 Sign Out
               </DialogTitle>
-              <DialogDescription className="text-sm text-gray-500 mt-2">
+              <DialogDescription className="text-sm text-slate-500 mt-2">
                 Are you sure you want to sign out of your account?
               </DialogDescription>
             </DialogHeader>
             <DialogFooter className="flex flex-col sm:flex-row gap-3 mt-6 sm:justify-end">
               <DialogClose asChild>
-                <button className="px-6 py-3.5 rounded-full text-[11px] font-bold uppercase tracking-[0.15em] text-black bg-gray-100 hover:bg-gray-200 transition-colors w-full sm:w-auto text-center">
+                <button className="px-6 py-3.5 rounded-xl text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors w-full sm:w-auto text-center">
                   Cancel
                 </button>
               </DialogClose>
@@ -135,14 +132,14 @@ export function AffiliateSidebar({
                   router.push('/')
                   router.refresh()
                 }}
-                className="px-6 py-3.5 rounded-full text-[11px] font-bold uppercase tracking-[0.15em] text-white bg-red-500 hover:bg-red-600 transition-colors shadow-md w-full sm:w-auto text-center"
+                className="px-6 py-3.5 rounded-xl text-sm font-bold text-white bg-[#CC292B] hover:bg-[#b02224] transition-colors w-full sm:w-auto text-center"
               >
                 Yes, Sign Out
               </button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
-      </nav>
+      </div>
     </aside>
   )
 }

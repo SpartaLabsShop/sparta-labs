@@ -6,7 +6,7 @@ import configPromise from '@payload-config'
 import { getShopProducts } from '../(shop)/actions'
 
 export const metadata: Metadata = {
-  title: 'Shop All Compounds | The Looksmaxxing Lab',
+  title: 'Shop All Compounds | Sparta Labs',
   description: 'Browse our complete catalog of research-grade peptides and compounds. Filter by purity, category, and availability.',
 }
 

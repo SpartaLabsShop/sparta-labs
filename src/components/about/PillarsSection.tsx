@@ -24,7 +24,7 @@ const pillars = [
 
 export function PillarsSection() {
   return (
-    <section className="py-24 lg:py-32 px-4 md:px-8 lg:px-10 bg-white relative overflow-hidden">
+    <section className="pt-16 pb-16 lg:pt-16 lg:pb-20 px-4 md:px-8 lg:px-10 bg-white relative overflow-hidden">
       <div className="container mx-auto relative z-10">
         
         <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] xl:grid-cols-[300px_1fr] gap-8 lg:gap-16">
@@ -41,7 +41,7 @@ export function PillarsSection() {
             </FadeUp>
 
             {/* Decorative Curve (Desktop Only) */}
-            <div className="hidden lg:block absolute left-0 top-[150px] bottom-[50px] w-full pointer-events-none z-0">
+            <div className="hidden lg:block absolute left-0 top-[350px] bottom-[50px] w-full pointer-events-none z-0">
               <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 100">
                 <path d="M 0,0 Q 100,50 0,100" stroke="#e5e5e5" strokeWidth="1.5" fill="none" vectorEffect="non-scaling-stroke" />
               </svg>
@@ -61,7 +61,7 @@ export function PillarsSection() {
           </div>
 
           {/* Right Column: Items */}
-          <div className="flex flex-col justify-around gap-16 lg:gap-0 lg:pt-[150px] lg:pb-[50px] min-h-[600px] lg:min-h-[1000px]">
+          <div className="flex flex-col justify-around gap-16 lg:gap-0 lg:pt-[350px] lg:pb-[50px] min-h-[600px] lg:min-h-[1050px]">
             {pillars.map((pillar, i) => (
               <motion.div
                 key={pillar.num}

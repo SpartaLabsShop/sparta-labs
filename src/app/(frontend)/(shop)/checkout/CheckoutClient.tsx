@@ -21,7 +21,8 @@ import { Space_Grotesk } from 'next/font/google'
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] })
 
-const stripePromise = typeof window !== 'undefined' ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '') : null
+const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''
+const stripePromise = typeof window !== 'undefined' && stripeKey.startsWith('pk_') ? loadStripe(stripeKey) : null
 
 export function CheckoutClient() {
   const { items, couponCode: storedCouponCode, setCoupon } = useCartStore()
@@ -29,6 +30,9 @@ export function CheckoutClient() {
   
   // Mobile summary toggle
   const [mobileSummaryOpen, setMobileSummaryOpen] = useState(true)
+
+  // Payment method
+  const [paymentMethod, setPaymentMethod] = useState<'stripe' | 'zelle'>('zelle')
 
   // Stripe
   const [clientSecret, setClientSecret] = useState<string | null>(null)
@@ -169,24 +173,18 @@ export function CheckoutClient() {
   const pointsToRedeem = isRedeemingPoints ? Math.min(availablePoints, totalBeforePoints) : 0
   const total = totalBeforePoints - pointsToRedeem
 
-  // Fetch client secret when order details change
-  useEffect(() => {
-    if (items.length > 0 && total > 0) {
-      createPaymentIntent(items, shippingMethod, appliedCoupon?.code, isRedeemingPoints)
-        .then(res => {
-          if (res.clientSecret && res.paymentIntentId) {
-            setClientSecret(res.clientSecret)
-            setPaymentIntentId(res.paymentIntentId)
-          } else if (res.error) {
-            toast.error(res.error)
-            if ((res as any).priceChanged && (res as any).updatedItems) {
-              const { useCartStore } = require('@/lib/cart/store')
-              useCartStore.getState().setItems((res as any).updatedItems)
-            }
-          }
-        })
-    }
-  }, [items, shippingMethod, appliedCoupon, isRedeemingPoints])
+  // Stripe disabled for now — will be enabled later
+  // useEffect(() => {
+  //   if (items.length > 0 && total > 0 && paymentMethod === 'stripe') {
+  //     createPaymentIntent(items, shippingMethod, appliedCoupon?.code, isRedeemingPoints)
+  //       .then(res => {
+  //         if (res.clientSecret && res.paymentIntentId) {
+  //           setClientSecret(res.clientSecret)
+  //           setPaymentIntentId(res.paymentIntentId)
+  //         }
+  //       })
+  //   }
+  // }, [items, shippingMethod, appliedCoupon, isRedeemingPoints, paymentMethod])
 
   // Handlers
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -265,6 +263,37 @@ export function CheckoutClient() {
       useCartStore.getState().clear()
       window.location.href = `/order-confirmation/${orderRes.orderId}`
     } catch (e: any) {
+      toast.error('An unexpected error occurred.')
+      setIsProcessing(false)
+    }
+  }
+
+  const handleZelleCheckout = async () => {
+    if (!formData.email || !formData.firstName || !formData.address || !formData.city || !formData.state || !formData.zip) {
+      toast.error('Please fill out all required shipping fields before completing your order.')
+      return
+    }
+
+    setIsProcessing(true)
+    try {
+      const { createPayloadOrder } = await import('./actions')
+      const orderRes = await createPayloadOrder(
+        items, shippingMethod, appliedCoupon?.code, isRedeemingPoints,
+        { ...formData, email: user?.email || formData.email },
+        'zelle_pending',
+        user?.id != null ? String(user.id) : undefined
+      )
+
+      if (orderRes.error || !orderRes.orderId) {
+        toast.error(orderRes.error || 'Failed to create order.')
+        setIsProcessing(false)
+        return
+      }
+
+      toast.success('Order placed! Complete Zelle payment to confirm.')
+      useCartStore.getState().clear()
+      window.location.href = `/order-confirmation/${orderRes.orderId}`
+    } catch {
       toast.error('An unexpected error occurred.')
       setIsProcessing(false)
     }
@@ -640,7 +669,7 @@ export function CheckoutClient() {
               <section className="flex flex-col gap-4">
                 <h2 className="text-xl font-display font-bold text-ink mb-2">Payment</h2>
                 <p className="text-xs font-medium text-ink/50 mb-2 flex items-center gap-1.5"><Lock size={12} /> All transactions are 256-bit encrypted and secure.</p>
-                
+
                 {total <= 0 ? (
                   <div className="w-full h-56 bg-green-50 border border-green-500/20 rounded-3xl flex flex-col items-center justify-center gap-4 shadow-sm relative overflow-hidden p-6 text-center">
                     <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600">
@@ -651,23 +680,18 @@ export function CheckoutClient() {
                       {isProcessing ? <Loader2 className="animate-spin" /> : "Complete Free Order"}
                     </Button>
                   </div>
-                ) : clientSecret && stripePromise && paymentIntentId ? (
-                  <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
-                    <StripeCheckoutForm 
-                       amount={total}
-                       items={items}
-                       shippingMethod={shippingMethod}
-                       couponCode={appliedCoupon?.code}
-                       isRedeemingPoints={isRedeemingPoints}
-                       formData={formData}
-                       paymentIntentId={paymentIntentId}
-                       userId={user?.id != null ? String(user.id) : undefined}
-                    />
-                  </Elements>
                 ) : (
-                  <div className="w-full h-56 bg-white border border-ink/10 rounded-3xl flex items-center justify-center flex-col gap-3 shadow-sm relative overflow-hidden">
-                    <Loader2 size={32} className="text-ink/20 animate-spin" />
-                    <span className="text-sm font-bold text-ink/40">Initializing secure checkout...</span>
+                  <div className="w-full bg-white border border-ink/10 rounded-3xl p-6 flex flex-col items-center gap-4 shadow-sm">
+                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13.559 24H6.832c-.91 0-1.376-1.1-.74-1.746L17.133 11.26H8.59a1.19 1.19 0 01-1.19-1.19V7.295c0-.657.533-1.19 1.19-1.19h6.869c.91 0 1.376 1.1.74 1.745L5.157 18.844h8.402c.657 0 1.19.533 1.19 1.19v2.776c0 .657-.533 1.19-1.19 1.19z" fill="#6D1ED4"/></svg>
+                    </div>
+                    <h3 className="text-sm font-bold text-ink">Pay with Zelle</h3>
+                    <p className="text-sm text-center text-ink/70">
+                      After placing your order, you'll receive Zelle payment instructions with a QR code on the confirmation page.
+                    </p>
+                    <Button onClick={handleZelleCheckout} disabled={isProcessing} variant="dark" size="lg" className="w-full h-14 rounded-full">
+                      {isProcessing ? <Loader2 className="animate-spin" /> : `Place Order · $${total.toFixed(2)}`}
+                    </Button>
                   </div>
                 )}
               </section>

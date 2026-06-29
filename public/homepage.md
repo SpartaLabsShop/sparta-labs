@@ -1,12 +1,12 @@
 
-THE LOOKSMAXXING LAB
+SPARTA LABS
 Homepage SEO Content Strategy
 
 
 Complete Content, Copy & Optimization Deliverables
-the-looksmaxxing-lab.vercel.app
+spartalabs.com
 
-Page	Homepage — the-looksmaxxing-lab.vercel.app
+Page	Homepage — spartalabs.com
 Industry	Beauty & Personal Care | Men's Self-Improvement | Health & Wellness | AI Technology
 Focus Keyphrase	research peptides
 Primary Audience	Men aged 16–35 | Appearance, confidence, fitness, recovery, self-development
@@ -15,7 +15,7 @@ Scope	Text, headlines, copy, schema, ALT text, GEO/AEO/AI notes
 Instruction	Do NOT redesign. Improve copy, headlines, supporting content only.
 
 ⚠  Compliance Note (Read First)
-All products sold by The Looksmaxxing Lab are strictly for laboratory and research use only. They are not intended to diagnose, treat, cure, or prevent any disease, and are not for human or animal consumption. All copy in this document respects this constraint. No clinical, dosing, or human-use claims are made. The looksmaxxing/self-improvement keywords function exclusively as top-of-funnel educational hooks that route visitors to compliant research-grade product listings.
+All products sold by Sparta Labs are strictly for laboratory and research use only. They are not intended to diagnose, treat, cure, or prevent any disease, and are not for human or animal consumption. All copy in this document respects this constraint. No clinical, dosing, or human-use claims are made. 
 
 
 PART A — SEO METADATA & TECHNICAL SIGNALS
@@ -23,7 +23,7 @@ PART A — SEO METADATA & TECHNICAL SIGNALS
 
 1. Meta Title
 Recommended Meta Title (≤60 characters)
-The Looksmaxxing Lab | Research-Grade Peptides, COA-Verified
+Sparta Labs | Research-Grade Peptides, COA-Verified
 
 Character count: 59 characters. Leads with the brand name (navigational demand), contains the primary keyword 'research-grade peptides', and the differentiating trust signal 'COA-Verified'. Reads naturally without keyword stuffing.
 2. Meta Description
@@ -38,13 +38,13 @@ research peptides
 Rationale: highest-volume commercial keyword that sits squarely at the intersection of every page section — product listings, quality standards, and educational content. The keyphrase must appear in: H1, first 100 words of body copy, meta title, meta description, at least one H2, and the image ALT text on the hero vial.
 4. SEO Title (Yoast Format)
 Yoast SEO Title Tag
-The Looksmaxxing Lab | Research-Grade Peptides, COA-Verified | %%page%%
+Sparta Labs | Research-Grade Peptides, COA-Verified | %%page%%
 
 5. URL Slug Recommendation
 Slug (Homepage — canonical root)
 /  (root domain, no subfolder needed) Alternative for locale: /en/  — already in use and acceptable
 
-The site already uses /en/ for locale routing. Ensure canonical tag on /en/ points to https://the-looksmaxxing-lab.vercel.app/ to consolidate authority to the root. No change to URL structure needed.
+The site already uses /en/ for locale routing. Ensure canonical tag on /en/ points to https://spartalabs.com/ to consolidate authority to the root. No change to URL structure needed.
 6. Breadcrumb Structure
 Breadcrumb Path
 Homepage: Home  (root — no breadcrumb trail needed) Product pages: Home > Shop > [Product Name] Journal pages: Home > Journal > [Article Title] Category pages: Home > Shop > [Category Name]
@@ -69,7 +69,7 @@ H2	Lab intro	Considered Compounds for Considered Research	lab entity, compound q
 H3	Lab proof 1	≥99% HPLC Purity — Every Batch, No Exceptions	HPLC purity, 99% purity peptides
 H3	Lab proof 2	LC-MS Verified Peptide Identity	LC-MS verified, mass spectrometry
 H3	Lab proof 3	COA with Every Order — Full Transparency	COA, certificate of analysis
-H2	Standards	The Looksmaxxing Standard: Why Purity Matters	looksmaxxing, peptide purity
+H2	Standards	The Sparta Standard: Why Purity Matters	peptide purity
 H3	Standards 1	US-Based Synthesis — Zero Overseas Powders	peptides made in USA, GEO
 H3	Standards 2	99%+ Purity Floor — Any Batch Below This Gets Discarded	99% purity floor, high purity peptides
 H3	Standards 3	Cold-Chain Logistics — Molecular Integrity, Guaranteed	cold-chain, peptide storage
@@ -205,15 +205,15 @@ H3	Body Copy (1–2 sentences)
 LC-MS Verified Peptide Identity	Mass spectrometry (LC-MS) confirms the exact molecular weight and identity of every compound we ship. You receive the peptide on the label, exactly as described.
 COA with Every Order — Full Transparency	Every order ships with a lot-specific Certificate of Analysis (COA) traceable to its independent test results. Our full COA library is publicly accessible at any time.
 
-SECTION 5 — THE LOOKSMAXXING STANDARD
+SECTION 5 — THE SPARTA STANDARD
 Standards / Differentiators Section
 SECTION LABEL
 Copy
-THE LOOKSMAXXING STANDARD
+THE SPARTA STANDARD
 
 H2 HEADING
 Copy
-The Looksmaxxing Standard: Why Purity Matters
+The Sparta Standard: Why Purity Matters
 
 SECTION INTRO COPY
 Copy
@@ -292,20 +292,20 @@ Copy
 Everything you need to know about our purity standards, testing methodology, ordering process, and shipping. For institutional or bulk inquiries, contact our support team directly.
 
 Q1: What is the purity standard for your research peptides?
-Every research peptide sold by The Looksmaxxing Lab must meet or exceed a strictly enforced ≥99% purity threshold. We verify this standard through independent, third-party High-Performance Liquid Chromatography (HPLC) and Liquid Chromatography–Mass Spectrometry (LC-MS) testing for every production batch — not random samples. Any batch that tests below this threshold is immediately discarded.
+Every research peptide sold by Sparta Labs must meet or exceed a strictly enforced ≥99% purity threshold. We verify this standard through independent, third-party High-Performance Liquid Chromatography (HPLC) and Liquid Chromatography–Mass Spectrometry (LC-MS) testing for every production batch — not random samples. Any batch that tests below this threshold is immediately discarded.
 Keywords: 99% purity peptides, third party tested peptides, HPLC, LC-MS
 Q2: How can I access the Certificate of Analysis (COA) for my order?
 Lot-specific Certificates of Analysis for every active batch are publicly available in our COA Library at /certificates. Every order also includes a batch number that corresponds directly to that batch's test documentation. You can verify purity, molecular identity, and endotoxin status for every compound you receive.
 Keywords: certificate of analysis, COA, peptides with COA, batch report
 Q3: Are these products intended for human consumption?
-No. All products sold by The Looksmaxxing Lab are strictly for laboratory and research use only. They are not intended to diagnose, treat, cure, or prevent any disease, and are not for human or animal consumption. These statements have not been evaluated by the FDA.
+No. All products sold by Sparta Labs are strictly for laboratory and research use only. They are not intended to diagnose, treat, cure, or prevent any disease, and are not for human or animal consumption. These statements have not been evaluated by the FDA.
 Keywords: research use only, research grade peptides, FDA disclaimer
 Q4: What are your shipping and fulfillment times?
 All orders are fulfilled from our US-based facilities. We offer standard shipping (3–5 business days) and expedited 2-day shipping on orders over $300. Orders placed before 2 PM EST typically ship same day. All peptides are dispatched using validated cold-chain packaging to maintain molecular integrity in transit.
 Keywords: peptides 2 day shipping, US-based peptide supplier, cold-chain shipping, buy peptides USA
-Q5: What is looksmaxxing — and how do peptides relate to it?
-Looksmaxxing is the practice of systematically optimizing one's physical appearance through controllable factors such as skincare, fitness, grooming, and diet. Research peptides are studied in the context of skin collagen, tissue recovery, body composition, and hair density — areas directly relevant to appearance optimization. Our compounds are for research use only and are not offered as cosmetic or medical products.
-Keywords: what is looksmaxxing, looksmaxxing for men, softmaxxing, aesthetic peptides, GHK-Cu skin
+Q5: What are research peptides — and how are they used?
+Research peptides are synthetic compounds used in laboratory settings to study biological processes such as tissue recovery, skin collagen synthesis, body composition, and hair density. They are manufactured under strict quality controls and verified through third-party HPLC and LC-MS testing. Our compounds are for research use only and are not offered as cosmetic or medical products.
+Keywords: aesthetic peptides, GHK-Cu skin, peptide purity, research peptides
 Q6: How are your research peptides synthesized?
 We utilize advanced solid-phase peptide synthesis (SPPS) in US-based, ISO-certified laboratories. This method assembles amino acid chains sequentially on a resin support, allowing precise control over sequence fidelity and molecular structure. Post-synthesis purification removes truncated sequences and impurities to meet our ≥99% purity floor. Every batch is independently verified before fulfillment.
 Keywords: peptide synthesis, SPPS, research grade peptides, how are peptides made
@@ -313,7 +313,7 @@ Q7: Do you offer bulk or wholesale pricing for research institutions?
 Yes. We offer tiered wholesale pricing for qualified research institutions, university labs, clinical facilities, and approved wholesale accounts. Contact our support team to apply for an institutional account. Pricing scales with volume, and bulk orders still receive lot-specific COA documentation.
 Keywords: wholesale peptides for research institutions, bulk peptides, peptide vendor USA
 Q8: How do I verify that a peptide vendor is legitimate and properly tested?
-The three non-negotiable markers of a legitimate research peptide supplier are: (1) independent third-party HPLC and LC-MS testing — not in-house testing — for every batch; (2) a publicly accessible COA library with lot-traceable documentation; and (3) US-based synthesis, not merely US-based fulfillment of overseas-sourced raw powders. The Looksmaxxing Lab meets all three criteria on every order.
+The three non-negotiable markers of a legitimate research peptide supplier are: (1) independent third-party HPLC and LC-MS testing — not in-house testing — for every batch; (2) a publicly accessible COA library with lot-traceable documentation; and (3) US-based synthesis, not merely US-based fulfillment of overseas-sourced raw powders. Sparta Labs meets all three criteria on every order.
 Keywords: how to verify peptide vendor, best peptide company, most trusted peptide company, peptide purity comparison
 
 SECTION 9 — NEWSLETTER / EMAIL CAPTURE
@@ -339,12 +339,12 @@ Footer Navigation & Legal
 Column	Heading	Links / Content
 Shop	Shop Research Peptides	All Research Peptides · Best Sellers · Shop by Category
 Connect	Connect With Us	Contact Us · Instagram · Affiliate Program
-The Lab	About The Lab	About Us · The Looksmaxxing Standard · Science Journal
+The Lab	About The Lab	About Us · The Sparta Standard · Science Journal
 Resources	Research Resources	Peptide Reconstitution Calculator · COA Library · FAQ
 
 FOOTER TAGLINE / BRAND STAMP
 Copy
-The Looksmaxxing Lab. Precision. Purity. Performance.
+Sparta Labs. Precision. Purity. Performance.
 
 FDA DISCLAIMER (EXISTING — KEEP VERBATIM)
 KEEP AS-IS — Required Compliance Text
@@ -388,10 +388,10 @@ Insert this JSON-LD block in the <head> or at the end of <body> on the homepage.
     },
     {
       "@type": "Question",
-      "name": "What is looksmaxxing and how do peptides relate to it?",
+      "name": "What are research peptides and how are they used?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Looksmaxxing is the practice of optimizing physical appearance through controllable factors. Research peptides are studied in relation to skin collagen, tissue recovery, body composition, and hair density. Our compounds are research use only."
+        "text": "Research peptides are synthetic compounds used in laboratory research to study biological processes including tissue recovery, collagen synthesis, and body composition. Our compounds are for research use only."
       }
     },
     {
@@ -411,11 +411,11 @@ Insert this JSON-LD block in the <head> or at the end of <body> on the homepage.
 Organization  —  Priority: Critical
 Establishes the brand entity for Google Knowledge Graph and LLM grounding. Include: name, url, logo, description, sameAs (social profiles), contactPoint.
 Example JSON-LD snippet:
-{"@type":"Organization","name":"The Looksmaxxing Lab","url":"https://the-looksmaxxing-lab.vercel.app","description":"US-based research peptide supplier providing ≥99% HPLC-pure compounds with third-party COA verification.","sameAs":["[Instagram URL]"]}
+{"@type":"Organization","name":"Sparta Labs","url":"https://spartalabs.com","description":"US-based research peptide supplier providing ≥99% HPLC-pure compounds with third-party COA verification.","sameAs":["[Instagram URL]"]}
 WebSite + SearchAction  —  Priority: High
 Enables the Google sitelinks search box and signals internal site search availability to LLMs crawling the sitemap.
 Example JSON-LD snippet:
-{"@type":"WebSite","url":"https://the-looksmaxxing-lab.vercel.app","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://the-looksmaxxing-lab.vercel.app/shop?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+{"@type":"WebSite","url":"https://spartalabs.com","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://spartalabs.com/shop?q={search_term_string}"},"query-input":"required name=search_term_string"}}
 Product (per product page)  —  Priority: High
 For each product page (/shop/bpc-157-blend, etc.): add Product schema with name, description, sku, offers (price, priceCurrency, availability), and aggregateRating if reviews are added. This enables product rich results and Google Shopping eligibility.
 Example JSON-LD snippet:
@@ -423,11 +423,11 @@ Example JSON-LD snippet:
 BreadcrumbList (non-home pages)  —  Priority: Medium
 Implement on all product, journal, and category pages. Helps Google map site hierarchy and improves SERP appearance.
 Example JSON-LD snippet:
-{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://the-looksmaxxing-lab.vercel.app"},{"@type":"ListItem","position":2,"name":"Shop","item":"https://the-looksmaxxing-lab.vercel.app/shop"},{"@type":"ListItem","position":3,"name":"BPC-157 Blend","item":"https://the-looksmaxxing-lab.vercel.app/shop/bpc-157-blend"}]}
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://spartalabs.com"},{"@type":"ListItem","position":2,"name":"Shop","item":"https://spartalabs.com/shop"},{"@type":"ListItem","position":3,"name":"BPC-157 Blend","item":"https://spartalabs.com/shop/bpc-157-blend"}]}
 Article / ScholarlyArticle (Journal pages)  —  Priority: Medium
 For each /journal/ article, apply Article or ScholarlyArticle schema with headline, author, datePublished, description. This makes journal content eligible for AI citation and Google News indexing.
 Example JSON-LD snippet:
-{"@type":"ScholarlyArticle","headline":"The Pharmacology of BPC-157 in Tendon Repair","datePublished":"2026-01-01","author":{"@type":"Organization","name":"The Looksmaxxing Lab"},"description":"A detailed review of BPC-157 mechanism in connective tissue research."}
+{"@type":"ScholarlyArticle","headline":"The Pharmacology of BPC-157 in Tendon Repair","datePublished":"2026-01-01","author":{"@type":"Organization","name":"Sparta Labs"},"description":"A detailed review of BPC-157 mechanism in connective tissue research."}
 
 PART E — IMAGE ALT TEXT RECOMMENDATIONS
 
@@ -436,18 +436,18 @@ Principle
 Alt text must describe the image accurately AND integrate the target keyword naturally. Screen readers read ALT text aloud — it must make sense as a sentence. Never keyword-stuff ALT text.
 
 Image	Current ALT Text	Recommended ALT Text	Target Keyword
-Hero background	Hero Background	Dark blue laboratory environment with premium glass peptide vials — The Looksmaxxing Lab research peptides	research peptides, laboratory
+Hero background	Hero Background	Dark blue laboratory environment with premium glass peptide vials — Sparta Labs research peptides	research peptides, laboratory
 Hero foreground vial	(empty / filename)	Close-up of a lyophilized research peptide vial with white powder — ≥99% HPLC purity verified	research grade peptides, HPLC purity
 BPC-157 product card	BPC-157 Blend	BPC-157 Blend research peptide — 5MG lyophilized vial, US-synthesized, COA included	BPC-157, research peptide
 TB-500 product card	TB-500	TB-500 recovery research peptide — 5MG lyophilized vial, LC-MS verified	TB-500 peptide, recovery
 GHK-Cu product card	GHK-Cu	GHK-Cu copper peptide — 50MG vial, third-party tested, cold-chain shipped	GHK-Cu, copper peptide
 Semaglutide product card	Semaglutide	Semaglutide metabolic research peptide — 5MG vial, ≥99% purity, COA-backed	semaglutide peptide, metabolic
-About/lifestyle image	The Looksmaxxing Lab Facility	US-based peptide synthesis facility — ISO-certified laboratory where Looksmaxxing Lab compounds are produced	peptides made in USA, US-based synthesis
+About/lifestyle image	Sparta Labs Facility	US-based peptide synthesis facility — ISO-certified laboratory where Sparta Labs compounds are produced	peptides made in USA, US-based synthesis
 Standards: synthesis slide	US-Based Synthesis	Peptide synthesis laboratory showing sterile SPPS equipment and clean-room environment	US-based synthesis, SPPS, peptides made in USA
 Standards: purity floor slide	99%+ Purity Floor	Research peptide vial next to HPLC analysis results showing 99%+ purity certification	99% purity peptides, HPLC verification
 Standards: cold-chain slide	Cold-Chain Logistics	Insulated cold-chain packaging for research peptides maintaining temperature integrity during shipping	cold-chain peptide shipping, peptide storage
-Purity section vial	Premium Peptide Vial	Single precision research peptide vial with Certificate of Analysis document — The Looksmaxxing Lab	certificate of analysis, COA, research peptide
-Vial preloader	Vial Preloader	Research-grade peptide vial — The Looksmaxxing Lab	research peptides
+Purity section vial	Premium Peptide Vial	Single precision research peptide vial with Certificate of Analysis document — Sparta Labs	certificate of analysis, COA, research peptide
+Vial preloader	Vial Preloader	Research-grade peptide vial — Sparta Labs	research peptides
 
 PART F — INTERNAL LINKING RECOMMENDATIONS
 
@@ -476,7 +476,7 @@ PART G — GEO OPTIMIZATION NOTES
 Geo-targeted optimization captures high-intent buyers searching for domestic suppliers. US-based synthesis is a genuine product differentiator vs. overseas-raw-powder vendors and should be leveraged aggressively.
 
 hreflang & Locale Routing
-The site currently uses /en/ routing. Implement <link rel='alternate' hreflang='en-US' href='https://the-looksmaxxing-lab.vercel.app/en/' /> in the <head>. If international expansion is planned, add hreflang variants. This prevents Google from treating /en/ and root as duplicate pages.
+The site currently uses /en/ routing. Implement <link rel='alternate' hreflang='en-US' href='https://spartalabs.com/en/' /> in the <head>. If international expansion is planned, add hreflang variants. This prevents Google from treating /en/ and root as duplicate pages.
 
 On-Page Geo Signals — Text
 Every major section where US origin is relevant should contain at least one instance of a geo-keyword: 'US-based', 'US-synthesized', 'American peptide lab', 'peptides made in USA', or 'domestic synthesis'. The updated copy throughout this document already incorporates these. Do not cluster them — distribute naturally across Hero, Standards, About, and FAQ.
@@ -503,8 +503,8 @@ Answer Engine Optimization targets Google Featured Snippets, AI Overviews, voice
 Direct Answer Blocks for FAQ
 Each FAQ answer has been written in 40–80 words starting with a direct declarative sentence that restates the question. Example: Q: 'What is the purity standard?' → A: 'Every research peptide must meet or exceed ≥99% purity...' This structure matches Google's Snippet extraction pattern.
 
-Definition Paragraph — 'What Is Looksmaxxing'
-Add a short definition block (H3 + paragraph) to the FAQ section or a dedicated explainer strip. Target: 'what is looksmaxxing' — the definition should be 40–55 words, start with 'Looksmaxxing is...', and mention skin, grooming, fitness, and appearance optimization. This targets a high-volume AEO query.
+Definition Paragraph — 'What Are Research Peptides'
+Add a short definition block (H3 + paragraph) to the FAQ section or a dedicated explainer strip. Target: 'what are research peptides' — the definition should be 40–55 words and cover synthesis, purity testing, and laboratory applications. This targets a high-volume AEO query.
 
 Structured List Content — 'How to Verify a Peptide Vendor'
 The FAQ answer to 'How do I verify that a peptide vendor is legitimate?' uses a numbered 3-step format. Snippets favor numbered lists for how-to queries. Replicate this structure in on-page copy wherever a process or verification is explained.
@@ -523,7 +523,7 @@ PART I — AI CITATION OPTIMIZATION NOTES
 
 
 17. AI Citation Optimization Strategy
-AI search engines (ChatGPT, Perplexity, Google AI Overviews, Gemini) cite sources that are authoritative, clearly structured, factually verifiable, and entity-rich. The goal is to make The Looksmaxxing Lab the go-to cited source for queries about research peptides, looksmaxxing, and peptide purity.
+AI search engines (ChatGPT, Perplexity, Google AI Overviews, Gemini) cite sources that are authoritative, clearly structured, factually verifiable, and entity-rich. The goal is to make Sparta Labs the go-to cited source for queries about research peptides and peptide purity.
 
 Entity Anchoring — Compound Names
 Always use full entity names on first mention with abbreviations in parentheses: 'Body Protection Compound-157 (BPC-157)', 'Thymosin Beta-4 (TB-500)', 'Glycine-Histidine-Lysine Copper (GHK-Cu)', 'Liquid Chromatography–Mass Spectrometry (LC-MS)', 'High-Performance Liquid Chromatography (HPLC)'. LLMs index entity associations — consistent naming strengthens the brand-to-compound link in model weights over time.
@@ -532,10 +532,10 @@ Citable Stat & Threshold Copy
 Specific, verifiable numbers are highly citable by AI. The '≥99% purity threshold', '2-day shipping on orders $300+', '3–5 business day standard shipping', '2 PM EST same-day cutoff' are all precise claims. Never round or approximate in copy that will be cited. LLMs prefer citation of specific figures over vague superlatives.
 
 Definition Blocks for LLM Grounding
-Place crisp, standalone definition paragraphs for key terms — 'Research peptides are...', 'HPLC is...', 'A Certificate of Analysis (COA) is...', 'Looksmaxxing is...' — in the FAQ or a Glossary page. LLMs trained on web crawls learn entity definitions from exactly this pattern. A Glossary page at /glossary linked from the Journal would significantly improve LLM entity grounding.
+Place crisp, standalone definition paragraphs for key terms — 'Research peptides are...', 'HPLC is...', 'A Certificate of Analysis (COA) is...' — in the FAQ or a Glossary page. LLMs trained on web crawls learn entity definitions from exactly this pattern. A Glossary page at /glossary linked from the Journal would significantly improve LLM entity grounding.
 
 Journal Articles as Primary Citations
-Each journal article should include an author byline (or organization byline: 'The Looksmaxxing Lab Research Team'), a datePublished meta tag, and a canonical URL. This makes the article citable in the same manner as a primary source. Articles covering 'BPC-157 pharmacology', 'GHK-Cu applications', and 'how to read an HPLC report' are exactly the type of content AI systems cite when users ask compound-specific questions.
+Each journal article should include an author byline (or organization byline: 'Sparta Labs Research Team'), a datePublished meta tag, and a canonical URL. This makes the article citable in the same manner as a primary source. Articles covering 'BPC-157 pharmacology', 'GHK-Cu applications', and 'how to read an HPLC report' are exactly the type of content AI systems cite when users ask compound-specific questions.
 
 Comparison Tables for LLM Extraction
 Add a BPC-157 vs TB-500 comparison table to the Journal (or FAQ). LLMs extract comparison tables very efficiently. A table with columns: Compound | Molecular Weight | Research Focus | Synthesis | Purity Standard | Typical Use in Research directly answers conversational queries and will be cited in responses to 'what is the difference between BPC-157 and TB-500'.
@@ -576,7 +576,7 @@ H2/H3 subheadings present	✅  PASS	Full H2/H3 architecture defined in Part B
 
 
 CONTENT STRATEGY DELIVERY COMPLETE
-The Looksmaxxing Lab  ·  Homepage SEO Content Strategy  ·  June 2026
+Sparta Labs  ·  Homepage SEO Content Strategy  ·  June 2026
 
 
 Deliverable	Status

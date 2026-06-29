@@ -125,7 +125,7 @@ export async function attributeOrder(
   try {
     const adminHtml = generateAdminAffiliateConversionEmail(order, affiliate, isVoid ? 0 : commissionAmount)
     await payload.sendEmail({
-      to: 'support@thelooksmaxxinglab.com',
+      to: 'support@spartalabs.com',
       subject: `New Affiliate Sale! ${affiliate.displayName} made a conversion`,
       html: adminHtml,
     })

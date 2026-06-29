@@ -9,6 +9,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { FaqItem } from '@/components/shared/FaqCarousel'
 import FAQ from '@/components/FAQ'
+import { CTASection } from '@/components/shared/CTASection'
 
 const CALCULATOR_FAQS: FaqItem[] = [
   {
@@ -924,50 +925,15 @@ export default function PeptideCalculatorPage() {
       {/* ============================================
           SECTION 8: SHOP CTA STRIP
           ============================================ */}
-      <section className="py-24 px-4 md:px-8 lg:px-10 bg-white relative overflow-hidden">
-        <FadeUp>
-          <div className="relative w-full max-w-[1400px] mx-auto bg-gradient-to-b from-[#f4f7fb] to-white border border-[#eef3fb] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-sm px-6 py-16 lg:py-24 flex flex-col items-center justify-center text-center">
-            
-            {/* Background Image */}
-            <Image 
-              src="https://res.cloudinary.com/denskvdyt/image/upload/v1782167603/cta-image_b7krl0.webp"
-              alt="CTA Background"
-              fill
-              className="object-cover object-center pointer-events-none z-0"
-            />
-            
-            <div className="relative z-10 w-full max-w-4xl flex flex-col items-center gap-6">
-              <h2 className="text-[2.5rem] leading-[1.1] font-normal tracking-[-1.5px] text-ink min-[480px]:text-[3rem] md:text-[4rem] uppercase">
-                Shop Research Peptides
-              </h2>
-              
-              <p className="text-base lg:text-lg text-ink-muted leading-relaxed font-light max-w-2xl mx-auto mb-8">
-                Every compound in our catalog is US-synthesized, independently verified at ≥99% HPLC purity, and ships with a lot-specific Certificate of Analysis.
-              </p>
-              
-              <Link href="/shop" className="group">
-                <button className="rounded-xl px-8 py-5 bg-ink text-white hover:bg-ink/90 transition-colors duration-300 font-medium text-base uppercase tracking-widest flex items-center justify-center gap-3">
-                  Browse Catalog
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </Link>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 w-full">
-                 {[
-                  { name: 'BPC-157 Blend', link: '/shop/bpc-157-blend' },
-                  { name: 'TB-500', link: '/shop/tb-500' },
-                  { name: 'GHK-Cu', link: '/shop/ghk-cu' },
-                  { name: 'Semaglutide', link: '/shop/semaglutide' }
-                ].map((prod, idx) => (
-                  <Link key={idx} href={prod.link} className="bg-white rounded-xl border border-[#eef3fb] p-4 text-center hover:border-[#5984c4] transition-colors">
-                    <span className="text-sm font-medium text-ink uppercase tracking-wide">{prod.name}</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </FadeUp>
-      </section>
+      <CTASection
+        subtitle="PREMIUM PEPTIDES"
+        title="Shop Research Peptides"
+        description="Every compound in our catalog is US-synthesized, independently verified at ≥99% HPLC purity, and ships with a lot-specific Certificate of Analysis."
+        primaryButtonText="Browse Catalog"
+        primaryButtonLink="/shop"
+        secondaryButtonText=""
+        secondaryButtonLink=""
+      />
 
       {/* ============================================
           SECTION 9: LEGAL DISCLAIMER
@@ -982,13 +948,13 @@ export default function PeptideCalculatorPage() {
               </div>
               <div className="flex-1 flex flex-col gap-6">
                 <p className="text-sm md:text-base text-ink/60 leading-relaxed font-light">
-                  All products referenced on this page and throughout The LooksMaxxing Lab are intended exclusively for <strong className="text-ink font-medium">in-vitro laboratory research purposes only</strong>. They are not intended for human consumption, diagnostic, therapeutic, or any other clinical use.
+                  All products referenced on this page and throughout Sparta Labs are intended exclusively for <strong className="text-ink font-medium">in-vitro laboratory research purposes only</strong>. They are not intended for human consumption, diagnostic, therapeutic, or any other clinical use.
                 </p>
                 <p className="text-sm md:text-base text-ink/60 leading-relaxed font-light">
                   This calculator is provided strictly as a <strong className="text-ink font-medium">theoretical research tool</strong> to assist researchers in calculating reconstitution volumes and concentrations for their laboratory guidelines. It does not constitute medical advice, and no information provided should be interpreted as guidance for human administration.
                 </p>
                 <p className="text-sm md:text-base text-ink/60 leading-relaxed font-light">
-                  By using this tool, you confirm that you are a qualified researcher and that all products will be used in strict compliance with applicable federal, state, and local regulations. The LooksMaxxing Lab assumes no liability for misuse of this tool or any products listed on our platform.
+                  By using this tool, you confirm that you are a qualified researcher and that all products will be used in strict compliance with applicable federal, state, and local regulations. Sparta Labs assumes no liability for misuse of this tool or any products listed on our platform.
                 </p>
               </div>
             </div>

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { DownloadIcon, FileTextIcon, ArrowRightIcon } from 'lucide-react'
 import { FadeUp } from '@/components/motion/FadeUp'
+import { CTASection } from '@/components/shared/CTASection'
 import { StaggerChildren, staggerItemVariants } from '@/components/motion/StaggerChildren'
 import { EyebrowHeading } from '@/components/editorial/EyebrowHeading'
 import { Button } from '@/components/ui/button'
@@ -219,19 +220,15 @@ export default function CertificatesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="px-6 text-center max-w-content mx-auto">
-        <FadeUp>
-          <h2 className="text-editorial-lg font-serif text-ink mb-6">Demanding a higher standard</h2>
-          <p className="text-body-lg text-ink-muted mb-10">
-            Learn more about why rigorous independent testing is the only way to guarantee reproducible research results.
-          </p>
-          <Link href="/science">
-            <Button variant="primary" size="lg" className="gap-2">
-              Explore Our Science <ArrowRightIcon className="w-4 h-4" />
-            </Button>
-          </Link>
-        </FadeUp>
-      </section>
+      <CTASection
+        subtitle="VERIFICATION"
+        title="Demanding a higher standard."
+        description="Learn more about why rigorous independent testing is the only way to guarantee reproducible research results."
+        primaryButtonText="Explore Our Science"
+        primaryButtonLink="/science"
+        secondaryButtonText=""
+        secondaryButtonLink=""
+      />
     </main>
   )
 }

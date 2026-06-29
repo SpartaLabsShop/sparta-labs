@@ -1,5 +1,5 @@
 export async function generateAffiliateWelcomeEmail(affiliate: any, user: any): Promise<string> {
-  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://thelooksmaxxinglab.com';
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://spartalabs.com';
   
   const affiliateName = affiliate.displayName || user?.firstName || 'Partner';
   const referralLink = `${serverUrl}/ref/${affiliate.referralSlug}`;
@@ -134,7 +134,7 @@ export async function generateAffiliateWelcomeEmail(affiliate: any, user: any): 
     </div>
     <div class="content">
       <h2>Hi ${affiliateName},</h2>
-      <p>Your application has been instantly approved! We're thrilled to have you join The Looksmaxxing Lab as an official partner. You can now start earning ${commissionRate}% commission on every referral.</p>
+      <p>Your application has been instantly approved! We're thrilled to have you join Sparta Labs as an official partner. You can now start earning ${commissionRate}% commission on every referral.</p>
       
       <div class="card">
         <h3>Your Partner Toolkit</h3>
@@ -158,7 +158,7 @@ export async function generateAffiliateWelcomeEmail(affiliate: any, user: any): 
       </div>
     </div>
     <div class="footer">
-      &copy; ${new Date().getFullYear()} The Looksmaxxing Lab. All rights reserved.<br>
+      &copy; ${new Date().getFullYear()} Sparta Labs. All rights reserved.<br>
       <a href="${serverUrl}" style="color: #8A8A8A; text-decoration: underline;">Visit our store</a>
     </div>
   </div>

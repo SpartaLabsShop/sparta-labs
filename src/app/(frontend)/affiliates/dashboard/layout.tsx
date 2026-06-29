@@ -2,15 +2,12 @@ import React from 'react'
 import { redirect } from 'next/navigation'
 import { Container } from '@/components/ui/container'
 import { AffiliateSidebar } from '@/components/affiliates/AffiliateSidebar'
-import { Space_Grotesk } from 'next/font/google'
 import { getPayloadUser } from '@/lib/auth/getPayloadUser'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['300', '400', '500', '700'] })
-
 export const metadata = {
-  title: 'Affiliate Dashboard | The Looksmaxxing Lab',
+  title: 'Affiliate Dashboard | Sparta Labs',
 }
 
 export default async function AffiliateDashboardLayout({ children }: { children: React.ReactNode }) {
@@ -37,21 +34,17 @@ export default async function AffiliateDashboardLayout({ children }: { children:
   const tier = affiliate.tier || 'standard'
 
   return (
-    <div className="pt-20 bg-[#FAFAFA] min-h-screen selection:bg-black/10">
-      <Container size="page" className="py-12 md:py-16">
-        <h1 className={`text-4xl md:text-5xl font-bold tracking-tighter text-black mb-12 drop-shadow-sm ${spaceGrotesk.className}`}>
-          Affiliate Dashboard
-        </h1>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-12 lg:gap-20">
-          <div className="h-full relative">
-            <AffiliateSidebar userName={userName} tier={tier} />
-          </div>
-          <div className="w-full">
+    <div className="min-h-screen bg-white">
+      <div className="flex flex-col lg:flex-row min-h-screen">
+        <div className="w-full lg:w-[280px] xl:w-[320px] shrink-0 border-r border-gray-100 bg-[#FAFCFC]">
+          <AffiliateSidebar userName={userName} tier={tier} />
+        </div>
+        <div className="flex-1 p-6 md:p-12 lg:p-16 bg-white">
+          <div className="max-w-[1000px] mx-auto">
             {children}
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   )
 }

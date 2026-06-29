@@ -1,7 +1,7 @@
 export async function generateOrderInvoiceHtml(order: any, payload?: any, customNote?: string): Promise<string> {
   const orderNumber = order.orderNumber || order.id;
   const orderDate = order.createdAt ? new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://thelooksmaxxinglab.com';
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://spartalabs.com';
   
   const formatMoney = (amount: number) => `$${(amount).toFixed(2)}`;
   
@@ -115,7 +115,7 @@ export async function generateOrderInvoiceHtml(order: any, payload?: any, custom
           <!-- Header -->
           <tr>
             <td style="padding: 40px 40px 30px 40px; text-align: center; border-bottom: 1px solid #f3f4f6;">
-              <h1 style="margin: 0; font-size: 24px; font-weight: 800; color: #000000; letter-spacing: -1px;">The Looksmaxxing Lab</h1>
+              <h1 style="margin: 0; font-size: 24px; font-weight: 800; color: #000000; letter-spacing: -1px;">Sparta Labs</h1>
               <p style="margin: 12px 0 0 0; font-size: 16px; color: #6b7280;">Thank you for your order, ${customerName}!</p>
             </td>
           </tr>
@@ -222,7 +222,7 @@ export async function generateOrderInvoiceHtml(order: any, payload?: any, custom
           <tr>
             <td style="padding: 30px 40px; text-align: center;">
               <p style="margin: 0; font-size: 12px; color: #9ca3af;">If you have any questions about this invoice, simply reply to this email or reach out to our support team.</p>
-              <p style="margin: 12px 0 0 0; font-size: 12px; color: #d1d5db;">&copy; ${new Date().getFullYear()} The Looksmaxxing Lab. All rights reserved.</p>
+              <p style="margin: 12px 0 0 0; font-size: 12px; color: #d1d5db;">&copy; ${new Date().getFullYear()} Sparta Labs. All rights reserved.</p>
             </td>
           </tr>
 

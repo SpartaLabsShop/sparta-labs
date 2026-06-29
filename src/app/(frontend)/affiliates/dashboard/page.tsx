@@ -6,7 +6,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 
 export const metadata = {
-  title: 'Affiliate Dashboard | The Looksmaxxing Lab',
+  title: 'Affiliate Dashboard | Sparta Labs',
 }
 
 export default async function AffiliateDashboardOverview() {
