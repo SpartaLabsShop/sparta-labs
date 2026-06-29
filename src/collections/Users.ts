@@ -14,7 +14,8 @@ export const Users: CollectionConfig = {
       secure: process.env.NODE_ENV === 'production',
     },
     forgotPassword: {
-      generateEmailHTML: ({ token }: { token: string }) => {
+      generateEmailHTML: (args) => {
+        const token = args?.token || ''
         const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
         return `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 40px 20px;">

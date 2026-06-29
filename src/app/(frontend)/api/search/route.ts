@@ -3,8 +3,7 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import Fuse from 'fuse.js'
 
-// Cache the route heavily so we aren't querying Payload on every keystroke
-export const revalidate = 60 // Cache for 60 seconds
+export const dynamic = 'force-dynamic'
 
 export async function GET(request: Request) {
   try {

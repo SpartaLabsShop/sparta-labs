@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function AuthRedirectPage() {
+function AuthRedirectContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -20,5 +20,13 @@ export default function AuthRedirectPage() {
         <p className="text-sm text-gray-500">Signing you in...</p>
       </div>
     </div>
+  )
+}
+
+export default function AuthRedirectPage() {
+  return (
+    <Suspense>
+      <AuthRedirectContent />
+    </Suspense>
   )
 }
