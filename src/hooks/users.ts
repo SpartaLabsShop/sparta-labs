@@ -19,11 +19,29 @@ export const beforeChangeEmailLowercase: CollectionBeforeChangeHook = async ({ d
  * Placeholder hook after a new user is created.
  * TODO: create Stripe customer + send welcome email.
  */
+const ADMIN_EMAIL = 'kyle@spartalabs.shop'
+
 export const afterCreateUserTodo: CollectionAfterChangeHook = async ({ doc, operation, req }) => {
   if (operation === 'create') {
-    console.log(
-      `[TODO] After user creation – add Stripe customer & welcome email for user ${doc.id}`,
-    )
+    // Notify admin of new registration
+    req.payload.sendEmail({
+      to: ADMIN_EMAIL,
+      subject: `New User Registration — ${doc.email}`,
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 40px 20px;">
+          <h1 style="font-size: 20px; font-weight: 700; color: #111; margin: 0 0 24px 0;">SPARTA LABS</h1>
+          <h2 style="font-size: 22px; font-weight: 700; color: #111; margin-bottom: 16px;">New User Registered</h2>
+          <table style="width: 100%; font-size: 14px; color: #444; line-height: 1.8;">
+            <tr><td style="font-weight: 600;">Email</td><td>${doc.email}</td></tr>
+            <tr><td style="font-weight: 600;">Name</td><td>${doc.firstName || ''} ${doc.lastName || ''}</td></tr>
+            <tr><td style="font-weight: 600;">Provider</td><td>${doc.authProvider || 'email'}</td></tr>
+          </table>
+          <a href="${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/admin/collections/users/${doc.id}" style="display: inline-block; background: #111; color: #fff; padding: 12px 24px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; margin-top: 24px;">
+            View in Admin
+          </a>
+        </div>
+      `,
+    }).catch((err: any) => console.error('Failed to send admin registration notification:', err))
 
     // Retroactive Order Binding
     if (doc.email) {

@@ -79,11 +79,12 @@ export default async function AccountOverviewPage() {
   } : null
 
   return (
-    <AccountOverviewClient 
-      stats={stats} 
-      recentOrders={recentOrders} 
-      defaultAddress={defaultAddress} 
+    <AccountOverviewClient
+      stats={stats}
+      recentOrders={recentOrders}
+      defaultAddress={defaultAddress}
       affiliateStatus={affiliateStatus}
+      userName={user.firstName || user.email.split('@')[0]}
     />
   )
 }

@@ -321,6 +321,97 @@ export async function createPayloadOrder(
       }
     })
 
+    // Create guest account if no logged-in user
+    if (!payloadUserId && formData.email) {
+      const guestEmail = formData.email.toLowerCase()
+      let isNewAccount = false
+
+      try {
+        const existingUser = await payload.find({
+          collection: 'users',
+          where: { email: { equals: guestEmail } },
+          limit: 1,
+          overrideAccess: true,
+        })
+
+        let guestUserId
+        if (existingUser.docs.length === 0) {
+          const crypto = await import('crypto')
+          const guestUser = await payload.create({
+            collection: 'users',
+            data: {
+              email: guestEmail,
+              password: crypto.randomBytes(16).toString('hex') + '!A1a',
+              firstName: formData.firstName || '',
+              lastName: formData.lastName || '',
+              role: 'customer',
+            },
+            overrideAccess: true,
+          })
+          guestUserId = guestUser.id
+          isNewAccount = true
+        } else {
+          guestUserId = existingUser.docs[0].id
+        }
+
+        await payload.update({
+          collection: 'orders',
+          id: order.id,
+          data: { owner: guestUserId },
+          overrideAccess: true,
+        })
+      } catch (guestErr: any) {
+        console.error('Guest account error:', guestErr?.message || guestErr)
+      }
+
+      // Send order email
+      const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+      const orderNumber = (order as any).orderNumber || order.id
+      const isZelle = paymentIntentId === 'zelle_pending'
+
+      payload.sendEmail({
+        to: guestEmail,
+        subject: `Order #${orderNumber} — ${isZelle ? 'Zelle Payment Required' : 'Confirmed'} | Sparta Labs`,
+        html: `
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 40px 20px;">
+            <div style="text-align: center; margin-bottom: 32px;">
+              <h1 style="font-size: 20px; font-weight: 700; color: #111; margin: 0;">SPARTA LABS</h1>
+            </div>
+            <h2 style="font-size: 24px; font-weight: 700; color: #111; margin-bottom: 16px;">
+              Order #${orderNumber} Placed
+            </h2>
+            ${isZelle ? `
+              <div style="background: #f3f0ff; border: 1px solid #d4c5f9; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+                <p style="font-size: 14px; font-weight: 600; color: #6D1ED4; margin: 0 0 8px 0;">Zelle Payment Required</p>
+                <p style="font-size: 13px; color: #555; margin: 0; line-height: 1.5;">
+                  Send <strong>$${total.toFixed(2)}</strong> to <strong>kyle@spartalabs.shop</strong> via Zelle.<br/>
+                  Include <strong>#${orderNumber}</strong> in the memo.
+                </p>
+              </div>
+            ` : ''}
+            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;">
+              Thank you for your order, ${formData.firstName || 'there'}. ${isZelle ? 'Your order will be confirmed once payment is verified.' : 'Your order is confirmed and being processed.'}
+            </p>
+            ${isNewAccount ? `
+              <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;">
+                We've created an account for you. Set your password to track your order:
+              </p>
+              <a href="${serverUrl}/forgot-password" style="display: inline-block; background: #111; color: #fff; padding: 14px 32px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none;">
+                Set Your Password
+              </a>
+            ` : `
+              <a href="${serverUrl}/account" style="display: inline-block; background: #111; color: #fff; padding: 14px 32px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none;">
+                View Your Order
+              </a>
+            `}
+            <p style="font-size: 12px; color: #999; margin-top: 32px; line-height: 1.6;">
+              If you didn't place this order, you can safely ignore this email.
+            </p>
+          </div>
+        `,
+      }).catch((err: any) => console.error('Guest email send error:', err?.message || err))
+    }
+
     // Update Stripe PaymentIntent with the Order ID (unless it's a free order or zelle)
     if (paymentIntentId && paymentIntentId !== 'free_order' && paymentIntentId !== 'zelle_pending') {
        await getStripe().paymentIntents.update(paymentIntentId, {

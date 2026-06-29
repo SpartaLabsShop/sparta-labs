@@ -33,11 +33,11 @@ export function QuantityStepper({
   }
 
   return (
-    <div className={cn("inline-flex items-center justify-between border border-ink/10 rounded-full bg-white h-12 px-1 w-[120px] shadow-sm transition-all hover:border-ink/20", className)}>
+    <div className={cn("inline-flex items-center justify-between border border-ink/10 rounded-xl bg-white h-12 px-1 w-[120px] shadow-sm transition-all hover:border-ink/20", className)}>
       <button 
         onClick={handleDecrement}
         disabled={value <= min}
-        className="w-10 h-10 flex items-center justify-center text-ink/60 hover:text-ink hover:bg-ink/5 rounded-full transition-colors disabled:opacity-30 flex-shrink-0"
+        className="w-10 h-10 flex items-center justify-center text-ink/60 hover:text-ink hover:bg-ink/5 rounded-xl transition-colors disabled:opacity-30 flex-shrink-0"
         aria-label="Decrease quantity"
       >
         <Minus size={16} strokeWidth={2} />
@@ -50,7 +50,7 @@ export function QuantityStepper({
       <button 
         onClick={handleIncrement}
         disabled={value >= max}
-        className="w-10 h-10 flex items-center justify-center text-ink/60 hover:text-ink hover:bg-ink/5 rounded-full transition-colors disabled:opacity-30 flex-shrink-0"
+        className="w-10 h-10 flex items-center justify-center text-ink/60 hover:text-ink hover:bg-ink/5 rounded-xl transition-colors disabled:opacity-30 flex-shrink-0"
         aria-label="Increase quantity"
       >
         <Plus size={16} strokeWidth={2} />
