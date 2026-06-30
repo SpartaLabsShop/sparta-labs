@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   const code = searchParams.get('code')
   const stateParam = searchParams.get('state')
   const error = searchParams.get('error')
-  const origin = new URL(request.url).origin
+  const origin = process.env.NEXT_PUBLIC_SERVER_URL || new URL(request.url).origin
 
   if (error) {
     return NextResponse.redirect(new URL('/login?error=google_denied', origin), { status: 302 })

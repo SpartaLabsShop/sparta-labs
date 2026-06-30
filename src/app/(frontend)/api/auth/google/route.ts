@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   const statePayload = JSON.stringify({ token: state, redirect: redirectTo })
   const encodedState = Buffer.from(statePayload).toString('base64url')
 
-  const origin = new URL(request.url).origin
+  const origin = process.env.NEXT_PUBLIC_SERVER_URL || new URL(request.url).origin
   const callbackUrl = `${origin}/api/auth/google/callback`
 
   const params = new URLSearchParams({
