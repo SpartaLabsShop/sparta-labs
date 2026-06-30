@@ -24,7 +24,7 @@ const CONTACT_FAQS = [
   { question: 'Where is my tracking number?', answer: 'Tracking numbers are automatically emailed as soon as your shipping label is created. You can also view your tracking status by logging into your account dashboard.' },
   { question: 'My package was damaged in transit, what do I do?', answer: 'If your vials arrive compromised, please use the contact form above to reach out within 48 hours of delivery. Include your order number and we will request photos of the damaged items to expedite a replacement.' },
   { question: 'How can I get a copy of my batch COA?', answer: 'Certificates of Analysis (COAs) are included with every shipment and are also available digitally. You can download past COAs directly from your Order History in your account dashboard, or request them via the Quality & COAs contact email.' },
-  { question: 'Do you offer wholesale pricing for laboratories?', answer: 'Yes, we offer special pricing tiers for bulk acquisition by licensed laboratories and academic institutions. Please select "Wholesale" in the contact form department dropdown or email wholesale@spartalabs.com directly.' },
+  { question: 'Do you offer wholesale pricing for laboratories?', answer: 'Yes, we offer special pricing tiers for bulk acquisition by licensed laboratories and academic institutions. Please select "Wholesale" in the contact form department dropdown or email wholesale@spartalabs.shop directly.' },
   { question: 'Why was my order cancelled?', answer: 'Orders may be cancelled if our fraud detection system flags an issue with the payment method, or if there is any communication indicating the intent to misuse our research-only products for human consumption.' },
   { question: 'Do you ship internationally?', answer: 'Yes, we ship worldwide. However, it is the sole responsibility of the researcher to ensure that the importation of our research compounds complies with all local and national regulations in the destination country.' }
 ]
@@ -103,7 +103,7 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
               <div>
                 <h4 className="font-bold text-ink mb-3">Order Support</h4>
-                <p className="text-gray-500 text-sm">support@spartalabs.com</p>
+                <p className="text-gray-500 text-sm">support@spartalabs.shop</p>
                 <p className="text-gray-500 text-sm mt-1">Responses within 12 hours</p>
               </div>
 
@@ -115,8 +115,8 @@ export default function ContactPage() {
 
               <div>
                 <h4 className="font-bold text-ink mb-3">Other Inquiries</h4>
-                <p className="text-gray-500 text-sm">quality@spartalabs.com</p>
-                <p className="text-gray-500 text-sm mt-1">wholesale@spartalabs.com</p>
+                <p className="text-gray-500 text-sm">quality@spartalabs.shop</p>
+                <p className="text-gray-500 text-sm mt-1">wholesale@spartalabs.shop</p>
               </div>
 
               <div>

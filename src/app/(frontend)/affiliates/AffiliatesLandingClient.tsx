@@ -630,7 +630,7 @@ export function AffiliatesLandingClient({ userStatus }: Props) {
         primaryButtonText="Become an Affiliate"
         primaryButtonLink="#apply"
         secondaryButtonText="Contact Us"
-        secondaryButtonLink="mailto:affiliates@spartalabs.com"
+        secondaryButtonLink="mailto:affiliates@spartalabs.shop"
       />
       <section className="bg-white px-6 lg:px-12 pb-24">
         <div className="pt-8 border-t border-gray-200 max-w-[1400px] mx-auto">

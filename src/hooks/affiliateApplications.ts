@@ -157,11 +157,11 @@ export const afterAffiliateApplicationChange: CollectionAfterChangeHook = async 
           // Send Notification Email to Admin
           const adminHtml = generateAdminAffiliateNotificationEmail(doc, newAffiliate, userDoc)
           await req.payload.sendEmail({
-            to: 'support@spartalabs.com',
+            to: 'support@spartalabs.shop',
             subject: `New Affiliate Registered: ${newAffiliate.displayName}`,
             html: adminHtml,
           })
-          req.payload.logger.info(`Sent admin notification to support@spartalabs.com`)
+          req.payload.logger.info(`Sent admin notification to support@spartalabs.shop`)
         }
       } catch (emailErr) {
         req.payload.logger.error({ err: emailErr }, 'Error sending affiliate emails')

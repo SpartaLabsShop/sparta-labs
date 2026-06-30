@@ -489,7 +489,7 @@ export async function notifyAdminFailedPayment(orderId: string, errorMessage: st
     `
 
     await payload.sendEmail({
-      to: 'support@spartalabs.com',
+      to: 'support@spartalabs.shop',
       subject: `⚠️ Payment Failed - Order ${orderId}`,
       html: html,
     })

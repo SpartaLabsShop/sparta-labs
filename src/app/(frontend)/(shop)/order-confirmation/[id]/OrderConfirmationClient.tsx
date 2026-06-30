@@ -114,7 +114,7 @@ export function OrderConfirmationClient({ order }: { order: OrderData }) {
             {/* Print Branding Header */}
             <div className="hidden print:flex items-center justify-between py-4 px-0 border-b border-ink/10">
               <h1 className="text-2xl font-display font-bold tracking-tight text-ink uppercase">Sparta Labs</h1>
-              <p className="text-sm font-medium text-ink/60">spartalabs.com</p>
+              <p className="text-sm font-medium text-ink/60">spartalabs.shop</p>
             </div>
 
             {/* Invoice Header */}
@@ -236,7 +236,7 @@ export function OrderConfirmationClient({ order }: { order: OrderData }) {
               <button onClick={() => window.print()} className="flex items-center gap-2 hover:text-ink transition-colors font-medium">
                 <Printer size={16} /> Print Receipt
               </button>
-              <span className="text-center sm:text-left">Questions? <a href="mailto:support@spartalabs.com" className="text-ink underline hover:no-underline font-medium">Contact Support</a></span>
+              <span className="text-center sm:text-left">Questions? <a href="mailto:support@spartalabs.shop" className="text-ink underline hover:no-underline font-medium">Contact Support</a></span>
             </div>
           </div>
         </FadeUp>

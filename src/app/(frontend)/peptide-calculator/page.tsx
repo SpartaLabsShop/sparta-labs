@@ -5,9 +5,9 @@ export const metadata: Metadata = {
   title: 'Peptide Reconstitution Calculator — Free Tool | Sparta Labs',
   description: 'Free peptide reconstitution calculator. Enter your vial size, BAC water volume, and target dose to get exact IU syringe units, concentration, and total doses. No signup — instant results.',
   alternates: {
-    canonical: 'https://spartalabs.com/peptide-calculator',
+    canonical: 'https://spartalabs.shop/peptide-calculator',
     languages: {
-      'en-US': 'https://spartalabs.com/peptide-calculator',
+      'en-US': 'https://spartalabs.shop/peptide-calculator',
     },
   },
 }
@@ -64,7 +64,7 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Peptide Reconstitution Calculator",
-    "url": "https://spartalabs.com/peptide-calculator",
+    "url": "https://spartalabs.shop/peptide-calculator",
     "description": "Free online peptide reconstitution calculator. Enter vial size, BAC water volume, and target dose to get exact IU syringe units, concentration, and total doses.",
     "applicationCategory": "HealthApplication",
     "operatingSystem": "Web Browser",
@@ -121,13 +121,13 @@ export default function Page() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://spartalabs.com"
+        "item": "https://spartalabs.shop"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Peptide Calculator",
-        "item": "https://spartalabs.com/peptide-calculator"
+        "item": "https://spartalabs.shop/peptide-calculator"
       }
     ]
   }

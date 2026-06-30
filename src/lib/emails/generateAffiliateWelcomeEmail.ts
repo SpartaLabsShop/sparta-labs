@@ -1,5 +1,5 @@
 export async function generateAffiliateWelcomeEmail(affiliate: any, user: any): Promise<string> {
-  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://spartalabs.com';
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://spartalabs.shop';
   
   const affiliateName = affiliate.displayName || user?.firstName || 'Partner';
   const referralLink = `${serverUrl}/ref/${affiliate.referralSlug}`;

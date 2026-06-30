@@ -134,7 +134,7 @@ export async function finalizeOrder(orderId: string | number, paymentIntentMetad
 
             await payload.sendEmail({
                 to: customerEmail,
-                bcc: 'support@spartalabs.com',
+                bcc: 'support@spartalabs.shop',
                 subject: `Order Confirmation #${order.orderNumber || order.id}`,
                 html: invoiceHtml,
             })

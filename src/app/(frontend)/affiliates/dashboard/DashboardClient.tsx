@@ -42,7 +42,7 @@ export function DashboardClient({ stats, recentConversions }: DashboardClientPro
 
   // Formatting helpers
   const formatMoney = (cents: number) => `$${(cents / 100).toFixed(2)}`
-  const [baseUrl, setBaseUrl] = useState('https://spartalabs.com')
+  const [baseUrl, setBaseUrl] = useState('https://spartalabs.shop')
   
   React.useEffect(() => {
     setBaseUrl(window.location.origin)
