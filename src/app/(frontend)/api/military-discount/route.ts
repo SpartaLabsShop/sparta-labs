@@ -25,6 +25,11 @@ export async function POST(request: NextRequest) {
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json({ error: 'Please upload a PDF, JPG, or PNG file.' }, { status: 400 })
     }
+    // file.type is client-supplied; also validate the extension so a renamed executable can't slip through
+    const allowedExtensions = /\.(pdf|jpg|jpeg|png|webp)$/i
+    if (!allowedExtensions.test(file.name)) {
+      return NextResponse.json({ error: 'Please upload a PDF, JPG, or PNG file.' }, { status: 400 })
+    }
 
     const payload = await getPayload({ config })
 

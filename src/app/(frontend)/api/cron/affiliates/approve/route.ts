@@ -2,10 +2,12 @@ import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
-// Optional: Add a secret token check here if you want to secure the cron endpoint
-// e.g. if (request.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) ...
-
 export async function GET(request: Request) {
+  const cronSecret = process.env.CRON_SECRET
+  if (!cronSecret || request.headers.get('Authorization') !== `Bearer ${cronSecret}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     const payload = await getPayload({ config: configPromise })
     
@@ -13,12 +15,15 @@ export async function GET(request: Request) {
     const fifteenDaysAgo = new Date()
     fifteenDaysAgo.setDate(fifteenDaysAgo.getDate() - 15)
 
-    // Find all pending conversions older than 15 days
+    // Find all pending conversions older than 15 days that are not flagged for review
     const pendingConversions = await payload.find({
       collection: 'affiliate-conversions',
       where: {
-        status: { equals: 'pending' },
-        createdAt: { less_than_equal: fifteenDaysAgo.toISOString() },
+        and: [
+          { status: { equals: 'pending' } },
+          { createdAt: { less_than_equal: fifteenDaysAgo.toISOString() } },
+          { flaggedForReview: { equals: false } },
+        ],
       },
       limit: 1000, // Process in batches if necessary
       overrideAccess: true,

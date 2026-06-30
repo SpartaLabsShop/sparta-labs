@@ -3,8 +3,10 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 
 export async function GET(request: Request) {
-  // In production, you would want to secure this endpoint via a secret token
-  // e.g. if (request.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) ...
+  const cronSecret = process.env.CRON_SECRET
+  if (!cronSecret || request.headers.get('Authorization') !== `Bearer ${cronSecret}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
 
   try {
     const payload = await getPayload({ config })

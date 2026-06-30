@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { getPayloadUser } from '@/lib/auth/getPayloadUser'
+import { escapeHtml } from '@/lib/utils'
 
 export async function POST(request: Request) {
   try {
@@ -63,11 +64,11 @@ export async function POST(request: Request) {
       const emailHtml = `
         <div style="font-family: sans-serif; color: #111827; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #000; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">New Affiliate Payout Request</h2>
-          <p><strong>Affiliate:</strong> ${affiliate.displayName || affiliate.referralSlug || 'Unknown'} (${user.email})</p>
+          <p><strong>Affiliate:</strong> ${escapeHtml(affiliate.displayName || affiliate.referralSlug || 'Unknown')} (${escapeHtml(user.email || '')})</p>
           <p><strong>Amount:</strong> $${amount.toFixed(2)}</p>
-          <p><strong>Method:</strong> <span style="text-transform: uppercase;">${method}</span></p>
+          <p><strong>Method:</strong> <span style="text-transform: uppercase;">${escapeHtml(method || '')}</span></p>
           <p><strong>Payout Details:</strong></p>
-          <p style="background: #f3f4f6; padding: 12px; border-radius: 6px; font-family: monospace;">${details}</p>
+          <p style="background: #f3f4f6; padding: 12px; border-radius: 6px; font-family: monospace;">${escapeHtml(details || '')}</p>
           <p style="margin-top: 30px; font-size: 14px; color: #6b7280;">Please log in to the Payload admin panel to review, approve, and process this payout request.</p>
         </div>
       `

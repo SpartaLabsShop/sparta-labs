@@ -1,5 +1,6 @@
 // src/hooks/users.ts
 import type { CollectionBeforeChangeHook, CollectionAfterChangeHook } from 'payload'
+import { escapeHtml } from '@/lib/utils'
 
 /**
  * Lower‑case the email on create / update.
@@ -32,9 +33,9 @@ export const afterCreateUserTodo: CollectionAfterChangeHook = async ({ doc, oper
           <h1 style="font-size: 20px; font-weight: 700; color: #111; margin: 0 0 24px 0;">SPARTA LABS</h1>
           <h2 style="font-size: 22px; font-weight: 700; color: #111; margin-bottom: 16px;">New User Registered</h2>
           <table style="width: 100%; font-size: 14px; color: #444; line-height: 1.8;">
-            <tr><td style="font-weight: 600;">Email</td><td>${doc.email}</td></tr>
-            <tr><td style="font-weight: 600;">Name</td><td>${doc.firstName || ''} ${doc.lastName || ''}</td></tr>
-            <tr><td style="font-weight: 600;">Provider</td><td>${doc.authProvider || 'email'}</td></tr>
+            <tr><td style="font-weight: 600;">Email</td><td>${escapeHtml(doc.email || '')}</td></tr>
+            <tr><td style="font-weight: 600;">Name</td><td>${escapeHtml(doc.firstName || '')} ${escapeHtml(doc.lastName || '')}</td></tr>
+            <tr><td style="font-weight: 600;">Provider</td><td>${escapeHtml(doc.authProvider || 'email')}</td></tr>
           </table>
           <a href="${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/admin/collections/users/${doc.id}" style="display: inline-block; background: #111; color: #fff; padding: 12px 24px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; margin-top: 24px;">
             View in Admin

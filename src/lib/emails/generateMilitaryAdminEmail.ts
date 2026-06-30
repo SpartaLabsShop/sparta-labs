@@ -1,3 +1,5 @@
+import { escapeHtml } from '@/lib/utils'
+
 export function generateMilitaryAdminEmail(application: {
   firstName: string
   lastName: string
@@ -39,10 +41,10 @@ export function generateMilitaryAdminEmail(application: {
     <h2>New Military Discount Application</h2>
     <div class="badge">Pending Review</div>
 
-    <div class="field"><div class="label">Name</div><div class="value">${application.firstName} ${application.lastName}</div></div>
-    <div class="field"><div class="label">Email</div><div class="value">${application.email}</div></div>
-    <div class="field"><div class="label">Branch</div><div class="value">${branchLabels[application.branch] || application.branch}</div></div>
-    <div class="field"><div class="label">Service Status</div><div class="value">${statusLabels[application.serviceStatus] || application.serviceStatus}</div></div>
+    <div class="field"><div class="label">Name</div><div class="value">${escapeHtml(application.firstName)} ${escapeHtml(application.lastName)}</div></div>
+    <div class="field"><div class="label">Email</div><div class="value">${escapeHtml(application.email)}</div></div>
+    <div class="field"><div class="label">Branch</div><div class="value">${escapeHtml(branchLabels[application.branch] || application.branch)}</div></div>
+    <div class="field"><div class="label">Service Status</div><div class="value">${escapeHtml(statusLabels[application.serviceStatus] || application.serviceStatus)}</div></div>
 
     <hr />
 

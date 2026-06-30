@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
+import { getPayloadUser } from '@/lib/auth/getPayloadUser'
 
 export async function GET() {
+  const user = await getPayloadUser()
+  if (!user || !['admin', 'staff'].includes(user.role as string)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   const payload = await getPayload({ config: configPromise })
 
   try {
