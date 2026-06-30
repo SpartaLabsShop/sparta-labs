@@ -42,7 +42,7 @@ export async function submitMilitaryApplication(formData: FormData) {
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
-    const uploadedDoc = await payload.create({
+    const uploadedDoc = await (payload.create as any)({
       collection: 'documents',
       data: { title: `Military ID — ${firstName} ${lastName} (${email})` },
       file: {
