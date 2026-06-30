@@ -5,14 +5,10 @@ import { processPendingCommissions } from '@/lib/affiliates/processPending'
 // export const maxDuration = 300; 
 
 export async function GET(req: Request) {
-  // 1. Basic security check (e.g. check for a cron secret header to prevent unauthorized runs)
-  // Example for Vercel Cron:
-  /*
-  const authHeader = req.headers.get('authorization')
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const cronSecret = process.env.CRON_SECRET
+  if (!cronSecret || req.headers.get('authorization') !== `Bearer ${cronSecret}`) {
     return new Response('Unauthorized', { status: 401 })
   }
-  */
 
   try {
     const result = await processPendingCommissions()

@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/affiliate-approve",
+      "schedule": "0 2 * * *"
+    },
+    {
+      "path": "/api/cron/process-commissions",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}
