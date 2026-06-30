@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Link from 'next/link'
 import { HeroBreadcrumb } from '@/components/shared/HeroBreadcrumb'
 import { ShieldCheck, Upload, CheckCircle2, ChevronDown } from 'lucide-react'
 
@@ -55,12 +56,12 @@ export default function MilitaryDiscountPage() {
           </div>
           <h1 className="text-2xl font-bold text-ink mb-3">Application Submitted</h1>
           <p className="text-gray-500 leading-relaxed">
-            Thank you for your service. We've received your application and will review your ID proof shortly. Once approved, your discount code will be emailed to you.
+            Thank you for your service. We&apos;ve received your application and will review your ID proof shortly. Once approved, your discount code will be emailed to you.
           </p>
           <p className="text-sm text-gray-400 mt-4">Review typically takes 1–2 business days.</p>
-          <a href="/shop" className="inline-block mt-8 px-6 py-3 bg-black text-white rounded font-medium text-sm hover:bg-gray-800 transition-colors">
+          <Link href="/shop" className="inline-block mt-8 px-6 py-3 bg-black text-white rounded font-medium text-sm hover:bg-gray-800 transition-colors">
             Browse Products
-          </a>
+          </Link>
         </div>
       </main>
     )
@@ -94,7 +95,7 @@ export default function MilitaryDiscountPage() {
               15% Off For Those Who Served
             </h2>
             <p className="text-gray-500 leading-relaxed mb-8">
-              As a thank-you to military personnel, veterans, and their families, Sparta Labs offers a permanent 15% discount on all orders. Submit your application and we'll verify your status within 1–2 business days.
+              As a thank-you to military personnel, veterans, and their families, Sparta Labs offers a permanent 15% discount on all orders. Submit your application and we&apos;ll verify your status within 1–2 business days.
             </p>
 
             <div className="space-y-4">
@@ -102,7 +103,7 @@ export default function MilitaryDiscountPage() {
                 { title: 'Submit your application', desc: 'Fill out the form and upload proof of service (military ID, DD-214, or equivalent).' },
                 { title: 'We verify your status', desc: 'Our team reviews your document within 1–2 business days.' },
                 { title: 'Receive your coupon code', desc: 'Once approved, your personal 15% discount code is sent to your email.' },
-                { title: 'Apply at checkout', desc: 'Enter the code in the coupon field at checkout — it\'s that simple.' },
+                { title: 'Apply at checkout', desc: "Enter the code in the coupon field at checkout — it's that simple." },
               ].map((step, i) => (
                 <div key={i} className="flex gap-4">
                   <div className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</div>
@@ -129,8 +130,9 @@ export default function MilitaryDiscountPage() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">First Name *</label>
+                    <label htmlFor="firstName" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">First Name *</label>
                     <input
+                      id="firstName"
                       name="firstName"
                       type="text"
                       required
@@ -139,8 +141,9 @@ export default function MilitaryDiscountPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Last Name *</label>
+                    <label htmlFor="lastName" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Last Name *</label>
                     <input
+                      id="lastName"
                       name="lastName"
                       type="text"
                       required
@@ -151,8 +154,9 @@ export default function MilitaryDiscountPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Email Address *</label>
+                  <label htmlFor="email" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Email Address *</label>
                   <input
+                    id="email"
                     name="email"
                     type="email"
                     required
@@ -163,9 +167,10 @@ export default function MilitaryDiscountPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Branch of Service *</label>
+                  <label htmlFor="branch" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Branch of Service *</label>
                   <div className="relative">
                     <select
+                      id="branch"
                       name="branch"
                       required
                       defaultValue=""
@@ -179,9 +184,10 @@ export default function MilitaryDiscountPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Service Status *</label>
+                  <label htmlFor="serviceStatus" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Service Status *</label>
                   <div className="relative">
                     <select
+                      id="serviceStatus"
                       name="serviceStatus"
                       required
                       defaultValue=""
@@ -195,10 +201,10 @@ export default function MilitaryDiscountPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">ID Proof / Proof of Service *</label>
-                  <div
-                    onClick={() => fileInputRef.current?.click()}
-                    className="border-2 border-dashed border-gray-200 rounded-lg p-5 text-center cursor-pointer hover:border-gray-400 transition-colors"
+                  <span className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">ID Proof / Proof of Service *</span>
+                  <label
+                    htmlFor="idProofInput"
+                    className="border-2 border-dashed border-gray-200 rounded-lg p-5 text-center cursor-pointer hover:border-gray-400 transition-colors block"
                   >
                     <Upload size={20} className="mx-auto mb-2 text-gray-400" />
                     {fileName ? (
@@ -210,6 +216,7 @@ export default function MilitaryDiscountPage() {
                       </>
                     )}
                     <input
+                      id="idProofInput"
                       ref={fileInputRef}
                       name="idProof"
                       type="file"
@@ -218,7 +225,7 @@ export default function MilitaryDiscountPage() {
                       required
                       onChange={e => setFileName(e.target.files?.[0]?.name || '')}
                     />
-                  </div>
+                  </label>
                 </div>
 
                 {error && (

@@ -2,6 +2,10 @@ import { withPayload } from '@payloadcms/next/withPayload'
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  // @ts-expect-error: Next.js 16 removed eslint from NextConfig types but still supports it at runtime
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   serverExternalPackages: [
     'googleapis',
     'sharp',
