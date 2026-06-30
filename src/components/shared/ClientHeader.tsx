@@ -256,7 +256,7 @@ export function ClientHeader({ cartItemCount = 0, wishlistItemCount = 0, isLogge
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem className="cursor-pointer focus:bg-gray-50 focus:text-black rounded-lg" onSelect={async () => {
-                        await fetch('/api/users/logout', { method: 'POST', credentials: 'include' })
+                        await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
                         window.location.href = '/'
                       }}>
                         <span className="flex w-full items-center py-2 px-3 text-sm font-medium text-red-600">Sign out</span>

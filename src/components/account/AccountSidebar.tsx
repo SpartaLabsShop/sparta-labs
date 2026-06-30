@@ -101,7 +101,7 @@ export function AccountSidebar({
               </DialogClose>
               <button
                 onClick={async () => {
-                  await fetch('/api/users/logout', { method: 'POST', credentials: 'include' })
+                  await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
                   router.push('/')
                   router.refresh()
                 }}
