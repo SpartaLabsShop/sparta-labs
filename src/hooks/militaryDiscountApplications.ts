@@ -45,7 +45,7 @@ export const afterMilitaryApplicationChange: CollectionAfterChangeHook = async (
       })
 
       await req.payload.sendEmail({
-        to: 'main.belkdigital@gmail.com',
+        to: 'kyle@spartalabs.shop',
         subject: `[Military Discount] New Application from ${doc.firstName} ${doc.lastName}`,
         html,
       })
