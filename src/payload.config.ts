@@ -30,6 +30,7 @@ import { AffiliateConversions } from './collections/AffiliateConversions'
 import { AffiliatePayouts } from './collections/AffiliatePayouts'
 import { PayoutRequests } from './collections/PayoutRequests'
 import { ProcessingFees } from './collections/ProcessingFees'
+import { MilitaryDiscountApplications } from './collections/MilitaryDiscountApplications'
 import { Trash } from './collections/Trash'
 import { AffiliateSettings } from './globals/AffiliateSettings'
 import { OrderCounters } from './collections/OrderCounters'
@@ -77,6 +78,7 @@ export default buildConfig({
     AffiliatePayouts,
     PayoutRequests,
     ProcessingFees,
+    MilitaryDiscountApplications,
   ].map((collection) => {
     if (collection.slug === 'trash') return collection
 
