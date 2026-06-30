@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -12,14 +12,30 @@ const HelmetLogo = ({ className }) => (
   </svg>
 );
 
+const SkeletonCard = () => (
+  <div className="flex h-full w-full flex-col overflow-hidden rounded-lg border border-gray-100 bg-white animate-pulse">
+    <div className="aspect-square w-full bg-gray-100" />
+    <div className="flex flex-col gap-2 p-4">
+      <div className="h-3 w-1/3 rounded bg-gray-100" />
+      <div className="h-4 w-2/3 rounded bg-gray-100" />
+      <div className="h-3 w-1/4 rounded bg-gray-100 mt-1" />
+    </div>
+  </div>
+);
+
 const ResearchCompounds = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchProducts = useCallback((attempt = 0) => {
+    setLoading(true);
     fetch("/api/products?where[status][equals]=active&where[isVisible][equals]=true&limit=6&sort=-createdAt&depth=1")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error("fetch failed");
+        return r.json();
+      })
       .then((data) => {
-        if (data.docs) {
+        if (data.docs && data.docs.length > 0) {
           const mapped = data.docs.map((doc) => {
             let imageUrl = "/temp-products/product-image.png";
             if (doc.images?.length > 0 && typeof doc.images[0].image === "object" && doc.images[0].image?.url) {
@@ -31,9 +47,12 @@ const ResearchCompounds = () => {
               categoryName = doc.categories[0].name || categoryName;
             }
 
-            const displayPrice = typeof doc.salePrice === "number" && doc.salePrice > 0
-              ? doc.salePrice
-              : typeof doc.price === "number" ? doc.price : 0;
+            const displayPrice =
+              typeof doc.salePrice === "number" && doc.salePrice > 0
+                ? doc.salePrice
+                : typeof doc.price === "number"
+                ? doc.price
+                : 0;
 
             return {
               id: doc.id,
@@ -46,10 +65,26 @@ const ResearchCompounds = () => {
             };
           });
           setProducts(mapped);
+          setLoading(false);
+        } else if (attempt < 3) {
+          // Empty docs — retry (handles cold starts returning empty before DB is ready)
+          setTimeout(() => fetchProducts(attempt + 1), 1500 * (attempt + 1));
+        } else {
+          setLoading(false);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        if (attempt < 3) {
+          setTimeout(() => fetchProducts(attempt + 1), 1500 * (attempt + 1));
+        } else {
+          setLoading(false);
+        }
+      });
   }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -84,16 +119,17 @@ const ResearchCompounds = () => {
           </Link>
         </motion.div>
 
-        <motion.div
-          className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3"
-          variants={itemVariants}
-        >
-          {products.map((product) => (
-            <motion.div key={product.id} className="flex h-full w-full" variants={itemVariants}>
-              <PrimaryProductCard product={product} />
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
+          {loading
+            ? Array.from({ length: 6 }).map((_, i) => (
+                <SkeletonCard key={i} />
+              ))
+            : products.map((product) => (
+                <motion.div key={product.id} className="flex h-full w-full" variants={itemVariants} initial="hidden" animate="visible">
+                  <PrimaryProductCard product={product} />
+                </motion.div>
+              ))}
+        </div>
       </div>
     </motion.section>
   );
