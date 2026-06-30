@@ -38,8 +38,8 @@ const featureVariants = {
 };
 
 const bottomCenterVariants = {
-  hidden: { opacity: 0, y: 30, x: "-50%" },
-  visible: { opacity: 1, y: 0, x: "-50%", transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const FEATURE_BASE =
@@ -361,8 +361,9 @@ const CollagenBooster = () => {
             </motion.div>
 
             {/* Bottom Center */}
+            <div className="max-[992px]:col-span-2 max-[992px]:w-full min-[993px]:absolute min-[993px]:top-[calc(45%+295px)] min-[993px]:left-1/2 min-[993px]:-translate-x-1/2 min-[993px]:z-[3]">
             <motion.div
-              className={`${FEATURE_BASE} max-[992px]:col-span-2 min-[993px]:top-[calc(45%+295px)] min-[993px]:left-1/2 min-[993px]:w-max min-[993px]:flex-col min-[993px]:text-center`}
+              className={`${FEATURE_BASE} min-[993px]:relative min-[993px]:w-max min-[993px]:flex-col min-[993px]:text-center`}
               ref={bcRef}
               variants={bottomCenterVariants}
             >
@@ -378,6 +379,7 @@ const CollagenBooster = () => {
                 </p>
               </div>
             </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>
