@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { submitMilitaryApplication } from './actions'
 import { HeroBreadcrumb } from '@/components/shared/HeroBreadcrumb'
 import { ShieldCheck, Upload, CheckCircle2, ChevronDown } from 'lucide-react'
 
@@ -36,7 +35,8 @@ export default function MilitaryDiscountPage() {
     setSubmitting(true)
 
     const formData = new FormData(e.currentTarget)
-    const result = await submitMilitaryApplication(formData)
+    const res = await fetch('/api/military-discount', { method: 'POST', body: formData })
+    const result = await res.json()
 
     setSubmitting(false)
     if (result?.error) {
