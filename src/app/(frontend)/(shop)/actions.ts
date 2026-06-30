@@ -5,7 +5,8 @@ import configPromise from '@payload-config'
 import { getPayloadUser } from '@/lib/auth/getPayloadUser'
 import { revalidatePath } from 'next/cache'
 import { attributeOrder } from '@/lib/affiliates/commission'
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
+import { couponVerifyLimiter, getIp } from '@/lib/ratelimit'
 
 export async function addToCart(productId: string | number, quantity: number = 1, providedVariantSku?: string, providedPriceSnapshot?: number) {
   try {
@@ -251,6 +252,12 @@ async function calculateCartTotals(cartItems: any[], payload: any, coupon?: any)
 
 export async function verifyCoupon(couponCode: string, subtotal: number, clientCartItems?: any[]) {
   try {
+    if (couponVerifyLimiter) {
+      const ip = getIp(new Headers(await headers()))
+      const { success } = await couponVerifyLimiter.limit(ip)
+      if (!success) return { valid: false, error: 'Too many attempts. Please wait a few minutes and try again.' }
+    }
+
     const user = await getPayloadUser()
 
     if (!couponCode || !couponCode.trim()) return { valid: false, error: 'Please enter a coupon code' }

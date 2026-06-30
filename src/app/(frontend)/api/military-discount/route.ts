@@ -1,8 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { militaryDiscountLimiter, getIp } from '@/lib/ratelimit'
 
 export async function POST(request: NextRequest) {
+  if (militaryDiscountLimiter) {
+    const { success } = await militaryDiscountLimiter.limit(getIp(request.headers))
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 },
+      )
+    }
+  }
+
   try {
     const formData = await request.formData()
 
