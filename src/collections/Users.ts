@@ -8,7 +8,7 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   auth: {
-    tokenExpiration: 7200,
+    tokenExpiration: 2592000,
     cookies: {
       sameSite: 'Lax',
       secure: process.env.NODE_ENV === 'production',

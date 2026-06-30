@@ -313,8 +313,8 @@ export async function verifyCoupon(couponCode: string, subtotal: number, clientC
 
     // Check locked emails
     if (coupon.lockedEmails && coupon.lockedEmails.length > 0) {
-      if (!user) return { valid: false, error: 'You must log in to use this specific coupon' }
-      const allowed = coupon.lockedEmails.some((e: any) => e.email === user.email)
+      if (!user) return { valid: false, error: 'Please sign in to use this coupon — your session may have expired' }
+      const allowed = coupon.lockedEmails.some((e: any) => e.email?.toLowerCase() === user.email?.toLowerCase())
       if (!allowed) return { valid: false, error: 'This coupon is not available for your account' }
     }
 
