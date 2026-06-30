@@ -92,6 +92,7 @@ export interface Config {
     'affiliate-payouts': AffiliatePayout;
     'payout-requests': PayoutRequest;
     'processing-fees': ProcessingFee;
+    'military-discount-applications': MilitaryDiscountApplication;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -124,6 +125,7 @@ export interface Config {
     'affiliate-payouts': AffiliatePayoutsSelect<false> | AffiliatePayoutsSelect<true>;
     'payout-requests': PayoutRequestsSelect<false> | PayoutRequestsSelect<true>;
     'processing-fees': ProcessingFeesSelect<false> | ProcessingFeesSelect<true>;
+    'military-discount-applications': MilitaryDiscountApplicationsSelect<false> | MilitaryDiscountApplicationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -1180,6 +1182,38 @@ export interface PayoutRequest {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "military-discount-applications".
+ */
+export interface MilitaryDiscountApplication {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  branch: 'army' | 'navy' | 'air_force' | 'marines' | 'coast_guard' | 'space_force' | 'national_guard';
+  serviceStatus: 'active_duty' | 'veteran' | 'retired' | 'reservist' | 'national_guard';
+  /**
+   * Uploaded military ID or proof of service document.
+   */
+  idProof: number | Document;
+  status?: ('pending' | 'approved' | 'rejected') | null;
+  /**
+   * Discount % to apply when approving. Default 15.
+   */
+  discountPercent?: number | null;
+  /**
+   * Auto-generated on approval.
+   */
+  couponCode?: string | null;
+  coupon?: (number | null) | Coupon;
+  /**
+   * Internal notes (not sent to applicant).
+   */
+  reviewNotes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -1301,6 +1335,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'processing-fees';
         value: number | ProcessingFee;
+      } | null)
+    | ({
+        relationTo: 'military-discount-applications';
+        value: number | MilitaryDiscountApplication;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -2034,6 +2072,25 @@ export interface ProcessingFeesSelect<T extends boolean = true> {
   type?: T;
   isActive?: T;
   isOptional?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "military-discount-applications_select".
+ */
+export interface MilitaryDiscountApplicationsSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  email?: T;
+  branch?: T;
+  serviceStatus?: T;
+  idProof?: T;
+  status?: T;
+  discountPercent?: T;
+  couponCode?: T;
+  coupon?: T;
+  reviewNotes?: T;
   updatedAt?: T;
   createdAt?: T;
 }
