@@ -243,7 +243,7 @@ export function OrderConfirmationClient({ order }: { order: OrderData }) {
 
         {/* Footer Actions - Hidden on Print */}
         <FadeUp delay={0.3} className="mt-10 md:mt-12 w-full flex flex-col items-center print:hidden">
-          <Link href="/shop" className={buttonVariants({ variant: 'dark', size: 'lg', className: 'w-full sm:w-auto min-w-[200px] rounded-full px-8 tracking-widest text-sm uppercase shadow-md hover:-translate-y-0.5 transition-all h-14' })}>
+          <Link href="/shop" className={buttonVariants({ variant: 'dark', size: 'lg', className: 'w-full sm:w-auto min-w-[200px] rounded-xl px-8 tracking-widest text-sm uppercase shadow-md hover:-translate-y-0.5 transition-all h-14' })}>
             Continue Shopping
           </Link>
         </FadeUp>

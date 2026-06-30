@@ -59,7 +59,7 @@ export default function AboutPage() {
       id: "01",
       title: "Retail Research Peptides",
       desc: "A comprehensive library of meticulously synthesized peptides available for immediate dispatch in single or multi-vial quantities.",
-      image: "/Featured%20Images/three-floating-vials.webp"
+      image: "/services-vials.png"
     },
     {
       id: "02",
@@ -130,7 +130,7 @@ export default function AboutPage() {
             <div className="flex flex-col items-start md:items-end w-full md:w-auto relative gap-6">
               <div className="w-full md:w-auto">
                 <Link href="/shop" className="block w-full">
-                  <Button className="w-full md:w-auto bg-ink text-white hover:bg-ink/90 rounded-full px-8 py-7 text-base lg:text-lg font-medium flex items-center justify-center gap-4 transition-all duration-300">
+                  <Button className="w-full md:w-auto bg-ink text-white hover:bg-ink/90 rounded-xl px-8 py-7 text-base lg:text-lg font-medium flex items-center justify-center gap-4 transition-all duration-300">
                     Explore Our Catalog <ArrowRight className="w-5 h-5" />
                   </Button>
                 </Link>

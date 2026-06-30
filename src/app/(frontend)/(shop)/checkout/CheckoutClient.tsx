@@ -240,7 +240,7 @@ export function CheckoutClient() {
           <h1 className="text-2xl font-semibold text-ink mb-3">Your cart is empty</h1>
           <p className="text-sm text-gray-400 mb-8">Looks like you haven't added anything yet.</p>
           <Link href="/shop">
-            <Button variant="dark" className="rounded-full h-12 px-8 text-xs uppercase tracking-[0.15em] font-semibold">
+            <Button variant="dark" className="rounded-xl h-12 px-8 text-xs uppercase tracking-[0.15em] font-semibold">
               Shop Now
             </Button>
           </Link>

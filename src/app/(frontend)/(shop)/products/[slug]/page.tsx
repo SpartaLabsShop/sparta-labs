@@ -249,6 +249,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           hoverImageUrl = p.images[1].image.url
         }
 
+        const variantLabels = p.hasVariants && p.variants && p.variants.length > 1
+          ? p.variants.map((v: any) => v.options?.map((o: any) => o.value).join(' ')).filter(Boolean)
+          : []
+
         return {
           id: p.id,
           name: p.name,
@@ -260,6 +264,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           priceRange: `$${p.price?.toFixed(2) || '0.00'}`,
           originalPrice: p.salePrice ? `$${p.salePrice.toFixed(2)}` : undefined,
           isFrom: p.bulkBundles && p.bulkBundles.length > 0,
+          variantLabels,
         }
       })
     }
@@ -292,6 +297,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         hoverImageUrl = p.images[1].image.url
       }
 
+      const variantLabels = p.hasVariants && p.variants && p.variants.length > 1
+        ? p.variants.map((v: any) => v.options?.map((o: any) => o.value).join(' ')).filter(Boolean)
+        : []
+
       return {
         id: p.id,
         name: p.name,
@@ -303,6 +312,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         priceRange: `$${p.price?.toFixed(2) || '0.00'}`,
         originalPrice: p.salePrice ? `$${p.salePrice.toFixed(2)}` : undefined,
         isFrom: p.bulkBundles && p.bulkBundles.length > 0,
+        variantLabels,
       }
     })
   }

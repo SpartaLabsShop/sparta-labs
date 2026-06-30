@@ -108,7 +108,7 @@ export default function JournalIndexPage() {
             <div className="flex flex-col items-start md:items-end w-full md:w-auto relative gap-6">
               <div className="w-full md:w-auto">
                 <button onClick={() => window.scrollBy({ top: 600, behavior: 'smooth' })} className="block w-full md:w-auto">
-                  <Button className="w-full md:w-auto bg-ink text-white hover:bg-ink/90 rounded-full px-8 py-7 text-base lg:text-lg font-medium flex items-center justify-center gap-4 transition-all duration-300">
+                  <Button className="w-full md:w-auto bg-ink text-white hover:bg-ink/90 rounded-xl px-8 py-7 text-base lg:text-lg font-medium flex items-center justify-center gap-4 transition-all duration-300">
                     Read Latest <ArrowDown className="w-5 h-5" />
                   </Button>
                 </button>

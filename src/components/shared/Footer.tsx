@@ -85,12 +85,9 @@ const FooterContent = () => {
         </div>
       </div>
 
-      {/* 2. Divider & Button */}
+      {/* 2. Divider */}
       <div className="w-full relative flex items-center mb-8">
         <div className="flex-1 h-[1px] bg-white/20" />
-        <Link href="/shop" className="absolute right-0 bg-white text-[#28282B] px-6 lg:px-8 py-2 lg:py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white/80 transition-colors shadow-lg">
-          Get Started
-        </Link>
       </div>
 
       {/* 3. Bottom Row: FDA Disclaimer & Legal */}

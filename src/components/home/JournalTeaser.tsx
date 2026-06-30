@@ -122,7 +122,7 @@ export function JournalTeaser() {
            </div>
 
            <div>
-            <Button variant="outline" asChild className="border-slate-300 text-ink hover:bg-[#5984c4] hover:border-[#5984c4] hover:text-white rounded-full px-6 xl:px-8 py-4 uppercase tracking-widest text-[10px] xl:text-xs font-bold transition-all duration-300 shadow-sm">
+            <Button variant="outline" asChild className="border-slate-300 text-ink hover:bg-[#5984c4] hover:border-[#5984c4] hover:text-white rounded-xl px-6 xl:px-8 py-4 uppercase tracking-widest text-[10px] xl:text-xs font-bold transition-all duration-300 shadow-sm">
                <Link href="/journal">View the Full Journal →</Link>
              </Button>
            </div>

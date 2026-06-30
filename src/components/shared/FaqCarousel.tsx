@@ -190,7 +190,7 @@ export function FaqCarousel({
                   {sectionLabel}
                 </span>
               )}
-              <h2 className={`text-4xl sm:text-5xl xl:text-6xl font-serif tracking-tight leading-[1.1] ${titleClass}`}>
+              <h2 className={`text-4xl sm:text-5xl xl:text-6xl font-sans uppercase tracking-tight leading-[1.1] ${titleClass}`}>
                 {title} <span className={isDark ? 'text-gold' : 'text-[#1c4477]'}>{accentTitle}</span>
               </h2>
             </FadeUp>
@@ -281,7 +281,7 @@ export function FaqCarousel({
                     {/* Inner wrapper allows text to naturally wrap based on the card's current width */}
                     <div className="w-full h-full flex flex-col relative z-10">
                       {/* Let the question fill the width on active cards, but lock it on inactive cards to prevent reflow during transition */}
-                      <h3 className={`text-2xl lg:text-3xl font-serif leading-tight mb-6 md:mb-8 w-full ${isActive ? 'max-w-none' : 'max-w-[216px] lg:max-w-[184px] line-clamp-4'}`}>
+                      <h3 className={`text-2xl lg:text-3xl font-sans uppercase leading-tight mb-6 md:mb-8 w-full ${isActive ? 'max-w-none' : 'max-w-[216px] lg:max-w-[184px] line-clamp-4'}`}>
                         {faq.question}
                       </h3>
 

@@ -122,7 +122,7 @@ export function ProductTabs({ tabs }: ProductTabsProps) {
             <div className="w-full">
               {typeof tab.content === 'string' ? (
                 <div className="max-w-4xl mx-auto">
-                  <h3 className="text-xl md:text-3xl font-serif text-ink mb-6 tracking-tight">
+                  <h3 className="text-xl md:text-3xl font-sans uppercase text-ink mb-6 tracking-tight">
                     {tab.label}
                   </h3>
                   <div className="flex flex-col gap-5 text-[15px] sm:text-base md:text-lg text-ink/70 leading-relaxed font-light">

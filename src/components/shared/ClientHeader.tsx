@@ -16,6 +16,11 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 const CartDrawer = dynamic(() => import('@/components/cart/CartDrawer').then(mod => mod.CartDrawer), { ssr: false })
 
 const SALE_END_DATE = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
+const ANNOUNCEMENTS = [
+  "Free shipping on orders over $300",
+  "Subscribe & save 15% on auto-ship",
+  "Same day shipping on orders before 2pm EST"
+]
 
 export function ClientHeader({ cartItemCount = 0, wishlistItemCount = 0, isLoggedIn = false, userEmail = '', avatarUrl = '', categories: initialCategories = [], initialWishlistItems = [], initialCartItems = [] }: any) {
   const cartStore = useCartStore()
@@ -30,7 +35,15 @@ export function ClientHeader({ cartItemCount = 0, wishlistItemCount = 0, isLogge
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [countdown, setCountdown] = useState({ days: 0, hrs: 0, min: 0, sec: 0 })
   const [couponCopied, setCouponCopied] = useState(false)
-  
+  const [announcementIndex, setAnnouncementIndex] = useState(0)
+
+  useEffect(() => {
+    if (announcementClosed) return
+    const interval = setInterval(() => {
+      setAnnouncementIndex((prev) => (prev + 1) % ANNOUNCEMENTS.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [announcementClosed])
 
   const cartHydrated = useRef(false)
   const wishlistHydrated = useRef(false)
@@ -150,86 +163,23 @@ export function ClientHeader({ cartItemCount = 0, wishlistItemCount = 0, isLogge
         >
           {/* Announcement Bar */}
           {!announcementClosed && (
-            <div className="w-full bg-[#1a1a1a] text-white pointer-events-auto relative">
-              <div className="flex items-center justify-center gap-3 sm:gap-5 px-10 py-2 sm:py-2.5">
-                {/* Offer Text */}
-                <span className="hidden sm:inline text-[10px] sm:text-xs font-semibold tracking-wide uppercase whitespace-nowrap">
-                  Limited Time Offer
-                </span>
-                <span className="hidden md:inline text-[10px] sm:text-xs text-white/50 font-light">—</span>
-                <span className="text-[10px] sm:text-xs text-white/80 font-light whitespace-nowrap">
-                  Up to 50% Off
-                </span>
-
-                {/* Countdown */}
-                <div className="flex items-center gap-1">
-                  {[
-                    { val: countdown.days, label: 'DAYS' },
-                    { val: countdown.hrs, label: 'HRS' },
-                    { val: countdown.min, label: 'MIN' },
-                    { val: countdown.sec, label: 'SEC' },
-                  ].map((unit, i) => (
-                    <React.Fragment key={unit.label}>
-                      {i > 0 && <span className="text-white/40 text-[10px] font-bold mx-0.5">:</span>}
-                      <div className="flex flex-col items-center">
-                        <span className="bg-white/10 border border-white/10 rounded-md px-1.5 sm:px-2 py-0.5 text-[11px] sm:text-xs font-bold tabular-nums min-w-[26px] sm:min-w-[30px] text-center">
-                          {String(unit.val).padStart(2, '0')}
-                        </span>
-                        <span className="text-[6px] sm:text-[7px] text-white/40 uppercase tracking-wider mt-0.5">{unit.label}</span>
-                      </div>
-                    </React.Fragment>
-                  ))}
-                </div>
-
-                {/* Coupon Code */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    const code = 'SAVE20'
-                    if (navigator.clipboard && window.isSecureContext) {
-                      navigator.clipboard.writeText(code).then(() => {
-                        setCouponCopied(true)
-                        setTimeout(() => setCouponCopied(false), 2000)
-                      })
-                    } else {
-                      const ta = document.createElement('textarea')
-                      ta.value = code
-                      ta.style.position = 'fixed'
-                      ta.style.opacity = '0'
-                      document.body.appendChild(ta)
-                      ta.select()
-                      document.execCommand('copy')
-                      document.body.removeChild(ta)
-                      setCouponCopied(true)
-                      setTimeout(() => setCouponCopied(false), 2000)
-                    }
-                  }}
-                  className="hidden sm:flex items-center gap-1.5 bg-white/10 border border-white/15 rounded-lg px-3 py-1 text-[10px] sm:text-[11px] font-bold tracking-wider uppercase hover:bg-white/15 transition-colors"
+            <div className="w-full bg-black text-white pointer-events-auto relative overflow-hidden h-[36px] sm:h-[40px] flex items-center justify-center border-b border-white/10">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={announcementIndex}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="absolute text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase text-center px-10"
                 >
-                  {couponCopied ? (
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-green-400">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  ) : (
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
-                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                    </svg>
-                  )}
-                  {couponCopied ? 'COPIED!' : 'SAVE20'}
-                </button>
-
-                {/* Shop Now */}
-                <Link
-                  href="/shop"
-                  className="bg-white text-black text-[10px] sm:text-[11px] font-bold tracking-wider uppercase px-3 sm:px-4 py-1 sm:py-1.5 rounded-lg hover:bg-white/90 transition-colors whitespace-nowrap"
-                >
-                  Shop Now
-                </Link>
-              </div>
+                  {ANNOUNCEMENTS[announcementIndex]}
+                </motion.div>
+              </AnimatePresence>
 
               <button
                 onClick={closeAnnouncement}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-10"
                 aria-label="Close announcement"
               >
                 <X size={14} strokeWidth={2} />

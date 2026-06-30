@@ -102,12 +102,12 @@ export function SwipeCarousel({ title, description, cards, isLoading = false }: 
   }
 
   return (
-    <section className="py-16 lg:py-20 bg-[#f4f3ef] text-ink overflow-hidden">
+    <section className="py-16 lg:py-20 bg-gray-100 text-ink overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
         
         {/* Header */}
         <FadeUp className="max-w-2xl mb-12 lg:mb-16">
-          <h2 className="text-4xl lg:text-5xl font-serif font-medium tracking-tight mb-6 text-ink">
+          <h2 className="text-4xl lg:text-5xl font-sans font-medium tracking-tight mb-6 text-ink uppercase">
             {title}
           </h2>
           <p className="text-lg lg:text-xl text-ink/70 leading-relaxed font-light">
@@ -188,7 +188,7 @@ export function SwipeCarousel({ title, description, cards, isLoading = false }: 
                   
                   {/* Content */}
                   <div className="absolute bottom-0 left-0 w-full p-6 lg:p-8 pointer-events-none">
-                    <h3 className="text-2xl lg:text-3xl font-serif text-white mb-3 tracking-wide">
+                    <h3 className="text-2xl lg:text-3xl font-sans text-white mb-3 tracking-wide">
                       {card.title}
                     </h3>
                     <p className="text-white/80 font-light leading-relaxed text-sm md:text-base">

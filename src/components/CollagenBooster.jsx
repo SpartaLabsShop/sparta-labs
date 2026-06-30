@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { Microscope, Snowflake, ShieldCheck, Dna } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -180,7 +181,7 @@ const CollagenBooster = () => {
             Each batch is tested by an independent, accredited laboratory to confirm purity, identity, and
             composition. Results are documented and available by batch.
           </p>
-          <button className="group inline-flex items-center gap-2 rounded border-[1.5px] border-white/85 bg-transparent px-7 py-3 text-[0.9rem] font-medium tracking-[0.5px] text-white transition-[background,border-color] duration-200 hover:border-white hover:bg-white/[0.12]">
+          <Link href="/certificates" className="group inline-flex items-center gap-2 rounded border-[1.5px] border-white/85 bg-transparent px-7 py-3 text-[0.9rem] font-medium tracking-[0.5px] text-white transition-[background,border-color] duration-200 hover:border-white hover:bg-white/[0.12]">
             <span>View COA</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +197,7 @@ const CollagenBooster = () => {
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </button>
+          </Link>
         </motion.div>
 
         {/* content ref is what the SVG is measured against */}

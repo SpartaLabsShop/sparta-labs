@@ -9,7 +9,7 @@ const PILLARS = [
     id: '01',
     title: 'Independent Testing',
     desc: 'Every single batch is tested by accredited US-based third-party laboratories via HPLC & Mass Spectrometry before it is ever made available for research.',
-    image: '/Featured%20Images/scientist-at-microscope.webp',
+    image: '/gold-standard-lab.png',
   },
   {
     id: '02',
@@ -21,7 +21,7 @@ const PILLARS = [
     id: '03',
     title: 'USA Fulfillment',
     desc: 'Our compounds are stocked securely in domestic, climate-controlled facilities. We fulfill and ship all orders directly from the United States for rapid delivery.',
-    image: '/Featured%20Images/three-floating-vials.webp',
+    image: '/usa-fulfillment.png',
   },
   {
     id: '04',

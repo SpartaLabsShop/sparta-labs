@@ -60,7 +60,7 @@ export default function AffiliateApplyPage() {
                   Your application has been submitted successfully. Our team will review your details and be in touch soon.
                 </p>
                 <Link href="/affiliates">
-                  <Button size="lg" className="h-14 px-10 rounded-full bg-ink text-white hover:bg-[#1a1a1a] hover:shadow-lg transition-all duration-300 font-bold tracking-wider uppercase text-sm border-none">
+                  <Button size="lg" className="h-14 px-10 rounded-xl bg-ink text-white hover:bg-[#1a1a1a] hover:shadow-lg transition-all duration-300 font-bold tracking-wider uppercase text-sm border-none">
                     Return to Affiliates
                   </Button>
                 </Link>
@@ -171,7 +171,7 @@ export default function AffiliateApplyPage() {
                   </div>
                   
                   <div className="w-full flex justify-end">
-                    <Button type="submit" size="lg" isLoading={isSubmitting} className="w-full md:w-auto h-14 px-10 rounded-full bg-ink text-white hover:bg-[#1a1a1a] hover:shadow-lg transition-all duration-300 font-bold tracking-wider uppercase text-sm border-none">
+                    <Button type="submit" size="lg" isLoading={isSubmitting} className="w-full md:w-auto h-14 px-10 rounded-xl bg-ink text-white hover:bg-[#1a1a1a] hover:shadow-lg transition-all duration-300 font-bold tracking-wider uppercase text-sm border-none">
                       Submit Application
                     </Button>
                   </div>

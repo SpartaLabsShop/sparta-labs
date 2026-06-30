@@ -746,6 +746,10 @@ export async function getShopProducts(params: {
         }
       }
 
+      const variantLabels = doc.hasVariants && doc.variants && doc.variants.length > 1
+        ? doc.variants.map((v: any) => v.options?.map((o: any) => o.value).join(' ')).filter(Boolean)
+        : []
+
       return {
         id: doc.id as number,
         name: doc.name,
@@ -753,16 +757,17 @@ export async function getShopProducts(params: {
         image: imageUrl,
         hoverImage: hoverImageUrl,
         shortDescription: doc.description || '',
-        priceRange: displaySalePrice 
-          ? `${isFrom ? 'From ' : ''}$${displaySalePrice.toFixed(2)}` 
+        priceRange: displaySalePrice
+          ? `${isFrom ? 'From ' : ''}$${displaySalePrice.toFixed(2)}`
           : `${isFrom ? 'From ' : ''}$${displayPrice.toFixed(2)}`,
         originalPrice: (displaySalePrice && !isFrom)
-          ? `$${displayPrice.toFixed(2)}` 
+          ? `$${displayPrice.toFixed(2)}`
           : undefined,
         discountPercentage: (displaySalePrice && displayPrice > 0)
           ? Math.round(((displayPrice - displaySalePrice) / displayPrice) * 100)
           : undefined,
-        category: categoryName
+        category: categoryName,
+        variantLabels,
       }
     })
 

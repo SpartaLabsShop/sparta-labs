@@ -19,7 +19,7 @@ import { ImageGallery } from '@/components/shop/ImageGallery'
 import { VariantSelector, Variant } from '@/components/shop/VariantSelector'
 import { QuantityStepper } from '@/components/shop/QuantityStepper'
 import { ProductTabs, Tab } from '@/components/shop/ProductTabs'
-import { FaqCarousel, FaqItem } from '@/components/shared/FaqCarousel'
+import type { FaqItem } from '@/components/shared/FaqCarousel'
 import { TrustBadges } from '@/components/shared/TrustBadges'
 import { StaggerChildren, staggerItemVariants } from '@/components/motion/StaggerChildren'
 import { CompactProductCard } from '@/components/shop/CompactProductCard'
@@ -127,6 +127,7 @@ export function ProductClient({ product }: ProductClientProps) {
   const [quantity, setQuantity] = useState(1)
   const [descOpen, setDescOpen] = useState(true)
   const [deliveryOpen, setDeliveryOpen] = useState(true)
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
 
   React.useEffect(() => {
     // Force scroll to top on mount to fix Next.js scroll restoration issues
@@ -753,15 +754,67 @@ export function ProductClient({ product }: ProductClientProps) {
         </Container>
       </section>
 
-      {/* 2.5 FAQs Section (Moved to Bottom) */}
+      {/* FAQs Section */}
       {product.faqs && product.faqs.length > 0 && (
-        <FaqCarousel 
-          faqs={product.faqs} 
-          theme="light" 
-          title="Product" 
-          accentTitle="FAQs"
-          description="Find answers to common questions regarding storage, reconstitution, and testing guidelines for this specific compound."
-        />
+        <section className="relative bg-white py-24 max-[992px]:py-20 max-[768px]:py-16">
+          <div className="relative z-2 mx-auto flex max-w-[800px] flex-col items-center gap-12 px-8 max-[992px]:gap-8 max-[768px]:gap-6 max-[768px]:px-4 max-[480px]:px-3">
+            <div className="flex flex-col items-center text-center">
+              <div className="mb-6 flex items-center justify-center gap-3">
+                <span className="text-[0.9rem] font-medium tracking-[0.05em] text-accent uppercase">Support</span>
+              </div>
+              <h2 className="m-0 text-[clamp(2rem,3.5vw,3rem)] leading-[1.15] font-normal text-[#222222] max-[768px]:text-[2rem] max-[480px]:text-[1.75rem]">
+                FREQUENTLY ASKED <br /> QUESTIONS
+              </h2>
+            </div>
+
+            <div className="flex w-full flex-col gap-4">
+              {product.faqs.map((faq, index) => {
+                const isOpen = openFaqIndex === index
+                return (
+                  <div
+                    key={index}
+                    className={`cursor-pointer overflow-hidden rounded-xl border bg-white p-6 px-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#d0d0d0] hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] max-[768px]:rounded-[10px] max-[768px]:px-5 max-[768px]:py-[1.2rem] ${isOpen ? 'border-[#222222]' : 'border-[#e5e7eb]'}`}
+                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <h3 className="m-0 pr-5 text-[1.2rem] font-medium text-[#111111] max-[768px]:pr-3 max-[768px]:text-base max-[480px]:text-[0.95rem]">
+                        {faq.question}
+                      </h3>
+                      <div
+                        className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 max-[768px]:h-7 max-[768px]:w-7 ${isOpen ? 'bg-[#111111] text-white' : 'bg-black/[0.03]'}`}
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                        >
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </div>
+                    </div>
+                    <div
+                      className={`transition-all duration-300 ease-in-out ${isOpen ? 'mt-4' : 'mt-0'}`}
+                      style={{
+                        maxHeight: isOpen ? '200px' : '0',
+                        opacity: isOpen ? 1 : 0,
+                      }}
+                    >
+                      <p className="m-0 text-base leading-[1.6] text-[#666666] max-[768px]:text-[0.95rem] max-[480px]:text-[0.9rem]">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
       )}
 
       {/* Mobile Fixed Action Bar */}

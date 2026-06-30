@@ -27,6 +27,7 @@ export interface Product {
   originalPrice?: string
   discountPercentage?: number
   category: string
+  variantLabels?: string[]
 }
 
 export interface PrimaryProductCardProps {
@@ -227,6 +228,12 @@ export function PrimaryProductCard({ product, id }: PrimaryProductCardProps) {
       <div className="flex flex-1 flex-col text-center">
         <p className="mb-1 sm:mb-1.5 text-[0.6rem] sm:text-[0.7rem] tracking-[0.5px] text-[#999999] uppercase">{product.category}</p>
         <h3 className="mb-2 sm:mb-3 text-[0.9rem] sm:text-[1.2rem] font-normal text-ink leading-tight">{product.name}</h3>
+
+        {product.variantLabels && product.variantLabels.length >= 2 && (
+          <p className="mb-2 sm:mb-3 text-[0.6rem] sm:text-[0.65rem] font-medium text-ink/40 tracking-wide">
+            {product.variantLabels.join(' · ')}
+          </p>
+        )}
 
         {/* Price Row */}
         <div className="mb-3 sm:mb-5 flex items-center justify-center gap-1.5 sm:gap-2">
