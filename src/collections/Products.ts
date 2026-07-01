@@ -247,6 +247,27 @@ export const Products: CollectionConfig = {
       },
     },
     {
+      name: 'coaBatchNumber',
+      type: 'text',
+      admin: {
+        description: 'Batch/lot number for the uploaded COA. Shown on the public Certificates page.',
+      },
+    },
+    {
+      name: 'coaPurity',
+      type: 'text',
+      admin: {
+        description: 'Purity result from the lab report, e.g. "99.6%". Shown on the public Certificates page.',
+      },
+    },
+    {
+      name: 'coaAnalyzedDate',
+      type: 'date',
+      admin: {
+        description: 'Date the batch was tested/analyzed. Shown on the public Certificates page.',
+      },
+    },
+    {
       name: 'faqs',
       type: 'array',
       labels: {

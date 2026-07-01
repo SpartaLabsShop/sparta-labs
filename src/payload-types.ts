@@ -468,6 +468,18 @@ export interface Product {
    */
   coaFile?: (number | null) | Document;
   /**
+   * Batch/lot number for the uploaded COA. Shown on the public Certificates page.
+   */
+  coaBatchNumber?: string | null;
+  /**
+   * Purity result from the lab report, e.g. "99.6%". Shown on the public Certificates page.
+   */
+  coaPurity?: string | null;
+  /**
+   * Date the batch was tested/analyzed. Shown on the public Certificates page.
+   */
+  coaAnalyzedDate?: string | null;
+  /**
    * Add frequently asked questions specifically for this product.
    */
   faqs?:
@@ -1611,6 +1623,9 @@ export interface ProductsSelect<T extends boolean = true> {
   complianceNoticeTitle?: T;
   complianceNoticeDescription?: T;
   coaFile?: T;
+  coaBatchNumber?: T;
+  coaPurity?: T;
+  coaAnalyzedDate?: T;
   faqs?:
     | T
     | {

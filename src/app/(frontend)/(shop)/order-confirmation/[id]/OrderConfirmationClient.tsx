@@ -93,7 +93,7 @@ export function OrderConfirmationClient({ order }: { order: OrderData }) {
               </p>
               {/* Placeholder QR - replace /zelle-qr.png with your actual QR code */}
               <div className="w-48 h-48 bg-white rounded-xl border border-purple-200 flex items-center justify-center overflow-hidden">
-                <Image src="/zelle-qr.png" alt="Zelle QR Code" width={180} height={180} className="object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                <Image src="https://res.cloudinary.com/denskvdyt/image/upload/v1782950051/zelle-qr_lsp1z4.jpg" alt="Zelle QR Code" width={180} height={180} className="object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
               </div>
               <div className="bg-white rounded-xl px-6 py-3 border border-purple-200">
                 <p className="text-xs text-purple-600 font-bold uppercase tracking-widest mb-1">Send to</p>

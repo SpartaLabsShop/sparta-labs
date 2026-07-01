@@ -90,10 +90,21 @@ export async function generateOrderInvoiceHtml(order: any, payload?: any, custom
           <tr>
             <td style="padding:20px 24px;">
               <p style="margin:0 0 6px;font-size:11px;font-weight:800;color:#7C3AED;text-transform:uppercase;letter-spacing:.6px;">Action Required — Zelle Payment</p>
-              <p style="margin:0;font-size:13px;color:#4C1D95;line-height:1.6;">
-                Send <strong>${fmt(total)}</strong> via Zelle to <strong>${process.env.ZELLE_PAYMENT_EMAIL || 'kyle@spartalabs.shop'}</strong><br/>
-                Include <strong>#${orderNumber}</strong> in the memo. Your order ships once payment is confirmed.
-              </p>
+              <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td valign="top">
+                    <p style="margin:0;font-size:13px;color:#4C1D95;line-height:1.6;">
+                      Send <strong>${fmt(total)}</strong> via Zelle to <strong>${process.env.ZELLE_PAYMENT_EMAIL || 'kyle@spartalabs.shop'}</strong><br/>
+                      Include <strong>#${orderNumber}</strong> in the memo. Your order ships once payment is confirmed.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top:12px;">
+                    <img src="https://res.cloudinary.com/denskvdyt/image/upload/v1782950051/zelle-qr_lsp1z4.jpg" alt="Zelle QR Code" width="120" height="120" style="display:block;background:#fff;padding:6px;border-radius:6px;border:1px solid #DDD6FE;" />
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
         </table>
