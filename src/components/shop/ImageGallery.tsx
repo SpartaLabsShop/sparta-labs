@@ -84,12 +84,12 @@ export function ImageGallery({ images }: ImageGalleryProps) {
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
-              <Image 
-                src={img} 
+              <Image
+                src={img}
                 alt={`Product view ${idx + 1}`}
                 fill
                 priority={idx === 0}
-                className="object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.75]"
+                className="object-cover scale-125 transition-transform duration-[400ms] ease-out group-hover:scale-[1.9]"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
 

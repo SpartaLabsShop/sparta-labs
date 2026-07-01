@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent, useMotionValue, useSpring } from 'framer-motion'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Heart, ChevronRight, ChevronLeft, Download, Star, Check, ShieldCheck, FlaskConical, MapPin, Zap, ShoppingCart, Truck, Sparkles, Loader2 } from 'lucide-react'
-import { Container } from '@/components/ui/container'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { StockIndicator } from '@/components/ui/stock-indicator'
@@ -216,6 +215,12 @@ export function ProductClient({ product }: ProductClientProps) {
   const selectedVariant = product.variants.find(v => v.id === selectedVariantId) || product.variants[0]
   const currentStock = selectedVariant?.inStock ? 50 : 0 // Fake stock level for testing
 
+  // When the selected variant has its own image, show it first in the gallery
+  // (e.g. switching dosage should switch the vial photo shown)
+  const galleryImages = selectedVariant?.image
+    ? [selectedVariant.image, ...product.images.filter(img => img !== selectedVariant.image)]
+    : product.images
+
   const [justAdded, setJustAdded] = useState(false)
   const cartStore = useCartStore()
   
@@ -310,7 +315,7 @@ export function ProductClient({ product }: ProductClientProps) {
       {/* 1. Hero Section */}
       <section className="w-full relative z-10 pt-8 pb-32">
         
-        <Container size="wide" className="relative z-10">
+        <div className="w-full px-4 md:px-8 lg:px-10 relative z-10">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm font-medium text-gray-500 mt-4 mb-8 relative z-20">
             <Link href="/" className="hover:text-ink transition-colors">Home</Link>
@@ -324,7 +329,7 @@ export function ProductClient({ product }: ProductClientProps) {
           
           {/* Left Column (Massive Cinematic Gallery) */}
           <div className="w-full lg:w-[45%] relative lg:sticky lg:top-32 lg:mt-6">
-            <ImageGallery images={product.images} />
+            <ImageGallery key={selectedVariant?.id} images={galleryImages} />
           </div>
 
           {/* Right Column (Clean Flow) */}
@@ -702,12 +707,12 @@ export function ProductClient({ product }: ProductClientProps) {
           <ProductTabs tabs={product.tabs} />
         </div>
 
-        </Container>
+        </div>
       </section>
 
       {/* 5. Related Editorial Carousel */}
       <section className="w-full py-32 bg-[#f8fafc] border-t border-blue-100/50 overflow-hidden relative">
-        <Container size="wide" className="relative z-10">
+        <div className="w-full px-4 md:px-8 lg:px-10 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
               <span className="text-[#5984c4] text-label-sm uppercase tracking-[0.2em] font-bold mb-4 block">Continue Exploring</span>
@@ -751,7 +756,7 @@ export function ProductClient({ product }: ProductClientProps) {
               </div>
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* FAQs Section */}

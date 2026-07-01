@@ -10,6 +10,7 @@ export interface Variant {
   price: string
   salePrice?: string
   inStock: boolean
+  image?: string
 }
 
 interface VariantSelectorProps {
