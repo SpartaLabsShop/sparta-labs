@@ -19,7 +19,7 @@ const DENY_ALL = {
   limit: async (_key: string) => ({ success: false }),
 } as unknown as Ratelimit
 
-function makeSecureLimiter(limiter: Ratelimit.Algorithm, prefix: string): Ratelimit | null {
+function makeSecureLimiter(limiter: ReturnType<typeof Ratelimit.slidingWindow>, prefix: string): Ratelimit | null {
   if (redis) return new Ratelimit({ redis, limiter, prefix })
   return process.env.NODE_ENV === 'production' ? DENY_ALL : null
 }
