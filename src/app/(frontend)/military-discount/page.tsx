@@ -72,9 +72,14 @@ export default function MilitaryDiscountPage() {
       {/* Hero */}
       <section className="px-4 md:px-8 container mx-auto mb-12">
         <div className="relative w-full h-[200px] md:h-[280px] rounded-lg overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-700" />
+          <img 
+            src="https://res.cloudinary.com/denskvdyt/image/upload/v1782864394/military-discount-banner_minejn.webp" 
+            alt="Military Discount" 
+            className="absolute inset-0 w-full h-full object-cover" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
           <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
-            <h1 className="text-3xl md:text-5xl font-semibold text-white tracking-tight">Military Discount</h1>
+            <h1 className="text-3xl md:text-5xl font-semibold text-white tracking-tight mb-2">Military Discount</h1>
             <HeroBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Military Discount' }]} />
           </div>
         </div>
