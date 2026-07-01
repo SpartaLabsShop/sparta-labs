@@ -164,7 +164,7 @@ export async function createPaymentIntent(
     return { clientSecret: paymentIntent.client_secret, paymentIntentId: paymentIntent.id, amount: total }
   } catch (error: any) {
     console.error('Checkout error:', error)
-    return { error: error.message }
+    return { error: 'Unable to process payment. Please try again.' }
   }
 }
 
@@ -384,7 +384,7 @@ export async function createPayloadOrder(
               <div style="background: #f3f0ff; border: 1px solid #d4c5f9; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
                 <p style="font-size: 14px; font-weight: 600; color: #6D1ED4; margin: 0 0 8px 0;">Zelle Payment Required</p>
                 <p style="font-size: 13px; color: #555; margin: 0; line-height: 1.5;">
-                  Send <strong>$${total.toFixed(2)}</strong> to <strong>kyle@spartalabs.shop</strong> via Zelle.<br/>
+                  Send <strong>$${total.toFixed(2)}</strong> to <strong>${process.env.ZELLE_PAYMENT_EMAIL || ''}</strong> via Zelle.<br/>
                   Include <strong>#${orderNumber}</strong> in the memo.
                 </p>
               </div>
@@ -429,19 +429,24 @@ export async function createPayloadOrder(
        })
     }
 
-    // Set a cookie to authorize the order confirmation page
+    // Set a signed cookie to authorize the order confirmation page.
+    // Value is HMAC-SHA256 of the orderId so it cannot be forged without PAYLOAD_SECRET.
+    const { createHmac } = await import('crypto')
     const cookieStore = await cookies()
-    cookieStore.set(`order_auth_${order.id}`, 'true', { 
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+    const sig = createHmac('sha256', process.env.PAYLOAD_SECRET || '')
+      .update(String(order.id))
+      .digest('hex')
+    cookieStore.set(`order_auth_${order.id}`, sig, {
+      maxAge: 60 * 60, // 1 hour
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax'
+      secure: true,
+      sameSite: 'strict',
     })
 
     return { orderId: String(order.id) }
   } catch (error: any) {
     console.error('Failed to create Payload order:', error)
-    return { error: error.message }
+    return { error: 'Unable to place order. Please try again.' }
   }
 }
 
@@ -457,7 +462,7 @@ export async function syncPaymentStatus(paymentIntentId: string, orderId: string
     return { success: false, status: paymentIntent.status }
   } catch (error: any) {
     console.error('Failed to sync payment status:', error)
-    return { error: error.message }
+    return { error: 'Unable to verify payment status. Please contact support.' }
   }
 }
 
@@ -489,7 +494,7 @@ export async function notifyAdminFailedPayment(orderId: string, errorMessage: st
     `
 
     await payload.sendEmail({
-      to: 'support@spartalabs.shop',
+      to: process.env.SUPPORT_EMAIL || 'support@spartalabs.shop',
       subject: `⚠️ Payment Failed - Order ${orderId}`,
       html: html,
     })

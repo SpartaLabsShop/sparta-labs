@@ -13,15 +13,28 @@ function makeRedis(): Redis | null {
 
 const redis = makeRedis()
 
-// 5 submissions per IP per hour — military discount application form
-export const militaryDiscountLimiter = redis
-  ? new Ratelimit({ redis, limiter: Ratelimit.slidingWindow(5, '1 h'), prefix: 'rl:military' })
-  : null
+// Fail-secure stub: blocks all requests in production when Redis is unavailable,
+// allows in dev so local work isn't broken.
+const DENY_ALL = {
+  limit: async (_key: string) => ({ success: false }),
+} as unknown as Ratelimit
 
-// 30 attempts per IP per 10 minutes — coupon code verification (prevents enumeration)
-export const couponVerifyLimiter = redis
-  ? new Ratelimit({ redis, limiter: Ratelimit.slidingWindow(30, '10 m'), prefix: 'rl:coupon' })
-  : null
+function makeSecureLimiter(limiter: Ratelimit.Algorithm, prefix: string): Ratelimit | null {
+  if (redis) return new Ratelimit({ redis, limiter, prefix })
+  return process.env.NODE_ENV === 'production' ? DENY_ALL : null
+}
+
+// 5 submissions per IP per hour — military discount application form
+export const militaryDiscountLimiter = makeSecureLimiter(
+  Ratelimit.slidingWindow(5, '1 h'),
+  'rl:military',
+)
+
+// 5 attempts per IP per 10 minutes — coupon code verification (prevents enumeration)
+export const couponVerifyLimiter = makeSecureLimiter(
+  Ratelimit.slidingWindow(5, '10 m'),
+  'rl:coupon',
+)
 
 export function getIp(headers: Headers): string {
   return headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1'

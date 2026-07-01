@@ -3,6 +3,7 @@ import { cookies } from 'next/headers'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import crypto from 'crypto'
+import jwt from 'jsonwebtoken'
 import type { User } from '@/payload-types'
 
 export async function GET(request: Request) {
@@ -25,11 +26,25 @@ export async function GET(request: Request) {
 
   let redirectTo = '/account'
   try {
-    const statePayload = JSON.parse(Buffer.from(stateParam, 'base64url').toString())
+    const outer = JSON.parse(Buffer.from(stateParam, 'base64url').toString())
+
+    // Verify HMAC signature to prevent state tampering and open redirects
+    const expectedSig = crypto
+      .createHmac('sha256', process.env.PAYLOAD_SECRET || '')
+      .update(outer.d)
+      .digest('hex')
+    if (outer.s !== expectedSig) {
+      return NextResponse.redirect(new URL('/login?error=google_state_invalid', origin), { status: 302 })
+    }
+
+    const statePayload = JSON.parse(outer.d)
     if (!storedState || statePayload.token !== storedState) {
       return NextResponse.redirect(new URL('/login?error=google_state_mismatch', origin), { status: 302 })
     }
-    redirectTo = statePayload.redirect || '/account'
+
+    // Restrict redirect to relative paths to prevent open redirect attacks
+    const rawRedirect = statePayload.redirect || '/account'
+    redirectTo = rawRedirect.startsWith('/') ? rawRedirect : '/account'
   } catch {
     return NextResponse.redirect(new URL('/login?error=google_state_invalid', origin), { status: 302 })
   }
@@ -56,7 +71,7 @@ export async function GET(request: Request) {
     })
 
     if (!tokenRes.ok) {
-      console.error('Google token exchange failed:', await tokenRes.text())
+      console.error('Google token exchange failed')
       return NextResponse.redirect(new URL('/login?error=google_token_exchange', origin), { status: 302 })
     }
 
@@ -78,9 +93,21 @@ export async function GET(request: Request) {
     }
 
     const payload = await getPayload({ config })
-    const tempPassword = crypto.randomBytes(32).toString('base64') + '!A1a'
+    const collectionConfig = payload.collections['users'].config
+    const tokenExpiration = collectionConfig.auth.tokenExpiration
+
+    // Issue a session JWT without needing to know the user's password.
+    // This is safe because the user was just verified by Google.
+    function issueToken(userId: number | string, userEmail: string): string {
+      return jwt.sign(
+        { id: userId, email: userEmail, collection: 'users' },
+        process.env.PAYLOAD_SECRET as string,
+        { expiresIn: tokenExpiration },
+      )
+    }
 
     let user: User | null = null
+    let loginToken: string | null = null
 
     const byGoogleId = await payload.find({
       collection: 'users',
@@ -89,12 +116,18 @@ export async function GET(request: Request) {
     })
 
     if (byGoogleId.docs.length > 0) {
-      user = await payload.update({
-        collection: 'users',
-        id: byGoogleId.docs[0].id,
-        data: { password: tempPassword, ...(avatarUrl ? { avatarUrl } : {}) },
-        overrideAccess: true,
-      })
+      // Returning Google user — update avatar only, never touch password
+      const existing = byGoogleId.docs[0]
+      if (avatarUrl && (existing as any).avatarUrl !== avatarUrl) {
+        await payload.update({
+          collection: 'users',
+          id: existing.id,
+          data: { avatarUrl },
+          overrideAccess: true,
+        })
+      }
+      user = existing as User
+      loginToken = issueToken(user.id, user.email)
     } else {
       const byEmail = await payload.find({
         collection: 'users',
@@ -103,11 +136,11 @@ export async function GET(request: Request) {
       })
 
       if (byEmail.docs.length > 0) {
+        // Existing email/password account — link Google ID without overwriting password
         user = await payload.update({
           collection: 'users',
           id: byEmail.docs[0].id,
           data: {
-            password: tempPassword,
             googleId,
             authProvider: 'google',
             emailVerified: true,
@@ -116,8 +149,11 @@ export async function GET(request: Request) {
             ...(avatarUrl ? { avatarUrl } : {}),
           },
           overrideAccess: true,
-        })
+        }) as User
+        loginToken = issueToken(user.id, user.email)
       } else {
+        // Brand-new Google user — create with temp password, use payload.login() for the token
+        const tempPassword = crypto.randomBytes(32).toString('base64') + '!A1a'
         user = await payload.create({
           collection: 'users',
           data: {
@@ -132,30 +168,23 @@ export async function GET(request: Request) {
             ...(avatarUrl ? { avatarUrl } : {}),
           },
           overrideAccess: true,
+        }) as User
+        const loginResult = await payload.login({
+          collection: 'users',
+          data: { email: user.email, password: tempPassword },
         })
+        loginToken = loginResult.token || null
       }
     }
 
-    if (!user) {
+    if (!user || !loginToken) {
       return NextResponse.redirect(new URL('/login?error=google_server_error', origin), { status: 302 })
-    }
-
-    const loginResult = await payload.login({
-      collection: 'users',
-      data: { email: user.email, password: tempPassword },
-    })
-
-    if (!loginResult.token) {
-      return NextResponse.redirect(new URL('/login?error=google_login_failed', origin), { status: 302 })
     }
 
     const redirectUrl = new URL(`/auth-redirect?to=${encodeURIComponent(redirectTo)}`, origin)
     const response = NextResponse.redirect(redirectUrl, { status: 302 })
 
-    const collectionConfig = payload.collections['users'].config
-    const tokenExpiration = collectionConfig.auth.tokenExpiration
-
-    response.cookies.set('payload-token', loginResult.token, {
+    response.cookies.set('payload-token', loginToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
@@ -167,7 +196,7 @@ export async function GET(request: Request) {
 
     return response
   } catch (err) {
-    console.error('Google OAuth error:', err)
+    console.error('Google OAuth error')
     return NextResponse.redirect(new URL('/login?error=google_server_error', origin), { status: 302 })
   }
 }

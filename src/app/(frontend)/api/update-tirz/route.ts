@@ -2,7 +2,12 @@ import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
-export async function GET() {
+export async function GET(request: Request) {
+  const cronSecret = process.env.CRON_SECRET
+  if (!cronSecret || request.headers.get('Authorization') !== `Bearer ${cronSecret}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     const payload = await getPayload({ config: configPromise })
 
@@ -120,6 +125,7 @@ export async function GET() {
 
     return NextResponse.json({ success: true, message: 'Updated Tirzepatide and created Bundles!' })
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    console.error('update-tirz error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

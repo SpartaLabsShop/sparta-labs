@@ -16,8 +16,12 @@ export default async function OrderConfirmationPage({ params }: { params: Promis
   }
 
   const { cookies } = await import('next/headers')
+  const { createHmac } = await import('crypto')
   const cookieStore = await cookies()
-  const isCookieAuthorized = cookieStore.get(`order_auth_${id}`)?.value === 'true'
+  const expectedSig = createHmac('sha256', process.env.PAYLOAD_SECRET || '')
+    .update(id)
+    .digest('hex')
+  const isCookieAuthorized = cookieStore.get(`order_auth_${id}`)?.value === expectedSig
 
   const payload = await getPayload({ config: configPromise })
   

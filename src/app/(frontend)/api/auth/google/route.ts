@@ -11,8 +11,12 @@ export async function GET(request: Request) {
   const redirectTo = searchParams.get('redirect') || '/account'
 
   const state = crypto.randomBytes(32).toString('hex')
-  const statePayload = JSON.stringify({ token: state, redirect: redirectTo })
-  const encodedState = Buffer.from(statePayload).toString('base64url')
+  const rawPayload = JSON.stringify({ token: state, redirect: redirectTo })
+  const sig = crypto
+    .createHmac('sha256', process.env.PAYLOAD_SECRET || '')
+    .update(rawPayload)
+    .digest('hex')
+  const encodedState = Buffer.from(JSON.stringify({ d: rawPayload, s: sig })).toString('base64url')
 
   const origin = process.env.NEXT_PUBLIC_SERVER_URL || new URL(request.url).origin
   const callbackUrl = `${origin}/api/auth/google/callback`

@@ -125,7 +125,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || process.env.DATABASE_URL || '',
       max: process.env.NODE_ENV === 'production' ? 10 : 10,
       ssl: {
-        rejectUnauthorized: false,
+        rejectUnauthorized: true,
       },
     },
   }),

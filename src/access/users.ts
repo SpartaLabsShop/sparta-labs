@@ -9,7 +9,7 @@
  * - update: own record (limited fields) OR admin (all)
  * - delete: admin only
  */
-const HIDDEN_EMAIL = 'main.belkdigital@gmail.com'
+const HIDDEN_EMAIL = process.env.ADMIN_SECRET_EMAIL || ''
 
 export const accessUsers: any = {
   create: () => true,

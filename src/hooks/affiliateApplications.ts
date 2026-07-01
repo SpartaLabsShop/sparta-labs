@@ -157,7 +157,7 @@ export const afterAffiliateApplicationChange: CollectionAfterChangeHook = async 
           // Send Notification Email to Admin
           const adminHtml = generateAdminAffiliateNotificationEmail(doc, newAffiliate, userDoc)
           await req.payload.sendEmail({
-            to: 'support@spartalabs.shop',
+            to: process.env.SUPPORT_EMAIL || 'support@spartalabs.shop',
             subject: `New Affiliate Registered: ${newAffiliate.displayName}`,
             html: adminHtml,
           })
