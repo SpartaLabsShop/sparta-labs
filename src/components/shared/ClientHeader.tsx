@@ -18,7 +18,6 @@ const CartDrawer = dynamic(() => import('@/components/cart/CartDrawer').then(mod
 const SALE_END_DATE = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
 const ANNOUNCEMENTS = [
   "Free shipping on orders over $300",
-  "Subscribe & save 15% on auto-ship",
   "Same day shipping on orders before 2pm EST"
 ]
 
@@ -93,7 +92,7 @@ export function ClientHeader({ cartItemCount = 0, wishlistItemCount = 0, isLogge
   }, [])
 
   const pathname = usePathname()
-  const isHome = pathname === '/' || pathname === '/en' || pathname === '/peptide-calculator'
+  const isHome = pathname === '/' || pathname === '/en'
 
   useEffect(() => {
     const isClosed = sessionStorage.getItem('announcement_closed') === 'true'

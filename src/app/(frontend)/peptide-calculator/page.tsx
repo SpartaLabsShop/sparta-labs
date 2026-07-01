@@ -1,5 +1,9 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import PeptideCalculatorPage from './PeptideCalculatorClient'
+
+// Page hidden per request — set to false to bring it back online.
+const IS_ENABLED = false
 
 export const metadata: Metadata = {
   title: 'Peptide Reconstitution Calculator — Free Tool | Sparta Labs',
@@ -13,6 +17,10 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+  if (!IS_ENABLED) {
+    notFound()
+  }
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   X, Search, Heart, User, LogIn, ArrowUpRight,
   Activity, Dna, Brain, ShieldPlus, Sparkles, Zap, Network, BatteryCharging,
-  ShoppingBag, Calculator, BookOpen, Microscope,
+  ShoppingBag, BookOpen, Microscope,
   HelpCircle, Mail, Users, ChevronDown
 } from 'lucide-react'
 import Link from 'next/link'
@@ -31,7 +31,6 @@ const CATEGORY_ICONS: Record<string, typeof Activity> = {
 
 const DISCOVER_LINKS = [
   { label: 'Shop All Formulations', href: '/shop', icon: ShoppingBag },
-  { label: 'Peptide Calculator', href: '/peptide-calculator', icon: Calculator },
   { label: 'Scientific Journal', href: '/journal', icon: BookOpen },
   { label: 'Our Laboratory', href: '/about', icon: Microscope },
 ]
