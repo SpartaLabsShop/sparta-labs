@@ -8,6 +8,19 @@ export async function Header() {
     const payload = await getPayload({ config: configPromise })
     const user = await getPayloadUser()
 
+    const categoriesRes = await payload.find({
+      collection: 'categories',
+      where: { isVisible: { equals: true } },
+      sort: 'name',
+      limit: 100,
+      overrideAccess: true,
+    })
+    const categories = categoriesRes.docs.map((cat) => ({
+      id: cat.id,
+      name: cat.name,
+      slug: cat.slug || '',
+    }))
+
     let cartItemCount = 0
     let wishlistItemCount = 0
     let initialWishlistItems: any[] = []
@@ -69,7 +82,7 @@ export async function Header() {
         isLoggedIn={!!user}
         userEmail={(user as any)?.email || ''}
         avatarUrl={(user as any)?.avatarUrl || ''}
-        categories={[]}
+        categories={categories}
         initialWishlistItems={initialWishlistItems}
         initialCartItems={initialCartItems}
       />

@@ -13,18 +13,21 @@ export interface MobileMenuProps {
   onClose: () => void
   isLoggedIn?: boolean
   onSearchClick?: () => void
+  categories?: { id: string | number; name: string; slug: string }[]
 }
 
-const CATEGORIES = [
-  { name: 'Bioregulators', icon: Activity },
-  { name: 'Cellular Health', icon: Dna },
-  { name: 'Cognitive', icon: Brain },
-  { name: 'Essentials', icon: ShieldPlus },
-  { name: 'Growth Factor', icon: Sparkles },
-  { name: 'Metabolic', icon: Zap },
-  { name: 'Receptor Agonist', icon: Network },
-  { name: 'Recovery', icon: BatteryCharging }
-]
+// Keyed by real category name (as stored in Payload) so icons still match
+// once real categories are wired in; anything unmapped falls back to Activity.
+const CATEGORY_ICONS: Record<string, typeof Activity> = {
+  'Bioregulators': Activity,
+  'Cellular Health Research': Dna,
+  'Cognitive Function Studies': Brain,
+  'Essentials': ShieldPlus,
+  'Growth Factor Research Peptides': Sparkles,
+  'Metabolic Research Peptides': Zap,
+  'Receptor Agonist Research Peptides': Network,
+  'Recovery Research Peptides': BatteryCharging,
+}
 
 const DISCOVER_LINKS = [
   { label: 'Shop All Formulations', href: '/shop', icon: ShoppingBag },
@@ -39,7 +42,7 @@ const SUPPORT_LINKS = [
   { label: 'Affiliate Program', href: '/affiliates', icon: Users },
 ]
 
-export function MobileMenu({ isOpen, onClose, isLoggedIn = false, onSearchClick }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, isLoggedIn = false, onSearchClick, categories = [] }: MobileMenuProps) {
 
   useEffect(() => {
     if (isOpen) {
@@ -144,17 +147,20 @@ export function MobileMenu({ isOpen, onClose, isLoggedIn = false, onSearchClick 
               >
                 <h3 className="text-[9px] font-bold uppercase tracking-[0.2em] text-ink/40 mb-5">Shop by Category</h3>
                 <div className="flex flex-col gap-1">
-                  {CATEGORIES.map((cat) => (
-                    <Link
-                      key={cat.name}
-                      href={`/shop/${cat.name.toLowerCase().replace(' ', '-')}`}
-                      onClick={onClose}
-                      className="flex items-center gap-3 py-2.5 text-ink/70 transition-all duration-200 hover:text-ink hover:pl-1"
-                    >
-                      <cat.icon size={14} strokeWidth={1.5} />
-                      <span className="text-[14px] font-light">{cat.name}</span>
-                    </Link>
-                  ))}
+                  {categories.map((cat) => {
+                    const Icon = CATEGORY_ICONS[cat.name] || Activity
+                    return (
+                      <Link
+                        key={cat.id}
+                        href={`/shop?category=${encodeURIComponent(cat.name)}`}
+                        onClick={onClose}
+                        className="flex items-center gap-3 py-2.5 text-ink/70 transition-all duration-200 hover:text-ink hover:pl-1"
+                      >
+                        <Icon size={14} strokeWidth={1.5} />
+                        <span className="text-[14px] font-light">{cat.name}</span>
+                      </Link>
+                    )
+                  })}
                 </div>
               </motion.div>
             </div>

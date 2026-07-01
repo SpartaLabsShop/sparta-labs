@@ -9,20 +9,22 @@ import Image from 'next/image'
 interface SearchOverlayProps {
   isOpen: boolean
   onClose: () => void
+  categories?: { id: string | number; name: string; slug: string }[]
 }
 
-const QUICK_CATEGORIES = [
-  { name: 'Metabolic Research', icon: Zap, href: '/shop/metabolic' },
-  { name: 'Growth Factor Research', icon: Sparkles, href: '/shop/growth-factor' },
-  { name: 'Recovery Research', icon: BatteryCharging, href: '/shop/recovery' },
-  { name: 'Cellular Health Research', icon: Dna, href: '/shop/cellular-health' },
-  { name: 'Bioregulators', icon: Activity, href: '/shop/bioregulators' },
-  { name: 'Cognitive Research', icon: Brain, href: '/shop/cognitive' },
-  { name: 'Essentials', icon: ShieldPlus, href: '/shop/essentials' },
-  { name: 'Receptor Agonist', icon: Network, href: '/shop/receptor-agonist' },
-]
+// Keyed by real category name (as stored in Payload); unmapped falls back to Sparkles.
+const CATEGORY_ICONS: Record<string, typeof Zap> = {
+  'Metabolic Research Peptides': Zap,
+  'Growth Factor Research Peptides': Sparkles,
+  'Recovery Research Peptides': BatteryCharging,
+  'Cellular Health Research': Dna,
+  'Bioregulators': Activity,
+  'Cognitive Function Studies': Brain,
+  'Essentials': ShieldPlus,
+  'Receptor Agonist Research Peptides': Network,
+}
 
-export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
+export function SearchOverlay({ isOpen, onClose, categories = [] }: SearchOverlayProps) {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -132,7 +134,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               )}
 
               {/* Show Quick Categories if no query */}
-              {!query && (
+              {!query && categories.length > 0 && (
                 <div className="py-2">
                   <div className="flex items-center gap-4 px-6 pt-6">
                     <span className="text-[9px] font-bold uppercase tracking-widest text-black/40 shrink-0">
@@ -140,26 +142,29 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                     </span>
                     <div className="flex-1 h-px bg-black/5" />
                   </div>
-                  
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6">
-                    {QUICK_CATEGORIES.map((cat, index) => (
-                      <Link
-                        key={cat.name}
-                        href={cat.href}
-                        onClick={onClose}
-                        className={`group items-center p-4 rounded-2xl bg-[#FAFAFA] border border-black/5 hover:border-black/20 hover:bg-white transition-all shadow-sm hover:shadow-md ${
-                          index >= 4 ? 'hidden sm:flex' : 'flex'
-                        }`}
-                      >
-                        <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm border border-black/5 shrink-0 group-hover:scale-105 transition-transform">
-                          <cat.icon size={18} className="text-black" strokeWidth={1.5} />
-                        </div>
-                        <span className="ml-4 text-sm font-semibold text-black flex-1">
-                          {cat.name}
-                        </span>
-                        <ArrowRight size={16} className="text-black/20 group-hover:text-black/60 transition-colors" />
-                      </Link>
-                    ))}
+                    {categories.map((cat, index) => {
+                      const Icon = CATEGORY_ICONS[cat.name] || Sparkles
+                      return (
+                        <Link
+                          key={cat.id}
+                          href={`/shop?category=${encodeURIComponent(cat.name)}`}
+                          onClick={onClose}
+                          className={`group items-center p-4 rounded-2xl bg-[#FAFAFA] border border-black/5 hover:border-black/20 hover:bg-white transition-all shadow-sm hover:shadow-md ${
+                            index >= 4 ? 'hidden sm:flex' : 'flex'
+                          }`}
+                        >
+                          <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm border border-black/5 shrink-0 group-hover:scale-105 transition-transform">
+                            <Icon size={18} className="text-black" strokeWidth={1.5} />
+                          </div>
+                          <span className="ml-4 text-sm font-semibold text-black flex-1">
+                            {cat.name}
+                          </span>
+                          <ArrowRight size={16} className="text-black/20 group-hover:text-black/60 transition-colors" />
+                        </Link>
+                      )
+                    })}
                   </div>
                 </div>
               )}

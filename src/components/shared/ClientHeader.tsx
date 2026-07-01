@@ -301,14 +301,15 @@ export function ClientHeader({ cartItemCount = 0, wishlistItemCount = 0, isLogge
 
       </div>
 
-      <MobileMenu 
-        isOpen={mobileMenuOpen} 
-        onClose={() => setMobileMenuOpen(false)} 
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
         isLoggedIn={isLoggedIn}
         onSearchClick={() => setIsSearchOpen(true)}
+        categories={initialCategories}
       />
       <CartDrawer />
-      <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} categories={initialCategories} />
     </>
   )
 }
