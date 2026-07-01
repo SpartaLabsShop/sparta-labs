@@ -18,6 +18,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https://images.unsplash.com https://lh3.googleusercontent.com https://pub-98e0db9a622e42fe957115eb0a1141ed.r2.dev https://res.cloudinary.com",
+      "media-src 'self' https://res.cloudinary.com",
       "connect-src 'self' https://api.stripe.com https://accounts.google.com",
       "frame-src https://js.stripe.com https://hooks.stripe.com https://accounts.google.com",
       "object-src 'none'",
