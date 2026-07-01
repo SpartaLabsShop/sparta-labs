@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { SOCIAL_LINKS } from './SocialIcons'
 const FooterContent = () => {
   return (
   <div className="bg-[#28282B] text-[#cccccc] pt-12 pb-0 w-full flex flex-col items-center overflow-hidden">
@@ -48,6 +49,20 @@ const FooterContent = () => {
             <ul className="flex flex-col gap-4">
               <li><Link href="/contact" className="text-sm text-white/50 hover:text-white transition-colors">Contact</Link></li>
             </ul>
+            <div className="flex items-center gap-4">
+              {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-white/50 hover:text-white transition-colors"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-col gap-6">

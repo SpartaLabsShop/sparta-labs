@@ -19,6 +19,7 @@ import { CheckCircle2, ChevronRight } from 'lucide-react'
 import { submitContactForm } from './actions'
 import { toast } from 'sonner'
 import { TurnstileWidget } from '@/components/TurnstileWidget'
+import { SOCIAL_LINKS } from '@/components/shared/SocialIcons'
 
 const CONTACT_FAQS = [
   { question: 'When will my order ship?', answer: 'Orders placed before 2:00 PM EST Monday through Friday are shipped the same day. Orders placed after the cutoff or on weekends will ship the following business day.' },
@@ -121,6 +122,24 @@ export default function ContactPage() {
                 <h4 className="font-bold text-ink mb-3">Other Inquiries</h4>
                 <p className="text-gray-500 text-sm">quality@spartalabs.shop</p>
                 <p className="text-gray-500 text-sm mt-1">wholesale@spartalabs.shop</p>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-ink mb-3">Follow Us</h4>
+                <div className="flex items-center gap-4">
+                  {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="text-gray-500 hover:text-ink transition-colors"
+                    >
+                      <Icon size={20} />
+                    </a>
+                  ))}
+                </div>
               </div>
 
             </div>

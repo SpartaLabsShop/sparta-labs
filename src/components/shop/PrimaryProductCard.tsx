@@ -140,9 +140,9 @@ export function PrimaryProductCard({ product, id }: PrimaryProductCardProps) {
       className="group relative flex flex-col overflow-hidden rounded-xl bg-[#f6f6f6] pt-6 sm:pt-8 px-3 sm:px-6 pb-4 sm:pb-6 h-full w-full"
     >
       {/* Third-Party Tested Badge */}
-      <div className="absolute top-0 left-1/2 z-10 flex h-7 w-[180px] -translate-x-1/2 items-center justify-center bg-white [clip-path:polygon(0_0,100%_0,88%_100%,12%_100%)]">
-        <span className="-mt-0.5 flex items-center text-[0.65rem] font-medium text-[#333333]">
-          <Check size={10} strokeWidth={3} className="mr-1" /> Third-Party Tested
+      <div className="absolute top-0 left-1/2 z-10 flex h-6 sm:h-7 w-[80%] sm:w-[180px] max-w-[180px] -translate-x-1/2 items-center justify-center bg-white [clip-path:polygon(0_0,100%_0,88%_100%,12%_100%)]">
+        <span className="-mt-0.5 flex items-center whitespace-nowrap text-[0.55rem] sm:text-[0.65rem] font-medium text-[#333333]">
+          <Check size={9} strokeWidth={3} className="mr-1 shrink-0" /> Third-Party Tested
         </span>
       </div>
 

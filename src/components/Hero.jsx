@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import { Check, ArrowUpRight } from "lucide-react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -62,6 +64,48 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+
+      <Link
+        href="/military-discount"
+        className="group absolute bottom-6 right-6 z-20 hidden w-[260px] flex-col overflow-hidden rounded-xl bg-[#f6f6f6] pt-8 pb-6 px-6 text-left shadow-2xl transition-transform duration-300 hover:-translate-y-1 sm:flex"
+      >
+        {/* Background image */}
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center opacity-30"
+          style={{ backgroundImage: "url('https://res.cloudinary.com/denskvdyt/image/upload/v1782864394/military-discount-banner_minejn.webp')" }}
+        />
+        {/* Fade to a solid backdrop toward the bottom so the text stays legible */}
+        <div className="absolute inset-0 z-[5] bg-gradient-to-b from-transparent via-[#f6f6f6]/80 to-[#f6f6f6]" />
+
+        {/* Verified Discount notch */}
+        <div className="absolute top-0 left-1/2 z-10 flex h-7 w-[170px] -translate-x-1/2 items-center justify-center bg-white [clip-path:polygon(0_0,100%_0,88%_100%,12%_100%)]">
+          <span className="-mt-0.5 flex items-center gap-1 whitespace-nowrap text-[0.7rem] font-medium text-[#333333]">
+            <Check size={12} strokeWidth={3} /> Verified Discount
+          </span>
+        </div>
+
+        {/* Badge image */}
+        <div className="relative z-10 mx-auto mb-4 mt-2 h-24 w-24 shrink-0">
+          <Image
+            src="https://res.cloudinary.com/denskvdyt/image/upload/v1782945873/military-badge_mtaehv.webp"
+            alt="Military Badge"
+            fill
+            className="object-contain"
+          />
+        </div>
+
+        <p className="relative z-10 mb-1 text-[0.65rem] font-medium uppercase tracking-[0.15em] text-gray-400">
+          Military Appreciation
+        </p>
+        <h3 className="relative z-10 mb-2 text-xl font-semibold text-ink">Military Discount</h3>
+        <p className="relative z-10 pr-6 text-sm leading-snug text-gray-500">
+          Exclusive savings for those who serve our country.
+        </p>
+
+        <div className="absolute bottom-5 right-5 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-ink transition-colors group-hover:bg-ink group-hover:text-white">
+          <ArrowUpRight size={16} />
+        </div>
+      </Link>
 
     </motion.section>
   );
