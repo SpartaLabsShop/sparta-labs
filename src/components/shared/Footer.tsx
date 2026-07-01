@@ -11,21 +11,8 @@ const FooterContent = () => {
       {/* 1. Top Section */}
       <div className="flex flex-col lg:flex-row justify-between gap-16 lg:gap-8 mb-12">
         
-        {/* Left: Socials & Newsletter */}
+        {/* Left: Newsletter */}
         <div className="w-full lg:w-5/12 flex flex-col items-start text-left">
-          {/* Social Icons */}
-          <div className="flex items-center gap-4 mb-8">
-            <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#28282B] transition-all">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#28282B] transition-all">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#28282B] transition-all">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
-            </a>
-          </div>
-
           <h2 className="text-sm font-medium mb-1 tracking-wide text-white/90">
             Research uninterrupted — Stay Ahead of New Compounds
           </h2>
@@ -60,7 +47,6 @@ const FooterContent = () => {
             <h3 className="text-[11px] uppercase tracking-[0.2em] text-white/80 font-medium">Connect</h3>
             <ul className="flex flex-col gap-4">
               <li><Link href="/contact" className="text-sm text-white/50 hover:text-white transition-colors">Contact</Link></li>
-              <li><a href="#" className="text-sm text-white/50 hover:text-white transition-colors">Instagram</a></li>
             </ul>
           </div>
 
