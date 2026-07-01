@@ -36,6 +36,24 @@ export const couponVerifyLimiter = makeSecureLimiter(
   'rl:coupon',
 )
 
+// 10 attempts per IP per 10 minutes — credential login (prevents brute force/credential stuffing)
+export const loginLimiter = makeSecureLimiter(
+  Ratelimit.slidingWindow(10, '10 m'),
+  'rl:login',
+)
+
+// 5 signups per IP per hour — registration (prevents mass account creation)
+export const registerLimiter = makeSecureLimiter(
+  Ratelimit.slidingWindow(5, '1 h'),
+  'rl:register',
+)
+
+// 5 attempts per IP per hour — password reset request (prevents email-bombing/enumeration)
+export const passwordResetLimiter = makeSecureLimiter(
+  Ratelimit.slidingWindow(5, '1 h'),
+  'rl:pwreset',
+)
+
 export function getIp(headers: Headers): string {
   return headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1'
 }

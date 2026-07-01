@@ -5,13 +5,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Loader2 } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import { GoogleSignInButton } from '@/components/auth/GoogleSignInButton'
+import { TurnstileWidget } from '@/components/TurnstileWidget'
 
 const GOOGLE_ERROR_MESSAGES: Record<string, string> = {
   google_denied: 'Google sign-in was cancelled.',
   google_no_email: 'Could not retrieve email from Google.',
   google_state_mismatch: 'Authentication failed. Please try again.',
   google_server_error: 'Something went wrong with Google sign-in.',
+  OAuthCallback: 'Google sign-in failed. Please try again.',
+  OAuthSignin: 'Could not initiate Google sign-in. Please try again.',
 }
 
 export default function LoginPage() {
@@ -20,23 +24,30 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const googleError = searchParams.get('error')
-  const [error, setError] = useState(googleError ? (GOOGLE_ERROR_MESSAGES[googleError] || 'Google sign-in failed.') : '')
+  const justRegistered = searchParams.get('registered') === 'true'
+  const [error, setError] = useState(googleError ? (GOOGLE_ERROR_MESSAGES[googleError] || 'Sign-in failed. Please try again.') : '')
   const [isLoading, setIsLoading] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
+    if (!turnstileToken) { setError('Please complete the verification challenge.'); return }
     setIsLoading(true)
     try {
-      const res = await fetch('/api/users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-        credentials: 'include',
+      const result = await signIn('credentials', {
+        email,
+        password,
+        turnstileToken,
+        redirect: false,
       })
-      const data = await res.json()
-      if (!res.ok) {
-        setError(data?.errors?.[0]?.message || 'Invalid email or password.')
+      if (!result?.ok) {
+        const msg = result?.error
+        if (msg === 'Bot verification failed. Please try again.') {
+          setError(msg)
+        } else {
+          setError('Invalid email or password.')
+        }
         return
       }
       router.push('/account')
@@ -82,6 +93,12 @@ export default function LoginPage() {
           <h1 className={`text-2xl font-bold tracking-tight text-black mb-1 font-[family-name:var(--font-inter)]`}>Welcome back</h1>
           <p className="text-sm text-gray-500 mb-8">Sign in to your Sparta Labs account</p>
 
+          {justRegistered && !error && (
+            <div className="mb-6 p-3 bg-green-50 border border-green-200 text-green-800 text-sm font-medium">
+              Account created! Please sign in below.
+            </div>
+          )}
+
           <GoogleSignInButton redirect="/account" className="h-14 rounded-none" />
 
           <div className="flex items-center gap-3 my-4">
@@ -111,9 +128,11 @@ export default function LoginPage() {
               />
             </div>
 
+            <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken('')} />
+
             {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
 
-            <button type="submit" disabled={isLoading}
+            <button type="submit" disabled={isLoading || !turnstileToken}
               className="bg-black hover:bg-gray-900 text-white w-full h-14 text-xs font-bold uppercase tracking-[0.2em] transition-colors flex items-center justify-center mt-2 disabled:opacity-60">
               {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Sign In'}
             </button>

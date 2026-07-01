@@ -60,7 +60,7 @@ export function AccountOverviewClient({ stats, recentOrders, defaultAddress, aff
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 bg-white border border-slate-200 px-4 py-2.5 rounded-xl shadow-sm">
             <Star size={18} className="text-[#CC292B]" />
-            <span className="text-sm font-semibold text-slate-700">Maxx Points</span>
+            <span className="text-sm font-semibold text-slate-700">Sparta Points</span>
             <span className="text-sm font-bold text-slate-900 ml-2">{stats.maxxPoints}</span>
           </div>
           <div className="w-11 h-11 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-bold">
@@ -72,7 +72,7 @@ export function AccountOverviewClient({ stats, recentOrders, defaultAddress, aff
       {/* Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Maxx Points', value: stats.maxxPoints, icon: Star },
+          { label: 'Sparta Points', value: stats.maxxPoints, icon: Star },
           { label: 'Orders Placed', value: stats.ordersPlaced, icon: Package },
           { label: 'Wishlist Items', value: stats.wishlistCount, icon: Heart },
           { label: 'Member Since', value: stats.memberSince, icon: Calendar },

@@ -519,13 +519,13 @@ export function CheckoutClient() {
                 ))}
               </div>
 
-              {/* Maxx Points */}
+              {/* Sparta Points */}
               {availablePoints > 0 && (
                 <div className={`flex items-center justify-between p-4 rounded-lg border mb-5 transition-colors ${isRedeemingPoints ? 'bg-amber-50 border-amber-200' : 'border-gray-100'}`}>
                   <div className="flex items-center gap-2.5">
                     <Sparkles size={14} className={isRedeemingPoints ? 'text-amber-500' : 'text-gray-300'} />
                     <div className="flex flex-col">
-                      <span className="text-xs font-medium text-ink">Maxx Points</span>
+                      <span className="text-xs font-medium text-ink">Sparta Points</span>
                       <span className="text-[11px] text-gray-400">{Number(availablePoints.toFixed(2))} pts (${availablePoints.toFixed(2)})</span>
                     </div>
                   </div>

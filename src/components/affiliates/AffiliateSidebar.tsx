@@ -128,9 +128,8 @@ export function AffiliateSidebar({
               </DialogClose>
               <button 
                 onClick={async () => {
-                  await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
-                  router.push('/')
-                  router.refresh()
+                  const { signOutEverywhere } = await import('@/lib/auth/signOutEverywhere')
+                  await signOutEverywhere('/')
                 }}
                 className="px-6 py-3.5 rounded-xl text-sm font-bold text-white bg-[#CC292B] hover:bg-[#b02224] transition-colors w-full sm:w-auto text-center"
               >

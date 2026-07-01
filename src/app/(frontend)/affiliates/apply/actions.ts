@@ -4,9 +4,14 @@ import { getPayloadUser } from '@/lib/auth/getPayloadUser'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { revalidatePath } from 'next/cache'
+import { verifyTurnstile } from '@/lib/turnstile'
 
 export async function submitAffiliateApplication(formData: FormData) {
   try {
+    const turnstileToken = formData.get('turnstileToken') as string
+    const valid = await verifyTurnstile(turnstileToken)
+    if (!valid) return { success: false, error: 'Bot verification failed. Please try again.' }
+
     const user = await getPayloadUser()
     if (!user) {
       return { success: false, error: 'You must be logged in to apply.' }

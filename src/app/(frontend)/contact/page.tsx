@@ -18,6 +18,7 @@ import {
 import { CheckCircle2, ChevronRight } from 'lucide-react'
 import { submitContactForm } from './actions'
 import { toast } from 'sonner'
+import { TurnstileWidget } from '@/components/TurnstileWidget'
 
 const CONTACT_FAQS = [
   { question: 'When will my order ship?', answer: 'Orders placed before 2:00 PM EST Monday through Friday are shipped the same day. Orders placed after the cutoff or on weekends will ship the following business day.' },
@@ -33,12 +34,15 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!turnstileToken) { toast.error('Please complete the verification challenge.'); return }
     setIsSubmitting(true)
 
     const formData = new FormData(e.currentTarget)
+    formData.set('turnstileToken', turnstileToken)
     const result = await submitContactForm(formData)
 
     setIsSubmitting(false)
@@ -119,25 +123,6 @@ export default function ContactPage() {
                 <p className="text-gray-500 text-sm mt-1">wholesale@spartalabs.shop</p>
               </div>
 
-              <div>
-                <h4 className="font-bold text-ink mb-3">Social network</h4>
-                <div className="flex gap-4 items-center">
-                  <a href="#" className="w-6 h-6 flex items-center justify-center text-ink hover:text-[#5984c4] transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
-                  </a>
-                  <a href="#" className="w-6 h-6 flex items-center justify-center text-ink hover:text-[#5984c4] transition-colors">
-                    <svg width="16" height="16" viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="currentColor" />
-                    </svg>
-                  </a>
-                  <a href="#" className="w-6 h-6 flex items-center justify-center text-ink hover:text-[#5984c4] transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
-                  </a>
-                  <a href="#" className="w-6 h-6 flex items-center justify-center text-ink hover:text-[#5984c4] transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" /><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" /></svg>
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -222,8 +207,12 @@ export default function ContactPage() {
                     </div>
                   </div>
 
+                  <div className="pt-2">
+                    <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken('')} />
+                  </div>
+
                   <div className="pt-4">
-                    <Button type="submit" disabled={isSubmitting} className="rounded-xl bg-[#2a2a2a] text-white hover:bg-black px-6 py-6 h-auto text-sm font-medium flex items-center gap-3">
+                    <Button type="submit" disabled={isSubmitting || !turnstileToken} className="rounded-xl bg-[#2a2a2a] text-white hover:bg-black px-6 py-6 h-auto text-sm font-medium flex items-center gap-3 disabled:opacity-60">
                       Send a message
                       <span className="bg-white/10 rounded-full p-1"><ChevronRight size={16} /></span>
                     </Button>
@@ -234,18 +223,6 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Map Section */}
-        <div className="w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden mt-12 bg-gray-100">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.47339870626!2d-0.24168120601630138!3d51.52855824202758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604b900d26973%3A0x4291f3172409ea92!2sLondon%20Eye!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
       </section>
 
       {/* FAQs Section */}

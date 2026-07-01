@@ -4,22 +4,25 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Loader2, CheckCircle } from 'lucide-react'
+import { TurnstileWidget } from '@/components/TurnstileWidget'
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
+    if (!turnstileToken) { setError('Please complete the verification challenge.'); return }
     setIsLoading(true)
     try {
-      const res = await fetch('/api/users/forgot-password', {
+      const res = await fetch('/api/auth/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, turnstileToken }),
       })
       if (!res.ok) {
         const data = await res.json()
@@ -90,9 +93,11 @@ export default function ForgotPasswordPage() {
                   />
                 </div>
 
+                <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken('')} />
+
                 {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
 
-                <button type="submit" disabled={isLoading}
+                <button type="submit" disabled={isLoading || !turnstileToken}
                   className="bg-black hover:bg-gray-900 text-white w-full h-14 text-xs font-bold uppercase tracking-[0.2em] transition-colors flex items-center justify-center mt-2 disabled:opacity-60">
                   {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Send Reset Link'}
                 </button>

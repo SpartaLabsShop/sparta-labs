@@ -233,7 +233,7 @@ export interface User {
     | boolean
     | null;
   /**
-   * Maxx Points ($1 per point). Can be used by users at checkout.
+   * Sparta Points ($1 per point). Can be used by users at checkout.
    */
   maxxPoints?: number | null;
   updatedAt: string;
@@ -680,7 +680,7 @@ export interface Order {
   subtotal?: number | null;
   discountTotal?: number | null;
   /**
-   * Maxx Points used in this order ($1 per point)
+   * Sparta Points used in this order ($1 per point)
    */
   redeemedPoints?: number | null;
   shippingTotal?: number | null;

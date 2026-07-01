@@ -1,14 +1,12 @@
 import React from 'react'
 import '@/app/globals.css'
 import { Inter } from 'next/font/google'
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
-import { headers } from 'next/headers'
 import { AuthProvider } from '@/lib/auth/AuthContext'
 import { SmoothScroll } from '@/components/shared/SmoothScroll'
 import { Toaster } from '@/components/ui/sonner'
 import { Header } from '@/components/shared/Header'
 import { Footer } from '@/components/shared/Footer'
+import { getPayloadUser } from '@/lib/auth/getPayloadUser'
 import type { User } from '@/payload-types'
 
 const inter = Inter({
@@ -26,11 +24,9 @@ export const metadata = {
 export default async function FrontendLayout({ children }: { children: React.ReactNode }) {
   let user: User | null = null
   try {
-    const payload = await getPayload({ config: configPromise })
-    const auth = await payload.auth({ headers: await headers() })
-    user = (auth.user as User) || null
+    user = await getPayloadUser()
   } catch {
-    // not authenticated or DB unavailable — render without user
+    // not authenticated — render without user
   }
 
   return (

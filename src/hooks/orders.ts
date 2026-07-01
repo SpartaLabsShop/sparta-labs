@@ -8,26 +8,34 @@ export const afterOrderChange: CollectionAfterChangeHook = async ({ doc, previou
   if (operation === 'create') {
     const customerEmail = (typeof doc.owner === 'object' && doc.owner?.email) || doc.guestEmail || 'Unknown'
     const orderNumber = doc.orderNumber || doc.id
+    const { adminEmail, infoTable, ctaButton } = await import('@/lib/emails/emailLayout')
+    const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://spartalabs.shop'
+    const adminOrderUrl = `${serverUrl}/admin/collections/orders/${doc.id}`
+    const paymentLabel = doc.paymentStatus === 'unpaid' ? 'Zelle — Pending' : doc.paymentStatus === 'captured' ? 'Paid' : (doc.paymentStatus || 'Unknown')
+    const adminOrderHtml = adminEmail(`
+      <tr><td style="padding:32px 32px 24px;">
+        <p style="margin:0 0 6px;font-size:20px;font-weight:800;color:#111827;">New Order Received</p>
+        <p style="margin:0;font-size:13px;color:#6B7280;">A new order has been placed and is awaiting fulfillment.</p>
+      </td></tr>
+      <tr><td style="padding:0 32px 24px;">
+        <div style="background:#FFF5F5;border-radius:10px;padding:20px 24px;border:1px solid #FEE2E2;text-align:center;margin-bottom:20px;">
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.5px;">Order Total</p>
+          <p style="margin:0;font-size:32px;font-weight:800;color:#E61C24;">$${(doc.total || 0).toFixed(2)}</p>
+        </div>
+        ${infoTable([
+          ['Order Number', `#${orderNumber}`],
+          ['Customer', `${doc.customerFirstName || ''} ${doc.customerLastName || ''}`.trim() || 'N/A'],
+          ['Email', customerEmail],
+          ['Payment', paymentLabel],
+          ['Shipping', doc.shippingMethod || 'Standard'],
+        ])}
+      </td></tr>
+      <tr><td align="center" style="padding:0 32px 36px;">${ctaButton(adminOrderUrl, 'View Order in Admin')}</td></tr>
+    `, 'New Order')
     req.payload.sendEmail({
       to: ADMIN_EMAIL,
       subject: `New Order #${orderNumber} — $${(doc.total || 0).toFixed(2)}`,
-      html: `
-        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 40px 20px;">
-          <h1 style="font-size: 20px; font-weight: 700; color: #111; margin: 0 0 24px 0;">SPARTA LABS</h1>
-          <h2 style="font-size: 22px; font-weight: 700; color: #111; margin-bottom: 16px;">New Order Received</h2>
-          <table style="width: 100%; font-size: 14px; color: #444; line-height: 1.8;">
-            <tr><td style="font-weight: 600;">Order</td><td>#${orderNumber}</td></tr>
-            <tr><td style="font-weight: 600;">Customer</td><td>${doc.customerFirstName || ''} ${doc.customerLastName || ''}</td></tr>
-            <tr><td style="font-weight: 600;">Email</td><td>${customerEmail}</td></tr>
-            <tr><td style="font-weight: 600;">Total</td><td style="font-weight: 700; color: #111;">$${(doc.total || 0).toFixed(2)}</td></tr>
-            <tr><td style="font-weight: 600;">Payment</td><td>${doc.paymentStatus === 'unpaid' ? '⏳ Zelle Pending' : '✅ Paid'}</td></tr>
-            <tr><td style="font-weight: 600;">Shipping</td><td>${doc.shippingMethod || 'Standard'}</td></tr>
-          </table>
-          <a href="${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/admin/collections/orders/${doc.id}" style="display: inline-block; background: #111; color: #fff; padding: 12px 24px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; margin-top: 24px;">
-            View in Admin
-          </a>
-        </div>
-      `,
+      html: adminOrderHtml,
     }).catch((err: any) => req.payload.logger.error({ err }, `Failed to send admin order notification`))
   }
   // Sync to Google Sheets if it became paid, captured, or completed

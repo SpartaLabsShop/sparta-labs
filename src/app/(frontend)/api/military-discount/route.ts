@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { militaryDiscountLimiter, getIp } from '@/lib/ratelimit'
+import { verifyTurnstile } from '@/lib/turnstile'
 
 export async function POST(request: NextRequest) {
   if (militaryDiscountLimiter) {
@@ -16,6 +17,12 @@ export async function POST(request: NextRequest) {
 
   try {
     const formData = await request.formData()
+
+    const turnstileToken = formData.get('turnstileToken') as string
+    const turnstileValid = await verifyTurnstile(turnstileToken)
+    if (!turnstileValid) {
+      return NextResponse.json({ error: 'Bot verification failed. Please try again.' }, { status: 403 })
+    }
 
     const firstName = (formData.get('firstName') as string)?.trim()
     const lastName = (formData.get('lastName') as string)?.trim()

@@ -219,7 +219,7 @@ export const Orders: CollectionConfig = {
     },
     { name: 'subtotal', type: 'number', admin: { position: 'sidebar', description: 'Before discounts/shipping/tax' } },
     { name: 'discountTotal', type: 'number', admin: { position: 'sidebar' } },
-    { name: 'redeemedPoints', type: 'number', defaultValue: 0, admin: { position: 'sidebar', description: 'Maxx Points used in this order ($1 per point)' } },
+    { name: 'redeemedPoints', type: 'number', defaultValue: 0, admin: { position: 'sidebar', description: 'Sparta Points used in this order ($1 per point)' } },
     { name: 'shippingTotal', type: 'number', admin: { position: 'sidebar' }, defaultValue: 0 },
     {
       name: 'taxTotal',

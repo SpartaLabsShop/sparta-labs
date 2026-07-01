@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { HeroBreadcrumb } from '@/components/shared/HeroBreadcrumb'
 import { ShieldCheck, Upload, CheckCircle2, ChevronDown } from 'lucide-react'
+import { TurnstileWidget } from '@/components/TurnstileWidget'
 
 const BRANCHES = [
   { value: 'army', label: 'Army' },
@@ -28,14 +29,17 @@ export default function MilitaryDiscountPage() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [fileName, setFileName] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setError('')
+    if (!turnstileToken) { setError('Please complete the verification challenge.'); return }
     setSubmitting(true)
 
     const formData = new FormData(e.currentTarget)
+    formData.set('turnstileToken', turnstileToken)
     const res = await fetch('/api/military-discount', { method: 'POST', body: formData })
     const result = await res.json()
 
@@ -233,13 +237,15 @@ export default function MilitaryDiscountPage() {
                   </label>
                 </div>
 
+                <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken('')} />
+
                 {error && (
                   <p className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">{error}</p>
                 )}
 
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={submitting || !turnstileToken}
                   className="w-full bg-black text-white py-3 rounded-lg font-semibold text-sm hover:bg-gray-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {submitting ? 'Submitting...' : 'Submit Application'}

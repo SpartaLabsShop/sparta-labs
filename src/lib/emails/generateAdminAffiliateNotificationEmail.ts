@@ -1,48 +1,47 @@
+import { adminEmail, infoTable, ctaButton } from './emailLayout'
+
 export function generateAdminAffiliateNotificationEmail(application: any, affiliate: any, user: any): string {
-  const affiliateName = application.displayName || 'Partner';
-  const website = application.websiteUrl || 'N/A';
-  const reach = application.estimatedMonthlyReach || 'N/A';
-  const promotionMethods = application.promotionMethods || 'N/A';
-  const niche = application.niche || 'N/A';
-  
-  let socialLinksHtml = 'N/A';
-  if (application.socialLinks && application.socialLinks.length > 0) {
-    socialLinksHtml = application.socialLinks.map((link: any) => `${link.platform}: <a href="${link.url}">${link.url}</a>`).join('<br>');
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://spartalabs.shop'
+  const adminUrl = `${serverUrl}/admin/collections/affiliates/${affiliate.id}`
+
+  let socialLinksText = 'N/A'
+  if (application.socialLinks?.length) {
+    socialLinksText = application.socialLinks.map((l: any) => `${l.platform}: ${l.url}`).join('<br/>')
   }
 
-  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://spartalabs.shop';
-  const adminUrl = `${serverUrl}/admin/collections/affiliates/${affiliate.id}`;
+  const body = `
+  <tr><td style="padding:32px 32px 24px;">
+    <p style="margin:0 0 6px;font-size:20px;font-weight:800;color:#111827;">New Affiliate Approved</p>
+    <p style="margin:0;font-size:13px;color:#6B7280;line-height:1.6;">
+      A new partner application has been automatically approved and their affiliate profile has been created.
+    </p>
+  </td></tr>
 
-  return `
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body { font-family: sans-serif; line-height: 1.5; color: #333; }
-    h2 { color: #000; }
-    .label { font-weight: bold; }
-    .card { background-color: #f9f9f9; padding: 20px; border: 1px solid #eee; border-radius: 8px; }
-  </style>
-</head>
-<body>
-  <h2>New Affiliate Registration Automatically Approved</h2>
-  <p>A new partner has registered and their application has been auto-approved.</p>
-  
-  <div class="card">
-    <p><span class="label">Name:</span> ${affiliateName}</p>
-    <p><span class="label">User Email:</span> ${user?.email || 'N/A'}</p>
-    <p><span class="label">Website:</span> ${website}</p>
-    <p><span class="label">Social Links:</span><br>${socialLinksHtml}</p>
-    <p><span class="label">Estimated Reach:</span> ${reach}</p>
-    <p><span class="label">Niche:</span> ${niche}</p>
-    <p><span class="label">Promotion Methods:</span> ${promotionMethods}</p>
-    <br>
-    <p><span class="label">Assigned Coupon:</span> ${affiliate.couponCode}</p>
-    <p><span class="label">Referral Slug:</span> ${affiliate.referralSlug}</p>
-  </div>
-  
-  <p><a href="${adminUrl}">View Affiliate in Payload Admin</a></p>
-</body>
-</html>
-  `;
+  <tr><td style="padding:0 32px 24px;">
+    <p style="margin:0 0 10px;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px;">Applicant Details</p>
+    ${infoTable([
+      ['Display Name', application.displayName || 'N/A'],
+      ['Email', user?.email || 'N/A'],
+      ['Website', application.websiteUrl || 'N/A'],
+      ['Social Links', socialLinksText],
+      ['Est. Monthly Reach', String(application.estimatedMonthlyReach || 'N/A')],
+      ['Niche', application.niche || 'N/A'],
+      ['Promotion Methods', application.promotionMethods || 'N/A'],
+    ])}
+  </td></tr>
+
+  <tr><td style="padding:0 32px 24px;">
+    <p style="margin:0 0 10px;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px;">Assigned Credentials</p>
+    ${infoTable([
+      ['Coupon Code', `<strong style="color:#E61C24;">${affiliate.couponCode}</strong>`],
+      ['Referral Slug', affiliate.referralSlug],
+      ['Commission Rate', `${affiliate.commissionRate || 'N/A'}%`],
+    ])}
+  </td></tr>
+
+  <tr><td align="center" style="padding:0 32px 36px;">
+    ${ctaButton(adminUrl, 'View Affiliate in Admin')}
+  </td></tr>`
+
+  return adminEmail(body, 'New Affiliate Registered')
 }

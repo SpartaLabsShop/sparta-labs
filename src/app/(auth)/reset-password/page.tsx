@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { ArrowLeft, Loader2, CheckCircle } from 'lucide-react'
+import { TurnstileWidget } from '@/components/TurnstileWidget'
 
 function ResetPasswordContent() {
   const searchParams = useSearchParams()
@@ -14,6 +15,7 @@ function ResetPasswordContent() {
   const [isLoading, setIsLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -31,13 +33,17 @@ function ResetPasswordContent() {
       setError('Invalid or missing reset token. Please request a new link.')
       return
     }
+    if (!turnstileToken) {
+      setError('Please complete the verification challenge.')
+      return
+    }
 
     setIsLoading(true)
     try {
-      const res = await fetch('/api/users/reset-password', {
+      const res = await fetch('/api/auth/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, password }),
+        body: JSON.stringify({ token, password, turnstileToken }),
       })
       if (!res.ok) {
         const data = await res.json()
@@ -122,9 +128,11 @@ function ResetPasswordContent() {
                   />
                 </div>
 
+                <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken('')} />
+
                 {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
 
-                <button type="submit" disabled={isLoading || !token}
+                <button type="submit" disabled={isLoading || !token || !turnstileToken}
                   className="bg-black hover:bg-gray-900 text-white w-full h-14 text-xs font-bold uppercase tracking-[0.2em] transition-colors flex items-center justify-center mt-2 disabled:opacity-60">
                   {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Reset Password'}
                 </button>

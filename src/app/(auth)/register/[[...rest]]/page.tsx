@@ -5,7 +5,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import { GoogleSignInButton } from '@/components/auth/GoogleSignInButton'
+import { TurnstileWidget } from '@/components/TurnstileWidget'
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -14,19 +16,21 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
-    if (password !== confirmPassword) { setError('Passwords do not match'); return }
+    if (password !== confirmPassword) { setError('Passwords do not match.'); return }
+    if (!turnstileToken) { setError('Please complete the verification challenge.'); return }
 
     setIsLoading(true)
     try {
-      // 1. Create user account
-      const registerRes = await fetch('/api/users', {
+      // 1. Create the Payload user (Turnstile verified here)
+      const registerRes = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, turnstileToken }),
       })
       const registerData = await registerRes.json()
       if (!registerRes.ok) {
@@ -34,19 +38,24 @@ export default function RegisterPage() {
         return
       }
 
-      // 2. Auto-login after registration
-      const loginRes = await fetch('/api/users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-        credentials: 'include',
-      })
-      if (loginRes.ok) {
-        router.push('/account')
-        router.refresh()
-      } else {
-        router.push('/login')
+      // 2. Auto-login using the server-signed token (bypasses second Turnstile requirement)
+      const { autoLoginToken } = registerData
+      if (autoLoginToken) {
+        const result = await signIn('credentials', {
+          email,
+          password,
+          autoLoginToken,
+          redirect: false,
+        })
+        if (result?.ok) {
+          router.push('/account')
+          router.refresh()
+          return
+        }
       }
+
+      // Fallback: redirect to login with success message
+      router.push('/login?registered=true')
     } catch {
       setError('Something went wrong. Please try again.')
     } finally {
@@ -122,9 +131,11 @@ export default function RegisterPage() {
               />
             </div>
 
+            <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken('')} />
+
             {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
 
-            <button type="submit" disabled={isLoading}
+            <button type="submit" disabled={isLoading || !turnstileToken}
               className="bg-black hover:bg-gray-900 text-white w-full h-14 text-xs font-bold uppercase tracking-[0.2em] transition-colors flex items-center justify-center mt-2 disabled:opacity-60">
               {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Create Account'}
             </button>

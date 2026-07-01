@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Loader2 } from 'lucide-react'
+import { signIn } from 'next-auth/react'
 
 interface GoogleSignInButtonProps {
   redirect?: string
@@ -13,8 +14,7 @@ export function GoogleSignInButton({ redirect, className }: GoogleSignInButtonPr
 
   const handleClick = () => {
     setIsLoading(true)
-    const params = redirect ? `?redirect=${encodeURIComponent(redirect)}` : ''
-    window.location.href = `/api/auth/google${params}`
+    signIn('google', { callbackUrl: redirect || '/account' })
   }
 
   return (

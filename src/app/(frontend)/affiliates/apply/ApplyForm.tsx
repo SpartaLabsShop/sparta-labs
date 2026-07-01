@@ -4,18 +4,22 @@ import { useState } from 'react'
 import { submitAffiliateApplication } from './actions'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { TurnstileWidget } from '@/components/TurnstileWidget'
 
 export function ApplyForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState('')
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!turnstileToken) { setError('Please complete the verification challenge.'); return }
     setIsSubmitting(true)
     setError(null)
-    
+
     const formData = new FormData(e.currentTarget)
+    formData.set('turnstileToken', turnstileToken)
     const result = await submitAffiliateApplication(formData)
     
     if (!result.success) {
@@ -161,10 +165,12 @@ export function ApplyForm() {
         </div>
       </div>
 
+      <TurnstileWidget onVerify={setTurnstileToken} onExpire={() => setTurnstileToken('')} />
+
       <div className="pt-4">
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !turnstileToken}
           className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 dark:focus:ring-offset-gray-900"
         >
           {isSubmitting ? (

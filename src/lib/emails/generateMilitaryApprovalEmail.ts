@@ -1,65 +1,66 @@
+import { customerEmail, iconCircle, ctaButton, codeBox, sectionTitle } from './emailLayout'
+
 export function generateMilitaryApprovalEmail(data: {
   firstName: string
   couponCode: string
   discountPercent: number
   serverUrl: string
 }): string {
-  return `
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #111; background: #f9fafb; margin: 0; padding: 40px 20px; }
-    .container { max-width: 560px; margin: 0 auto; }
-    .header { background: #000; color: #fff; border-radius: 8px 8px 0 0; padding: 32px 40px; text-align: center; }
-    .header h1 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
-    .header p { margin: 8px 0 0 0; font-size: 14px; color: rgba(255,255,255,0.7); }
-    .body { background: #fff; border-radius: 0 0 8px 8px; padding: 36px 40px; border: 1px solid #e5e7eb; border-top: none; }
-    .coupon-box { background: #f9fafb; border: 2px dashed #d1d5db; border-radius: 8px; padding: 24px; text-align: center; margin: 28px 0; }
-    .coupon-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #6b7280; margin-bottom: 10px; }
-    .coupon-code { font-size: 28px; font-weight: 800; letter-spacing: 4px; color: #000; font-family: monospace; }
-    .discount-badge { display: inline-block; background: #d90429; color: #fff; font-size: 13px; font-weight: 700; padding: 4px 14px; border-radius: 999px; margin-top: 10px; }
-    .btn { display: block; text-align: center; background: #000; color: #fff; text-decoration: none; padding: 14px 24px; border-radius: 6px; font-size: 15px; font-weight: 600; margin-top: 28px; }
-    .footer { text-align: center; margin-top: 24px; font-size: 12px; color: #9ca3af; }
-    ul { padding-left: 20px; color: #4b5563; font-size: 14px; line-height: 1.8; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1>Military Discount Approved</h1>
-      <p>Thank you for your service.</p>
+  const { firstName, couponCode, discountPercent, serverUrl } = data
+
+  const body = `
+  <!-- Hero -->
+  <tr><td style="padding:36px 32px 28px;text-align:center;">
+    ${iconCircle('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>')}
+    ${sectionTitle('Military Discount Approved', 'Thank you for your service.')}
+    <p style="margin:0;font-size:13px;color:#6B7280;line-height:1.7;">
+      Hi ${firstName}, your military discount application has been verified and approved.<br/>
+      As a token of our appreciation, here is your exclusive discount code:
+    </p>
+  </td></tr>
+
+  <!-- Coupon box -->
+  <tr><td style="padding:0 32px 24px;">
+    ${codeBox(couponCode, 'Your Exclusive Discount Code')}
+    <div style="margin-top:12px;text-align:center;">
+      <span style="display:inline-block;background:#E61C24;color:#fff;font-size:13px;font-weight:800;padding:6px 20px;border-radius:999px;">${discountPercent}% OFF Your Order</span>
     </div>
-    <div class="body">
-      <p style="margin-top:0;font-size:16px;">Hi ${data.firstName},</p>
-      <p style="color:#4b5563;font-size:14px;line-height:1.7;">
-        Your military discount application has been verified and approved. As a token of our appreciation for your service, here is your exclusive discount code:
-      </p>
+  </td></tr>
 
-      <div class="coupon-box">
-        <div class="coupon-label">Your Discount Code</div>
-        <div class="coupon-code">${data.couponCode}</div>
-        <div class="discount-badge">${data.discountPercent}% OFF</div>
-      </div>
+  <!-- How to use -->
+  <tr><td style="padding:0 32px 28px;">
+    <div style="background:#F9FAFB;border-radius:10px;padding:20px 24px;border:1px solid #F3F4F6;">
+      <p style="margin:0 0 12px;font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.5px;">How to use your code</p>
+      ${[
+        'Add any products to your cart.',
+        `Enter <strong>${couponCode}</strong> in the coupon field at checkout.`,
+        `${discountPercent}% will be automatically deducted from your order total.`,
+      ].map((t, i) => `
+      <table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr>
+        <td width="24" valign="top" style="padding-right:10px;">
+          <div style="width:20px;height:20px;background:#E61C24;border-radius:50%;text-align:center;line-height:20px;">
+            <span style="font-size:10px;font-weight:800;color:#fff;">${i + 1}</span>
+          </div>
+        </td>
+        <td style="font-size:13px;color:#374151;line-height:1.6;">${t}</td>
+      </tr></table>`).join('')}
+    </div>
+  </td></tr>
 
-      <p style="font-size:14px;font-weight:600;color:#111;margin-bottom:8px;">How to use your code:</p>
-      <ul>
-        <li>Add any products to your cart</li>
-        <li>Enter <strong>${data.couponCode}</strong> at checkout in the coupon field</li>
-        <li>${data.discountPercent}% will be deducted from your order total</li>
-      </ul>
-
-      <a href="${data.serverUrl}/shop" class="btn">Shop Now →</a>
-
-      <p style="margin-top:24px;font-size:13px;color:#6b7280;border-top:1px solid #f3f4f6;padding-top:20px;">
-        This code is linked to your email address and is for personal use only. If you have any questions, contact us at <a href="mailto:support@spartalabs.shop" style="color:#000;">support@spartalabs.shop</a>.
+  <!-- Disclaimer -->
+  <tr><td style="padding:0 32px 28px;">
+    <div style="background:#FFF5F5;border-radius:10px;padding:16px 20px;border:1px solid #FEE2E2;">
+      <p style="margin:0;font-size:11px;color:#6B7280;line-height:1.6;">
+        This code is linked to your email address and is for personal use only. Contact us at
+        <a href="mailto:${process.env.SUPPORT_EMAIL || 'support@spartalabs.shop'}" style="color:#E61C24;">${process.env.SUPPORT_EMAIL || 'support@spartalabs.shop'}</a> if you have any questions.
       </p>
     </div>
-    <div class="footer">
-      &copy; ${new Date().getFullYear()} Sparta Labs. Thank you for your service.
-    </div>
-  </div>
-</body>
-</html>
-  `
+  </td></tr>
+
+  <!-- CTA -->
+  <tr><td align="center" style="padding:0 32px 36px;">
+    ${ctaButton(`${serverUrl}/shop`, 'Shop Now')}
+  </td></tr>`
+
+  return customerEmail(body, 'Your Military Discount — Sparta Labs')
 }

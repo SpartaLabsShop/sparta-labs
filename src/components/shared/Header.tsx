@@ -1,12 +1,12 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { headers } from 'next/headers'
 import { ClientHeader } from './ClientHeader'
+import { getPayloadUser } from '@/lib/auth/getPayloadUser'
 
 export async function Header() {
   try {
     const payload = await getPayload({ config: configPromise })
-    const { user } = await payload.auth({ headers: await headers() })
+    const user = await getPayloadUser()
 
     let cartItemCount = 0
     let wishlistItemCount = 0

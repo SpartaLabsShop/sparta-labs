@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { OrderConfirmationClient } from './OrderConfirmationClient'
 import { notFound } from 'next/navigation'
+import { getPayloadUser } from '@/lib/auth/getPayloadUser'
 
 export const metadata = {
   title: 'Order Confirmed | Sparta Labs',
@@ -45,8 +46,7 @@ export default async function OrderConfirmationPage({ params }: { params: Promis
   // 2. Check User Auth (Logged in user returning to the page)
   if (!isAuthorized) {
      try {
-       const { headers } = await import('next/headers')
-       const { user } = await payload.auth({ headers: await headers() })
+       const user = await getPayloadUser()
        if (user && order.owner) {
           const ownerId = typeof order.owner === 'object' ? order.owner.id : order.owner
           if (String(ownerId) === String(user.id)) {
