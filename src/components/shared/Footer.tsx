@@ -109,7 +109,7 @@ const FooterContent = () => {
               © {new Date().getFullYear()} Sparta Labs.
             </p>
             <p className="text-[10px] text-white/30 uppercase tracking-widest font-medium">
-              Designed and developed by <a href="https://www.belkdigital.com/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">Belk Digital</a>
+              Designed and developed by <a href="https://www.belkdigital.com/" target="_blank" rel="noopener noreferrer" className="text-red-500 hover:text-red-400 transition-colors">Belk Digital</a>
             </p>
           </div>
         </div>
