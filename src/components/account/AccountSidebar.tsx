@@ -19,7 +19,7 @@ const NAV_ITEMS = [
   { name: 'Addresses', href: '/account/addresses', icon: MapPin },
   { name: 'Wishlist', href: '/account/wishlist', icon: Heart },
   { name: 'Settings', href: '/account/settings', icon: Settings },
-  { name: 'Partner Program', href: '/affiliates', icon: Users },
+  { name: 'Partner Program', href: '/affiliates/dashboard', icon: Users },
 ]
 
 export function AccountSidebar({

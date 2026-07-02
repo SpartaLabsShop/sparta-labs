@@ -34,7 +34,7 @@ export default async function AffiliateDashboardLayout({ children }: { children:
   const tier = affiliate.tier || 'standard'
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white pt-24 lg:pt-28">
       <div className="flex flex-col lg:flex-row min-h-screen">
         <div className="w-full lg:w-[280px] xl:w-[320px] shrink-0 border-r border-gray-100 bg-[#FAFCFC]">
           <AffiliateSidebar userName={userName} tier={tier} />
