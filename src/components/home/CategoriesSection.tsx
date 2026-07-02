@@ -9,14 +9,14 @@ import { Container } from '@/components/ui/container'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 const CATEGORIES = [
-  { name: 'Bioregulators', slug: 'bioregulators', number: '01', description: 'Short-chain peptide bioregulators. Research-grade purity, lot-specific COA.' },
-  { name: 'Cellular Health', slug: 'cellular-health', number: '02', description: 'Compounds studied for cellular repair and longevity applications.' },
-  { name: 'Cognitive Function', slug: 'cognitive-function', number: '03', description: 'Peptides associated with neurological and cognitive function research.' },
-  { name: 'Essentials', slug: 'essentials', number: '04', description: 'Core research compounds — the foundational stack for any peptide lab.' },
-  { name: 'Growth Factor', slug: 'growth-factor', number: '05', description: 'Growth factor peptides for tissue and recovery research. LC-MS verified.' },
-  { name: 'Metabolic', slug: 'metabolic', number: '06', description: 'GLP-1 and metabolic peptides for body composition and metabolic research.' },
-  { name: 'Receptor Agonist', slug: 'receptor-agonist', number: '07', description: 'Receptor-targeting peptides for advanced research protocols.' },
-  { name: 'Recovery', slug: 'recovery', number: '08', description: 'Tissue repair and recovery peptides. Includes BPC-157 and TB-500.' }
+  { name: 'Bioregulators', queryName: 'Bioregulators', slug: 'bioregulators', number: '01', description: 'Short-chain peptide bioregulators. Research-grade purity, lot-specific COA.' },
+  { name: 'Cellular Health', queryName: 'Cellular Health Research', slug: 'cellular-health', number: '02', description: 'Compounds studied for cellular repair and longevity applications.' },
+  { name: 'Cognitive Function', queryName: 'Cognitive Function Studies', slug: 'cognitive-function', number: '03', description: 'Peptides associated with neurological and cognitive function research.' },
+  { name: 'Essentials', queryName: 'Essentials', slug: 'essentials', number: '04', description: 'Core research compounds — the foundational stack for any peptide lab.' },
+  { name: 'Growth Factor', queryName: 'Growth Factor Research Peptides', slug: 'growth-factor', number: '05', description: 'Growth factor peptides for tissue and recovery research. LC-MS verified.' },
+  { name: 'Metabolic', queryName: 'Metabolic Research Peptides', slug: 'metabolic', number: '06', description: 'GLP-1 and metabolic peptides for body composition and metabolic research.' },
+  { name: 'Receptor Agonist', queryName: 'Receptor Agonist Research Peptides', slug: 'receptor-agonist', number: '07', description: 'Receptor-targeting peptides for advanced research protocols.' },
+  { name: 'Recovery', queryName: 'Recovery Research Peptides', slug: 'recovery', number: '08', description: 'Tissue repair and recovery peptides. Includes BPC-157 and TB-500.' }
 ]
 
 // Re-using the premium generated images as placeholders
@@ -48,7 +48,7 @@ function CategoryCard({ category, index }: { category: typeof CATEGORIES[0], ind
   const bgColor = CARD_COLORS[index % CARD_COLORS.length]
 
   return (
-    <Link href={`/shop?category=${encodeURIComponent(category.name)}`} className="group relative flex flex-col w-full aspect-[3/4] sm:aspect-[4/5] lg:aspect-[9/14] overflow-hidden rounded-[1rem] sm:rounded-[1.5rem] bg-white cursor-pointer shadow-md hover:shadow-xl border border-slate-100 transition-all duration-500">
+    <Link href={`/shop?category=${encodeURIComponent(category.queryName)}`} className="group relative flex flex-col w-full aspect-[3/4] sm:aspect-[4/5] lg:aspect-[9/14] overflow-hidden rounded-[1rem] sm:rounded-[1.5rem] bg-white cursor-pointer shadow-md hover:shadow-xl border border-slate-100 transition-all duration-500">
       
       {/* Top Half - Text Area */}
       <div className={`relative flex flex-col justify-between p-4 sm:p-6 lg:p-8 h-[45%] transition-colors duration-500 ${bgColor}`}>
