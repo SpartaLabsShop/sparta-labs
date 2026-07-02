@@ -21,13 +21,15 @@ export function BlogPostCard({
 }) {
   return (
     <Link href={`/journal/${slug}`} className="group flex flex-col h-full">
-      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl mb-5">
-        <Image
-          src={imageSrc}
-          alt={title}
-          fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-        />
+      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl mb-5 bg-ink/10">
+        {imageSrc && (
+          <Image
+            src={imageSrc}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        )}
       </div>
 
       <div className="flex flex-col flex-grow">

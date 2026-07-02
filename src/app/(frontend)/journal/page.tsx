@@ -199,6 +199,7 @@ export default function JournalIndexPage() {
                   excerpt={post.excerpt}
                   imageSrc={post.image}
                   readTime="5 min read"
+                  date={post.date}
                 />
               </motion.div>
             ))}
