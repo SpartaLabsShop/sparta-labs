@@ -6,14 +6,14 @@ import { Dna, Activity, Brain, FlaskConical, TrendingUp, Scale, Target, BatteryC
 import Link from "next/link";
 
 const categories = [
-  { id: 1, title: "Bioregulators", description: "Short-chain peptide bioregulators. Research-grade purity, lot-specific COA.", image: "/categories/light_bioregulators.png", icon: <Dna size={20} /> },
-  { id: 2, title: "Cellular Health", description: "Compounds studied for cellular repair and longevity applications.", image: "/categories/light_cellular_health.png", icon: <Activity size={20} /> },
-  { id: 3, title: "Cognitive Function", description: "Peptides associated with neurological and cognitive function research.", image: "/categories/light_cognitive.png", icon: <Brain size={20} /> },
-  { id: 4, title: "Essentials", description: "Core research compounds — the foundational stack for any peptide lab.", image: "/categories/light_essentials.png", icon: <FlaskConical size={20} /> },
-  { id: 5, title: "Growth Factor", description: "Growth factor peptides for tissue and recovery research. LC-MS verified.", image: "/categories/light_growth.png", icon: <TrendingUp size={20} /> },
-  { id: 6, title: "Metabolic", description: "GLP-1 and metabolic peptides for body composition and metabolic research.", image: "/categories/light_metabolic.png", icon: <Scale size={20} /> },
-  { id: 7, title: "Receptor Agonist", description: "Receptor-targeting peptides for advanced research protocols.", image: "/categories/light_receptor.png", icon: <Target size={20} /> },
-  { id: 8, title: "Recovery", description: "Advanced peptides formulated to support physical recovery and tissue repair.", image: "/categories/light_recovery.png", icon: <BatteryCharging size={20} /> },
+  { id: 1, title: "Bioregulators", queryTitle: "Bioregulators", description: "Short-chain peptide bioregulators. Research-grade purity, lot-specific COA.", image: "/categories/light_bioregulators.png", icon: <Dna size={20} /> },
+  { id: 2, title: "Cellular Health", queryTitle: "Cellular Health Research", description: "Compounds studied for cellular repair and longevity applications.", image: "/categories/light_cellular_health.png", icon: <Activity size={20} /> },
+  { id: 3, title: "Cognitive Function", queryTitle: "Cognitive Function Studies", description: "Peptides associated with neurological and cognitive function research.", image: "/categories/light_cognitive.png", icon: <Brain size={20} /> },
+  { id: 4, title: "Essentials", queryTitle: "Essentials", description: "Core research compounds — the foundational stack for any peptide lab.", image: "/categories/light_essentials.png", icon: <FlaskConical size={20} /> },
+  { id: 5, title: "Growth Factor", queryTitle: "Growth Factor Research Peptides", description: "Growth factor peptides for tissue and recovery research. LC-MS verified.", image: "/categories/light_growth.png", icon: <TrendingUp size={20} /> },
+  { id: 6, title: "Metabolic", queryTitle: "Metabolic Research Peptides", description: "GLP-1 and metabolic peptides for body composition and metabolic research.", image: "/categories/light_metabolic.png", icon: <Scale size={20} /> },
+  { id: 7, title: "Receptor Agonist", queryTitle: "Receptor Agonist Research Peptides", description: "Receptor-targeting peptides for advanced research protocols.", image: "/categories/light_receptor.png", icon: <Target size={20} /> },
+  { id: 8, title: "Recovery", queryTitle: "Recovery Research Peptides", description: "Advanced peptides formulated to support physical recovery and tissue repair.", image: "/categories/light_recovery.png", icon: <BatteryCharging size={20} /> },
 ];
 
 const Categories = () => {
@@ -104,7 +104,7 @@ const Categories = () => {
                   >
                     <h3 className="mb-2 text-[1.5rem] font-semibold text-[#111111] font-['Neue_Haas_Grotesk_Display',sans-serif]">{category.title}</h3>
                     <p className="mb-6 max-w-[90%] text-[0.95rem] leading-[1.5] text-[#444444]">{category.description}</p>
-                    <Link href={`/shop?category=${encodeURIComponent(category.title)}`} className="inline-flex w-fit items-center gap-3 rounded bg-[#111111] px-6 py-3 text-[0.85rem] font-medium text-white transition-colors duration-200 hover:bg-black">
+                    <Link href={`/shop?category=${encodeURIComponent(category.queryTitle)}`} className="inline-flex w-fit items-center gap-3 rounded bg-[#111111] px-6 py-3 text-[0.85rem] font-medium text-white transition-colors duration-200 hover:bg-black">
                       <span className="flex items-center justify-center">{category.icon}</span> Explore category
                     </Link>
                   </motion.div>
