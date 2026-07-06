@@ -14,7 +14,7 @@ export function MinimalFooter() {
         <div className="flex items-center gap-6 text-label-sm uppercase tracking-wider text-ink-muted">
           <Link href="/privacy" className="hover:text-ink transition-colors">Privacy</Link>
           <Link href="/terms" className="hover:text-ink transition-colors">Terms</Link>
-          <Link href="/refunds" className="hover:text-ink transition-colors">Refunds</Link>
+          <Link href="/refund" className="hover:text-ink transition-colors">Refunds</Link>
         </div>
       </Container>
     </footer>
